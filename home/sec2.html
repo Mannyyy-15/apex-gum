@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apex Energy Gum Section</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(120deg, #0049b7, #00b4ff);
+        color: white;
+        overflow-x: hidden;
+      }
+
+      .benefits-section {
+        text-align: center;
+        padding: 100px 20px;
+        position: relative;
+      }
+
+      .small-text {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      .heading {
+        font-size: 42px;
+        font-weight: 700;
+        margin: 20px 0 80px;
+      }
+
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 150px;
+        position: relative;
+      }
+
+      .left,
+      .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 60px;
+        z-index: 3;
+      }
+
+      .item {
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 30px;
+        padding: 10px 30px;
+        font-size: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+        transition: 0.3s ease;
+        min-width: 170px;
+        text-align: center;
+      }
+
+      .item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+
+      .center {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        z-index: 2;
+      }
+
+      .product-img {
+        width: 700px;
+        position: relative;
+        left: -200px;
+        z-index: 3;
+      }
+
+      /* SVG positions for better alignment */
+      .svg-lines {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        height: 500px;
+        z-index: 1;
+      }
+
+      .svg-lines svg:nth-child(1) {
+        position: absolute;
+        top: 27%;
+        left: 10%;
+        width: 150px;
+      }
+      .svg-lines svg:nth-child(2) {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        width: 150px;
+      }
+      .svg-lines svg:nth-child(3) {
+        position: absolute;
+        top: 65%;
+        left: 10%;
+        width: 150px;
+      }
+      .svg-lines svg:nth-child(4) {
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width: 150px;
+      }
+      .svg-lines svg:nth-child(5) {
+        position: absolute;
+        top: 40%;
+        right: 10%;
+        width: 150px;
+      }
+      .svg-lines svg:nth-child(6) {
+        position: absolute;
+        top: 60%;
+        right: 10%;
+        width: 150px;
+      }
+      .svg-lines svg:nth-child(7) {
+        position: absolute;
+        top: 70%;
+        right: 10%;
+        width: 150px;
+      }
+
+      /* Ensure lines stay behind text */
+      .left .item,
+      .right .item {
+        z-index: 5;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .content {
+          flex-direction: column;
+          gap: 60px;
+        }
+
+        .svg-lines {
+          display: none;
+        }
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  </head>
+  <body>
+    <section class="benefits-section">
+      <p class="small-text">Benefits</p>
+      <h1 class="heading">It's Time To Lock In</h1>
+
+      <div class="content">
+        <div class="left">
+          <div class="item">Speed</div>
+          <div class="item">Reaction Time</div>
+          <div class="item">Vigilance</div>
+        </div>
+
+        <div class="center">
+          <img src="/assests/tablets.png" alt="Apex Gum" class="product-img" />
+          <!-- Multiple SVGs -->
+          <div class="svg-lines">
+            <img src="/assests/Vector 17.svg" alt="Line" />
+            <img src="/assests/Vector 11.svg" alt="Line" />
+            <img src="/assests/Vector 15.svg" alt="Line" />
+            <img src="/assests/Vector 18.svg" alt="Line" />
+            <img src="/assests/Vector 12.svg" alt="Line" />
+            <img src="/assests/Vector 19.svg" alt="Line" />
+            <img src="/assests/Vector 16.svg" alt="Line" />
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="item">Endurance</div>
+          <div class="item">Emotional Status</div>
+          <div class="item">Energy</div>
+          <div class="item">Concentration</div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Animate SVG paths with GSAP
+      document.addEventListener("DOMContentLoaded", () => {
+        const svgs = document.querySelectorAll(".svg-lines img");
+
+        svgs.forEach((img, i) => {
+          fetch(img.src)
+            .then((res) => res.text())
+            .then((data) => {
+              const div = document.createElement("div");
+              div.innerHTML = data;
+              const inlineSVG = div.querySelector("svg");
+              img.replaceWith(inlineSVG);
+
+              const paths = inlineSVG.querySelectorAll("path, line, polyline");
+              paths.forEach((p) => {
+                const len = p.getTotalLength();
+                p.style.strokeDasharray = len;
+                p.style.strokeDashoffset = len;
+                p.style.stroke = "white";
+                p.style.strokeWidth = "1.5";
+                p.style.fill = "none";
+              });
+
+              gsap.to(paths, {
+                strokeDashoffset: 0,
+                duration: 1.6,
+                delay: i * 0.2,
+                ease: "power2.out",
+              });
+            });
+        });
+
+        // Floating product
+        gsap.to(".product-img", {
+          y: -10,
+          duration: 1.5,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+        });
+      });
+    </script>
+  </body>
+</html>

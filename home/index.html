@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>APEX Performance Boost Energy Gum</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Styrene A Trial Font -->
+  <link rel="stylesheet" href="https://use.typekit.net/[YOUR_KIT_CODE].css">
+  <!-- Icons CDN (FontAwesome for the icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* Reset some default styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      width: 100vw;
+      height: 100vh;
+      font-family: 'styrene-a-trial', sans-serif;
+      overflow: hidden;
+      color: #fff;
+      background: #02111e;
+    }
+    .bg {
+      background: url('/assests/f4d79b1c638ef4b143ea8380c5262f4429d8c83b.png') no-repeat center center/cover;
+      position: absolute;
+      z-index: 1;
+      width: 100vw;
+      height: 100vh;
+      top: 0; left: 0;
+      filter: brightness(0.8);
+    }
+    /* .overlay {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0; left: 0;
+      background: linear-gradient(120deg, rgba(21, 32, 58, 0.7) 40%, rgba(20,30,40,0.2) 100%);
+      z-index: 2;
+    } */
+    .container {
+      position: relative;
+      z-index: 3;
+      width: 100vw;
+      min-height: 100vh;
+      padding: 10px 4vw 0 4vw;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .logo {
+      font-size: 2rem;
+      letter-spacing: 4px;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .navlinks {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .navlinks a {
+      color: #c2dafc;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .navlinks a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.13);
+    }
+    .nav-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .icon-btn, .buynow-btn {
+      background:transparent;
+      border: solid rgba(24, 98, 182, 0.31) .5px;
+      outline: none;
+      padding: 9px;
+      border-radius: 10px;
+      color: #cbe7fe;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .icon-btn:hover {
+      /* background: rgba(24, 98, 182, 0.31); */
+      color: #fff;
+    }
+    .buynow-btn {
+      background: linear-gradient(282.35deg, #18C0EC 56.47%, #002981 117.86%),
+                  linear-gradient(285.32deg, #002981 -6.8%, rgba(24, 192, 236, 0) 55.94%);
+      color: #fff;
+      font-weight: 700;
+      padding: 9px 26px;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin-left: 8px;
+      box-shadow: 0 1px 10px rgba(40,120,180,0.18);
+      transition: filter 0.12s;
+    }
+    .buynow-btn:hover {
+      filter: brightness(1.1);
+    }
+    .flex-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      min-height: 65vh;
+      width: 100%;
+    }
+ .hero-left {
+    max-width: 600px;
+    margin-bottom: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between child elements */
+}
+
+    .hero-left .big-title {
+      font-weight: 800;
+      font-size: 5rem;
+      line-height: 0.97;
+      color: #fff;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 16px rgba(5,12,25,0.17);
+    }
+  .hero-left .big-title strong {
+  display: block;
+  font-size: 5.5rem;
+  color: #fff;
+}
+    .hero-left .subtitle {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+    .hero-left .desc {
+      color: #c1d4ef;
+      margin-bottom: 22px;
+      font-weight: 400;
+      font-size: 1.02rem;
+      text-shadow: 0 2px 6px rgba(10,22,33,0.12);
+    }
+    .hero-left .btn-row {
+      display: flex;
+      gap: 18px;
+    }
+    .btn {
+      padding: 10px 28px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: linear-gradient(282.35deg, #18C0EC 56.47%, #002981 117.86%),
+                  linear-gradient(285.32deg, #002981 -6.8%, rgba(24, 192, 236, 0) 55.94%);
+      color: #fff;
+      transition: filter 0.13s;
+      box-shadow: 0 4px 24px rgba(40,120,180,0.12);
+    }
+    .btn.secondary {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid #18C0EC;
+    }
+    .btn:hover {
+      filter: brightness(1.1);
+    }
+    
+ .stars-row {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      /* margin-top: 48px; */
+        display: flex;
+        gap: 1px;
+        position: absolute;
+        left: 4vw;
+        bottom: 40px;
+        z-index: 6;
+        padding: 0 6px;
+    }
+    .stars-row .stars {
+      color: #14e2fc;
+      font-size: .8rem;
+      letter-spacing: 2px;
+    }
+    .stars-row .rating-main span{
+      font-size: 3rem;
+      font-weight: 800;
+      color: #fff;
+      /* margin-left: 12px; */
+    }
+    .stars-row .ratings {
+      color: #bbb;
+      font-size: 0.98rem;
+      /* margin-left: 2px; */
+    }
+    .herobox {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: end;
+      flex: 1;
+      margin-bottom: 26px;
+    }
+    .herobox img {
+      width: 380px;
+      border-radius: 20px;
+      box-shadow: 0 14px 50px 0 rgba(60,78,110,0.22);
+      position: relative;
+      bottom: -48px;
+      z-index: 3;
+    }
+    .bottom-bar {
+    height: 80px;
+    width: min(600px, 90vw);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    gap: 1px;
+    position: absolute;
+    right: 4vw;
+    bottom: 40px;
+    z-index: 6;
+    padding: 0 6px;
+    
+    /* Container slide up animation */
+    opacity: 0;
+    animation: containerSlideUp 0.8s ease-out 1s forwards;
+  }
+
+  /* Container slides up first */
+  @keyframes containerSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ===== BOTTOM BAR ITEMS ===== */
+  .bottom-bar .item {
+    flex: 1;
+    width: 33.33%;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    transition: all 0.3s ease;
+  }
+
+  .bottom-bar .item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+  }
+
+  .bottom-bar .item:last-child {
+    border-right: none;
+  }
+
+  /* ===== ICON ===== */
+  .item .icon {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    color: #87d4f8;
+    line-height: 1;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    
+    /* Icon fade in after container slides */
+    opacity: 0;
+    animation: fadeInElement 0.6s ease-out 1.3s forwards;
+  }
+
+  /* ===== TYPE LABEL ===== */
+  .item .type {
+    font-size: 0.72rem;
+    color: #bbe1ff;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    
+    /* Type label fade in after icon */
+    opacity: 0;
+    animation: fadeInElement 0.6s ease-out 1.5s forwards;
+  }
+
+  /* ===== NAME ===== */
+  .item .name {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* Name fade in last */
+    opacity: 0;
+    animation: fadeInElement 0.6s ease-out 1.7s forwards;
+  }
+
+  /* Fade in animation for text elements */
+  @keyframes fadeInElement {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    .bottom-bar {
+      flex-direction: column;
+      position: relative;
+      left: 0;
+      right: 0;
+      transform: none;
+      width: 100vw;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+      margin-left: -4vw;
+      border: none;
+      height: auto;
+    }
+
+    .bottom-bar .item {
+      border-radius: 0;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      width: 100%;
+      padding: 12px 8px;
+    }
+
+    .bottom-bar .item:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .item .icon {
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .item .type {
+      font-size: 0.65rem;
+    }
+    .item .name {
+      font-size: 0.9rem;
+    }
+  }
+    /* Small adjustments for narrow screens */
+    @media (max-width: 480px) {
+      .bottom-bar {
+        height: 72px;
+        right: 2vw;
+        bottom: 20px;
+      }
+      .bottom-bar .item {
+        padding: 8px 6px;
+      }
+      .item .icon { font-size: 0.85rem; margin-bottom: 4px; }
+      .item .type { font-size: 0.65rem; }
+      .item .name { font-size: 0.9rem; }
+    }
+    @media (max-width: 1024px) {
+      .hero-left .big-title { font-size: 2.5rem; }
+      .hero-left .big-title strong { font-size: 3.1rem; }
+      .herobox img { width: 270px; bottom: -34px; }
+      .bottom-bar .item { padding: 18px 6px 10px 6px; }
+      .container { padding: 18px 2vw 0 2vw; }
+    }
+    @media (max-width: 700px) {
+      .flex-hero { flex-direction: column; align-items: flex-start; }
+      .hero-left { margin-bottom: 30px; }
+      .herobox { align-items: flex-start; justify-content: start; }
+      .herobox img { width: 180px; bottom: 0; }
+      .bottom-bar { flex-direction: column; position: relative; left: 0; transform: none; width: 100vw; background: transparent; box-shadow: none;}
+      .bottom-bar .item { border-radius: 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.04);}
+      .bottom-bar .item:last-child { border-bottom: none;}
+    }
+
+    /* Change delay timing */
+.big-title { animation-delay: 0.1s; } /* Faster */
+.desc { animation-delay: 0.3s; }
+.btn-row { animation-delay: 0.5s; }
+
+/* Change animation duration */
+.big-title, .desc, .btn-row {
+    animation: slideUp 1.2s ease-out forwards; /* 1.2s instead of 0.8s */
+}
+
+/* Change distance traveled */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px); /* More distance = 100px */
+    }
+}
+
+/* Change easing function */
+/* animation: slideUp 0.8s ease-in-out forwards; ease-in-out for smoother */
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="container">
+    <nav>
+      <div class="logo"><img src="/assests/apex.png" alt=""></div>
+      <div class="navlinks">
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">Product <i class="fa fa-angle-down"></i></a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn"><i class="fa fa-search"></i></button>
+        <button class="icon-btn"><i class="fa fa-shopping-basket"></i></button>
+        <button class="buynow-btn">Buy Now</button>
+      </div>
+    </nav>
+    <div class="flex-hero">
+      <div class="hero-left">
+        <div class="big-title">
+          Performance<br>
+          <strong>BOOST</strong>
+          Energy Gum.
+        </div>
+   
+        <div class="desc">
+          Lorem ipsum dolor sit amet consectetur. Justo lacus tristique volutpat elit ultrices ut purus. Ut metus nunc vitae risus. Massa sed amet volutpat feugiat est vel enim auctor.
+        </div>
+        <div class="btn-row">
+          <button class="btn"><i class="fa fa-shopping-basket"></i> Buy Now</button>
+          <button class="btn secondary">Learn more</button>
+        </div>
+        <div class="stars-row">
+          <div class="stars">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <div class="rating-main">
+            <span class="counter" data-target="5.0">0</span> Ratings
+          </div>
+          <script>
+            const counter = document.querySelector('.counter');
+            const target = parseFloat(counter.getAttribute('data-target'));
+            const increment = target / 50;
+            let current = 0;
+            
+            const updateCounter = () => {
+              if (current < target) {
+                current += increment;
+                counter.textContent = current.toFixed(1);
+                setTimeout(updateCounter, 40);
+              } else {
+                counter.textContent = target.toFixed(1);
+              }
+            };
+            
+            updateCounter();
+          </script>
+         
+        </div>
+      </div>
+      <div class="herobox">
+        <!-- Optional: If you have a cutout of the gum box with transparent bg, use it here instead of the full bg. Or leave blank if not needed. -->
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="item">
+        <div class="icon"><i class="fa fa-coffee"></i> <div class="type">ingredient</div></div>
+        
+        <div class="name">Caffeine</div>
+      </div>
+      <div class="item">
+        <div class="icon"><i class="fa fa-leaf"></i> <div class="type">Extract</div></div>
+   
+        <div class="name">Lemon Balm</div>
+      </div>
+      <div class="item">
+        <div class="icon"><i class="fa fa-bolt"></i> <div class="type">ingredient</div></div>
+        <div class="name">Taurine</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hero Section 1 Recreation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fff;
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Montserrat', Arial, sans-serif;
+      box-sizing: border-box;
+    }
+    .hero-main-wrap {
+      width: 100vw;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 0;
+    }
+    .hero-center-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 3.4vw;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      color: #1bbefc;
+      gap: 0.5em;
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 1.38em;
+    }
+    .hero-heading {
+      font-size: 3.1rem;
+      font-weight: 900;
+      color: #14171b;
+      text-align: center;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.6px;
+      line-height: 1.13;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      color: #717582;
+      margin-bottom: 2.6rem;
+      text-align: center;
+      font-weight: 500;
+      max-width: 550px;
+    }
+    .hero-cta-btns {
+      display: flex;
+      gap: 1.1em;
+      margin-bottom: 2rem;
+    }
+    .hero-cta-btn {
+      padding: 0.86em 2.1em;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: inherit;
+      font-size: 1.08em;
+      background: linear-gradient(90deg,#009dda,#36caff);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 24px #009dda14;
+      transition: background 0.2s;
+    }
+    .hero-cta-btn.secondary {
+      background: #fff;
+      color: #252b2d;
+      border: 1.7px solid #b7dafc;
+      box-shadow: none;
+    }
+
+    /* Floating Cards */
+    .hero-cards-abs {
+      width: 100vw;
+      height: 0; /* trick for stacking floating absolute cards */
+      position: relative;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .hero-card {
+      position: absolute;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(17,122,222,0.12);
+      background: #fff;
+      pointer-events:auto;
+      z-index:6;
+    }
+    /* Left top: stat box */
+    .hero-card.stat1 {
+      left: 8vw; top: 12vw;
+      width: 290px; height: 150px;
+      background: radial-gradient(100% 180% at 0% 90%,#02348a 0%,#1970c8 60%,#034078 100%);
+      color: #fff;
+      padding: 2.2em 2.1em 1.4em 2.1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      font-size:1.1em;
+    }
+    .stat1-icon {font-size:2em;}
+    .stat1-title {font-size: 2em;font-weight:900;}
+    .stat1-desc {font-size:1em; opacity:0.89;}
+    /* Right: product card */
+    .hero-card.product {
+      right: 12vw; top: 8vw;
+      width: 230px; padding: 1.1em 1.1em 1.23em 1.1em; text-align:left;
+    }
+    .hero-card.product-img {
+      display:block;width:96%;margin:0 auto 1em auto;background:#36cfff;border-radius:10px;
+      box-shadow:0 4px 8px #47e4ff18;
+    }
+    .product-title {font-size: 1em; font-weight:600; margin:0.5em 0 0.2em 0;}
+    .product-old {color:#bdbfc4; text-decoration:line-through; font-size:.96em;}
+    .product-new {color:#191919; font-weight:800; font-size:1.21em;}
+    /* Left mini card */
+    .hero-card.share {
+      left: 19vw; top: 32vw;
+      width: 260px; min-height:82px;display:flex;align-items:center;box-shadow:0 8px 30px #19d2e70e;
+      padding:1.18em 1.25em;gap:1em;
+    }
+    .share-avatar {
+      width:54px;height:54px;border-radius:50%;object-fit:cover;flex:0 0 54px;
+    }
+    .share-txt {font-size:.99em;font-weight:600;line-height:1.24;margin-bottom:0.3em;}
+    .share-link {
+      background: #19d2e7;
+      padding: .6em 2em; border: none;color: #fff;
+      border-radius: 6px;font-size:.91em;font-weight: 700;cursor:pointer;box-shadow:0 2px 8px #12cbea44;
+      margin-top:0.25em;
+    }
+    /* Bottom right: stat2 box */
+    .hero-card.stat2 {
+      right: 12vw; top: 31vw;
+      width: 220px; height: 120px; display: flex; flex-direction:column;justify-content:center;align-items:flex-start;
+      background:radial-gradient(90% 180% at 100% 0%,#04B3ED 16%,#2570e3 100%);
+      color:#fff;padding:1.9em 1.5em 1.35em 1.5em;font-size:1.05em;
+      box-shadow: 0 6px 26px #0ebfff15;
+    }
+    .stat2-icon {font-size:1.7em;}
+    .stat2-title {font-size: 2em;font-weight:900;}
+    .stat2-desc {font-size:1em; opacity:.88;}
+    /* Center: phone */
+    .hero-phone-block {
+      position: relative;
+      margin: 4vw auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      width: 330px;
+      height: 430px;
+    }
+    .hero-phone-bg {
+      position: absolute;
+      left: 50%;
+      bottom:-8vw;
+      transform: translate(-50%,0);
+      width: 580px;
+      height: 420px;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .hero-phone-mock {
+      width: 330px;
+      height: 430px;
+      border-radius: 38px;
+      background:#fff;
+      box-shadow:0 8px 60px #0db0eb21;display: flex;align-items: center;justify-content: center;overflow: hidden;position: relative;
+      z-index: 2;
+    }
+    .hero-phone-img {width: 100%;height: 102%;object-fit:cover;display: block;}
+    /* Phone on screen UI lines */
+    .phone-controls {
+      position:absolute;
+      top:90px;left:220px;width:240px;z-index:10;display:flex;flex-direction:column;gap:.7em;
+    }
+    .phone-control-row {
+      display:flex;align-items:center;gap:.7em;
+      background:rgba(80,80,80,0.12);padding:.37em 1.6em;border-radius:7px;width:160px;
+    }
+    .phone-control-dot {
+      display:inline-block;width:1.5em;height:1.5em;background:gold;border-radius:50%;color:#fff;
+      text-align:center;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.96em;
+    }
+    @media (max-width:900px) {
+      .hero-main-wrap{padding:0;}
+      .hero-phone-block,.hero-phone-mock{width:92vw;max-width:370px;height:390px;}
+      .hero-cards-abs .hero-card{font-size: .97em;}
+      .hero-phone-bg{width:99vw;max-width:480px;}
+    }
+    @media (max-width:600px){
+      .hero-heading{font-size:1.32rem;}
+      .hero-phone-block,.hero-phone-mock{width:99vw;max-width:360px;height:260px;}
+      .hero-cards-abs .hero-card{font-size:.89em;}
+      .hero-phone-bg{width:105vw;}
+      .phone-controls{left:44vw;width:30vw;}
+      .hero-card{min-width:120px;}
+    }
+  </style>
+</head>
+<body>
+<div class="hero-main-wrap">
+  <div class="hero-center-block">
+    <div class="hero-badge"><img src="https://img.icons8.com/?size=24&id=60383&format=png" alt="" style="width:20px;"> Media House</div>
+    <div class="hero-heading">Where Energy Meets<br>Limitless Imagination.</div>
+    <div class="hero-desc">
+      From electrifying events to cinematic storytelling, we create<br/>
+      moments that live beyond the screen.
+    </div>
+    <div class="hero-cta-btns">
+      <button class="hero-cta-btn">Buy Now</button>
+      <button class="hero-cta-btn secondary">Learn more</button>
+    </div>
+  </div>
+  <div class="hero-cards-abs">
+    <div class="hero-card stat1">
+      <span class="stat1-icon">&#128337;</span>
+      <div class="stat1-title">34.5 Min</div>
+      <div class="stat1-desc">Average event watch time</div>
+    </div>
+    <div class="hero-card product">
+      <img class="hero-card product-img" src="https://assets-global.website-files.com/63a5a69f2791608c5e26fb13/63b3acf439f92f1d8f01db58_apex-product-p.png" alt="Apex Gum">
+      <div class="product-title">Apex Gum Full Package</div>
+      <div>
+        <span class="product-old">$169</span>
+        <span class="product-new">$20.8</span>
+      </div>
+    </div>
+    <div class="hero-card share">
+      <img class="share-avatar" src="https://randomuser.me/api/portraits/women/22.jpg" alt="User">
+      <div>
+        <div class="share-txt">Where Energy Meets Boundless Imagination.</div>
+        <button class="share-link">Get to link</button>
+      </div>
+    </div>
+    <div class="hero-card stat2">
+      <span class="stat2-icon">&#127760;</span>
+      <div class="stat2-title">100+</div>
+      <div class="stat2-desc">Clients across the globe</div>
+    </div>
+  </div>
+
+  <div class="hero-phone-block">
+    <svg class="hero-phone-bg" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="heroCirc" cx="50%" cy="65%" r="83%" fx="47%" fy="87%">
+          <stop offset="0%" stop-color="#12dafc" stop-opacity="0.52"/>
+          <stop offset="100%" stop-color="#38b2ff" stop-opacity="0.11"/>
+        </radialGradient>
+      </defs>
+      <path d="M600,360 Q300,40 0,360" fill="none" stroke="#c7ebfa" stroke-width="2"/>
+      <path d="M0,360 A300,300 0 0,1 600,360 Z" fill="url(#heroCirc)" />
+    </svg>
+    <div class="hero-phone-mock">
+      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=640&h=1200" alt="athlete" class="hero-phone-img">
+      <div class="phone-controls">
+        <div class="phone-control-row"><span class="phone-control-dot">&#128712;</span><div style="flex:1;height:0.4em;background:#e1e4e7;border-radius:4px;"></div></div>
+        <div class="phone-control-row"><span class="phone-control-dot">&#128712;</span><div style="flex:1;height:0.4em;background:#e1e4e7;border-radius:4px;"></div></div>
+        <div class="phone-control-row"><span class="phone-control-dot">&#128712;</span><div style="flex:1;height:0.4em;background:#e1e4e7;border-radius:4px;"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+    

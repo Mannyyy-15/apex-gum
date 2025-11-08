@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What We Do Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #f5faff; margin: 0; }
+    .what-we-do-section{max-width:1200px;margin:3rem auto;padding:0 1rem;}
+    .wwd-card{display: grid;grid-template-columns:1.2fr 1fr;gap:3rem;background: #e6f8fd;border-radius:20px;margin-bottom:2.5rem;align-items:center;padding:2.3rem;box-shadow:0 2px 32px rgba(36,200,249,.08);}
+    .wwd-card.rev{grid-template-columns:1fr 1.2fr;}
+    .wwd-video-block{position:relative;width:100%;display:flex;align-items:center;justify-content:center;}
+    .wwd-video{width:29vw;max-width:440px;border-radius:18px;box-shadow:0 8px 24px rgba(29,95,143,.19);}
+    .wwd-overlay-box{position:absolute;top:1.3em;left:1.3em;min-width:105px;padding:1em 1.3em;background:linear-gradient(135deg,#0999e0,#37d1f7);border-radius:13px;color:#fff;font-size:.98em;font-weight:700;box-shadow:0 4px 22px rgba(9,153,224,.10);}
+    .wwd-qr{position:absolute;bottom:-1.3em;right:-1.3em;padding:0.55em 0.6em;background:#fff;border-radius:8px;box-shadow:0 6px 22px rgba(41,119,209,.13);display:flex;flex-direction:column;align-items:center;width:90px;}
+    .wwd-qr img{width:70px;align-self:center;}
+    .wwd-qr-label{font-size:.72em;color:#0e2a3b;text-align:center;margin-top:0.3em;}
+    .wwd-card-right{padding-left:2vw;}
+    .wwd-card-left{padding-right:2vw;}
+    .wwd-card-title{font-size:2rem;margin-bottom:.7em;line-height:1.18;font-weight:900;}
+    .wwd-card-sub{color:#1ecaff;font-weight:600;font-size:.98rem;margin-bottom:.6em;}
+    .wwd-card-desc{font-size:1.04rem;color:#37526b;line-height:1.61;margin-bottom:1.5em;}
+    .wwd-btn{padding:0.82em 2.1em;border-radius:9px;background:linear-gradient(135deg,#13b6fa 60%,#36e2fa);color:#fff;font-weight:700;font-size:1.11rem;outline:none;border:none;box-shadow:0 4px 22px rgba(58,199,250,.07);cursor:pointer;}
+    .wwd-btn:hover{background:linear-gradient(135deg,#0b84c7,#1aacda);}
+    /* reversed */
+    .wwd-card.rev .wwd-video-block{order:2;}
+    .wwd-card.rev .wwd-card-right{order:1;padding-left:0;padding-right:2vw;}
+    .wwd-card.rev .wwd-card-left{order:2;padding-right:0;padding-left:2vw;}
+    @media (max-width:1024px){
+      .wwd-card,.wwd-card.rev{grid-template-columns:1fr;gap:2.1rem;}
+      .wwd-video{width:97vw;max-width:98vw;}
+      .wwd-card-right,.wwd-card-left{padding:0;}
+      .wwd-overlay-box{font-size:.95em;}
+    }
+    @media (max-width:600px){
+      .wwd-card,.wwd-card.rev{padding:1.15rem 0.6rem;}
+      .wwd-card-title{font-size:1.24rem;}
+      .wwd-overlay-box{padding:0.63em 0.85em;}
+    }
+  </style>
+</head>
+<body>
+<div class="what-we-do-section">
+
+  <!-- Card 1 -->
+  <div class="wwd-card">
+    <div class="wwd-video-block">
+      <!-- Top left box -->
+      <div class="wwd-overlay-box">
+        <div style="font-size:1.35em;font-weight:900;line-height:1.05;">60+</div>
+        <div style="font-size:.96em;font-weight:400;">Events produced</div>
+      </div>
+      <!-- The video (img for demo) -->
+      <video class="wwd-video" autoplay muted loop poster="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&h=350&fit=crop">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/>
+        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&h=350&fit=crop" alt="Events">
+      </video>
+      <!-- Bottom right QR -->
+      <div class="wwd-qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=https://example.com"/>
+        <div class="wwd-qr-label">Scan to get connected</div>
+      </div>
+    </div>
+    <div class="wwd-card-right">
+      <div class="wwd-card-sub">What we do</div>
+      <div class="wwd-card-title">Event Production</div>
+      <div class="wwd-card-desc">We design high-voltage events that merge creativity, sound, and motion to captivate audiences. From live shows to brand activations, every moment is engineered to thrill and inspire.</div>
+      <button class="wwd-btn">Learn more</button>
+    </div>
+  </div>
+
+  <!-- Card 2 (reversed)-->
+  <div class="wwd-card rev">
+    <div class="wwd-card-right">
+      <div class="wwd-card-sub">What we do</div>
+      <div class="wwd-card-title">Film & Digital Media Campaign</div>
+      <div class="wwd-card-desc">
+        Our film and digital team transforms bold ideas into cinematic storytelling. We create visuals that ignite emotion, strengthen brands, and connect with audiences worldwide.
+      </div>
+      <button class="wwd-btn">Learn more</button>
+    </div>
+    <div class="wwd-video-block">
+      <div class="wwd-overlay-box">
+        <div style="font-size:1.35em;font-weight:900;line-height:1.05;">3M+</div>
+        <div style="font-size:.96em;font-weight:400;">Revenue generated</div>
+      </div>
+      <video class="wwd-video" autoplay muted loop poster="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=350&fit=crop">
+        <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"/>
+        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&h=350&fit=crop" alt="Studio">
+      </video>
+      <div class="wwd-qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=https://example.com"/>
+        <div class="wwd-qr-label">Scan to get connected</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

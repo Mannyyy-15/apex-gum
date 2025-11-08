@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testimonials Infinite Carousel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fcfdff;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .testimonials-section {
+      width: 100%;
+      padding: 2.2rem 0 2.6rem 0;
+      background: #fff;
+    }
+    .testimonials-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.35rem;
+      width: 100%;
+    }
+    .testimonials-badge {
+      color: #16c2e9;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.48rem;
+    }
+    .testimonials-title {
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 0;
+      color: #181d24;
+      letter-spacing: -1.5px;
+    }
+    .carousel-wrapper {
+      width: 100vw;
+      max-width: 100%;
+      overflow: hidden;
+      background: transparent;
+      padding: 0;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-top: 0.2rem;
+    }
+    .carousel-row {
+      display: flex;
+      gap: 2.5rem;
+      width: 100vw;
+      align-items: stretch;
+      position: relative;
+      will-change: transform;
+    }
+    .carousel-row.bottom {
+      flex-direction: row-reverse;
+    }
+    .testimonial-card {
+      min-width: 340px;
+      max-width: 380px;
+      background: #e9f9fe;
+      border-radius: 24px;
+      box-shadow: 0 1.5px 16px rgba(18,70,110,0.065);
+      padding: 2.1rem 2rem 1.35rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .testimonial-quote {
+      color: #04c5ea;
+      font-size: 2.35rem;
+      margin-bottom: 1.1rem;
+    }
+    .testimonial-text {
+      font-size: 1.1rem;
+      color: #242f3f;
+      font-weight: 400;
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+      letter-spacing: -0.1px;
+    }
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #d2f2fe;
+      border: 2px solid #e5faff;
+    }
+    .testimonial-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.03em;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 1.09em;
+      color: #15151f;
+      letter-spacing: -0.5px;
+    }
+    .testimonial-role {
+      font-size: 0.98em;
+      color: #595959;
+      opacity: 0.7;
+      font-weight: 400;
+    }
+    @media (max-width: 960px) {
+      .testimonials-title { font-size: 2rem;}
+      .carousel-row { gap: 1.2rem;}
+      .testimonial-card { min-width:280px; max-width:97vw;}
+    }
+    @media (max-width: 680px) {
+      .testimonial-card { min-width:88vw; max-width:98vw; }
+      .carousel-row, .carousel-wrapper { gap: 0.6rem;}
+      .testimonials-heading {margin-bottom:1rem;}
+    }
+  </style>
+</head>
+<body>
+  <section class="testimonials-section">
+    <div class="testimonials-heading">
+      <div class="testimonials-badge">
+        <span style="font-size:1.14em;">&#8226;</span> Testimonials
+      </div>
+      <h2 class="testimonials-title">Word Of Praises</h2>
+    </div>
+    <div class="carousel-wrapper">
+      <!-- Top carousel row, moves RIGHT -->
+      <div id="carousel-row-top" class="carousel-row top">
+        <!-- Cards will be injected by JS for infinite loop -->
+      </div>
+      <!-- Bottom carousel row, moves LEFT -->
+      <div id="carousel-row-bottom" class="carousel-row bottom">
+        <!-- Cards will be injected by JS for infinite loop -->
+      </div>
+    </div>
+  </section>
+  <script>
+    // Example testimonials data (replace avatars as needed)
+    const testimonials = [
+      {
+        text: "The energy boost kicks in fast and feels incredibly clean. Perfect for those mornings when I’m running late for work.",
+        name: "Sarah L.",
+        role: "Operations Director",
+        avatar: "https://randomuser.me/api/portraits/women/2.jpg"
+      },
+      {
+        text: "I was surprised by how smooth the caffeine felt. No crash, just steady focus for hours.",
+        name: "Daniel K",
+        role: "Software Developer",
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      {
+        text: "Apex Gum has become my go-to before every workout. It gives me instant motivation and lasting energy.",
+        name: "Maya R",
+        role: "Fitness Coach",
+        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      {
+        text: "Tastes great and actually works faster than coffee. Now I keep a pack in my car and gym bag.",
+        name: "Alex T",
+        role: "Entrepreneur",
+        avatar: "https://randomuser.me/api/portraits/men/91.jpg"
+      },
+      {
+        text: "I chew one before studying, and I’m locked in within minutes. It’s the easiest way to stay focused and alert.",
+        name: "Sarah L.",
+        role: "Operations Director",
+        avatar: "https://randomuser.me/api/portraits/women/2.jpg"
+      },
+      {
+        text: "The flavor lasts long and the effect hits quick. Exactly what I need to power through long shifts.",
+        name: "Kevin L",
+        role: "Nurse",
+        avatar: "https://randomuser.me/api/portraits/men/13.jpg"
+      },
+      {
+        text: "I love that it’s convenient and mess-free. No waiting, no drinks — just pure energy on demand.",
+        name: "Mark D.",
+        role: "Project Manager",
+        avatar: "https://randomuser.me/api/portraits/men/11.jpg"
+      },
+      {
+        text: "From the first chew, I could feel the difference. Apex Gum gives me that instant ‘go’ feeling every time.",
+        name: "Aisha N.",
+        role: "University Student",
+        avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+      }
+    ];
+
+    function makeCard(t) {
+      return `
+        <div class="testimonial-card">
+          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+          <div class="testimonial-text">${t.text}</div>
+          <div class="testimonial-footer">
+            <img src="${t.avatar}" class="testimonial-avatar" />
+            <div class="testimonial-info">
+              <div class="testimonial-name">${t.name}</div>
+              <div class="testimonial-role">${t.role}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRow(rowId, reverse=false) {
+      const el = document.getElementById(rowId);
+      // Double the cards for seamless loop
+      let rowHTML = '';
+      for(let cycle=0;cycle<2;cycle++){
+        (reverse ? [...testimonials].reverse() : testimonials).forEach((t) => {
+          rowHTML += makeCard(t);
+        });
+      }
+      el.innerHTML = rowHTML;
+    }
+
+    renderRow('carousel-row-top', false);
+    renderRow('carousel-row-bottom', true);
+
+    // Animation - infinite scroll both rows
+    let topPos = 0, bottomPos = 0;
+    const speed = 1.10; // px per frame
+    const rowTop = document.getElementById('carousel-row-top');
+    const rowBottom = document.getElementById('carousel-row-bottom');
+    // Determine actual width of a set
+    const cycleWidth = rowTop.scrollWidth / 2;
+
+    function animateCarousels() {
+      topPos += speed;
+      bottomPos -= speed;
+      if(topPos >= cycleWidth) topPos = 0;
+      if(bottomPos <= -cycleWidth) bottomPos = 0;
+      rowTop.style.transform = `translateX(${-topPos}px)`;
+      rowBottom.style.transform = `translateX(${-bottomPos}px)`;
+      requestAnimationFrame(animateCarousels);
+    }
+    animateCarousels();
+  </script>
+</body>
+</html>

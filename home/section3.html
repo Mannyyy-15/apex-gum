@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits Section - APEX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ===== BENEFITS SECTION ===== */
+        .benefits-section {
+            width: 100%;
+            min-height: 100vh;
+            background: url('/assests/ac95f38e4abb53c4144ba8394135c91d871ea474.png') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 4rem 4vw;
+        }
+
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* ===== CONTENT WRAPPER ===== */
+        .benefits-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        /* ===== TOP SECTION ===== */
+        .benefits-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+        }
+
+        /* Top Left Text */
+        .benefits-left {
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .ingredients-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredients-label i {
+            font-size: 1.1rem;
+        }
+
+.benefits-title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    line-height: 0.95;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.benefits-title-highlight {
+    position: relative;
+    display: inline-block;
+    color: white;
+    z-index: 1;
+    padding: 0 0.2em;
+}
+
+.benefits-title-highlight::before {
+    content: '';    
+    position: absolute;
+    /* top: 15%; */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #38b6ff, #00e4ff);
+    /* border-radius: 8px; */
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: slide-bg 1s cubic-bezier(.6,1.7,.69,.77) forwards;
+    animation-delay: .8s;
+}
+
+@keyframes slide-bg {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+
+        /* Top Right Text */
+        .benefits-right {
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .benefits-description {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            font-weight: 400;
+            text-align: right;
+        }
+
+        /* ===== BOTTOM BAR ===== */
+.benefits-bar {
+    position: fixed;
+    left:10%;
+    /* transform: translateX(-50%); */
+    bottom: 2rem;
+    width: 80%;
+    background: rgba(0, 0, 0, 0.208);
+    border-radius: 6px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2rem 2vw;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.4s forwards;
+    z-index: 100;
+}
+
+
+
+        .bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.594);
+        }
+         .bar-item:last-child {
+            border-right: none;
+        }
+
+        .bar-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .bar-item-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            gap: 0.5rem;
+        }
+
+        .bar-item-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bar-item-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .benefits-section {
+                padding: 3rem 3vw;
+                min-height: auto;
+            }
+
+            .benefits-title {
+                font-size: 3.2rem;
+            }
+
+            .benefits-description {
+                font-size: 1rem;
+            }
+
+            .benefits-bar {
+                width: calc(100% + 6vw);
+                margin: 0 -3vw -3rem -3vw;
+                padding: 2rem 3vw;
+                gap: 1.5rem;
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .benefits-top {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .benefits-description {
+                text-align: left;
+            }
+
+            .benefits-title {
+                font-size: 2.8rem;
+            }
+
+            .bar-item {
+                gap: 0.8rem;
+            }
+
+            .bar-item-name {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .benefits-section {
+                padding: 2rem 2vw;
+                min-height: auto;
+            }
+
+            .benefits-top {
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .benefits-title {
+                font-size: 2.2rem;
+            }
+
+            .benefits-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .ingredients-label {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .benefits-bar {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                padding: 1.5rem 2vw;
+                width: calc(100% + 4vw);
+                margin: 0 -2vw -2rem -2vw;
+            }
+
+            .bar-item {
+                gap: 0.6rem;
+            }
+
+            .bar-item-icon {
+                font-size: 1.1rem;
+            }
+
+            .bar-item-label {
+                font-size: 0.75rem;
+            }
+
+            .bar-item-name {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .benefits-section {
+                padding: 1.5rem 1.5vw;
+                min-height: auto;
+            }
+
+            .benefits-title {
+                font-size: 1.8rem;
+                line-height: 1;
+            }
+
+            .benefits-description {
+                font-size: 0.9rem;
+            }
+
+            .benefits-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+                padding: 1.2rem 1.5vw;
+                width: calc(100% + 3vw);
+                margin: 0 -1.5vw -1.5rem -1.5vw;
+            }
+
+            .bar-item {
+                gap: 0.5rem;
+            }
+
+            .bar-item-icon {
+                font-size: 1rem;
+            }
+
+            .bar-item-label {
+                font-size: 0.7rem;
+            }
+
+            .bar-item-name {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .benefits-section {
+                padding: 1rem 1rem;
+                min-height: auto;
+            }
+
+            .benefits-title {
+                font-size: 1.4rem;
+            }
+
+            .benefits-description {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .ingredients-label {
+                font-size: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .benefits-bar {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+                padding: 1rem 1rem;
+                width: calc(100% + 2rem);
+                margin: 0 -1rem -1rem -1rem;
+            }
+
+            .bar-item {
+                padding: 0.8rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                gap: 0.4rem;
+            }
+
+            .bar-item:last-child {
+                border-bottom: none;
+            }
+
+            .bar-item-icon {
+                font-size: 0.9rem;
+            }
+
+            .bar-item-label {
+                font-size: 0.65rem;
+            }
+
+            .bar-item-name {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="benefits-section">
+    <div class="benefits-content">
+        <!-- Top Section -->
+        <div class="benefits-top">
+            <!-- Left Text -->
+            <div class="benefits-left">
+                <div class="ingredients-label">
+                    <i class="fas fa-leaf"></i>
+                    Ingredients
+                </div>
+                <h1 class="benefits-title">
+                    Performance<br>
+                    <span class="benefits-title-highlight">Energy Gum.</span>
+                </h1>
+            </div>
+
+            <!-- Right Text -->
+            <div class="benefits-right">
+                <p class="benefits-description">
+                    Lorem ipsum dolor sit amet consectetur. Morbi cursus hendrerit vulputate curabitur. Ullamcorper cras sagittis varius morbi vel tellus mattis elian. Mattis diam quam neque ellerend in dolor ultricies dui. Massa vitae augue tacus vivamus in dolor dui consectetur enim.
+                </p>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="benefits-bar">
+            <div class="bar-item">
+                <div class="bar-item-icon">
+                    <i class="fas fa-coffee"></i>
+                    <span class="bar-item-label">Ingredient</span>
+                </div>
+                <div class="bar-item-name">Caffeine</div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-item-icon">
+                    <i class="fas fa-leaf"></i>
+                    <span class="bar-item-label">Extract</span>
+                </div>
+                <div class="bar-item-name">Lemon Balm</div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-item-icon">
+                    <i class="fas fa-bolt"></i>
+                    <span class="bar-item-label">Ingredient</span>
+                </div>
+                <div class="bar-item-name">Taurine</div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-item-icon">
+                    <i class="fas fa-wind"></i>
+                    <span class="bar-item-label">Flavor</span>
+                </div>
+                <div class="bar-item-name">Peppermint</div>
+            </div>
+
+            <div class="bar-item">
+                <div class="bar-item-icon">
+                    <i class="fas fa-cube"></i>
+                    <span class="bar-item-label">Total</span>
+                </div>
+                <div class="bar-item-name">54 Total</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Intersection observer for animations
+    const observerOptions = {
+        threshold: 0.3
+    };
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Trigger animations
+            }
+        });
+    }, observerOptions);
+
+    const section = document.querySelector('.benefits-section');
+    observer.observe(section);
+
+    // Bar item click handler
+    document.querySelectorAll('.bar-item').forEach(item => {
+        item.addEventListener('click', function() {
+            console.log('Clicked:', this.querySelector('.bar-item-name').textContent);
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FAQs Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;600;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    body {background: #fff; margin:0; font-family: 'Montserrat',sans-serif;}
+    .faq-section {
+      max-width: 1170px;
+      margin: 0 auto;
+      padding: 2.7rem 1.2rem;
+    }
+    .faq-badge {
+      text-align: center;
+      color: #17c7f7;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.13em;
+      margin-bottom: 0.7em;
+      margin-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .faq-title {
+      font-size: 2.9rem;
+      text-align: center;
+      font-weight: 900;
+      margin: 0 0 2.7rem 0;
+      color: #171717;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .faq-group-container {
+      margin-bottom: 2.3rem;
+      background: #e7faff;
+      border-radius: 26px;
+      padding: 2.4rem 2rem 2.1rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      min-width: 0;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 40px rgba(109, 203, 255, 0.09);
+    }
+    .faq-group-icon {
+      min-width: 58px;
+      width: 58px; height: 58px;
+      background: #16c9f7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 2.1rem;
+      margin-right: 0.8rem;
+      margin-top: 0.08em;
+      box-shadow: 0 2px 36px rgba(22,201,247,0.07);
+    }
+    .faq-group-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      color: #171717;
+      line-height: 1.11;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      white-space: nowrap;
+    }
+    .faq-questions-wrap {
+      flex: 1 1 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      min-width: 0;
+    }
+    .faq-item {
+      width: 100%;
+      transition: background 0.33s cubic-bezier(.82,0,.59,1.17),
+                  box-shadow 0.33s cubic-bezier(.82,0,.59,1.17),
+                  border-radius 0.38s cubic-bezier(.82,0,.59,1.17),
+                  margin 0.38s cubic-bezier(.82,0,.59,1.17);
+      margin-bottom: 0;
+      border-radius: 30px;
+      background: #c6f0fc;
+      box-shadow: 0 2px 13px rgba(9,95,150,0.04);
+      overflow: visible;
+      position: relative;
+    }
+    .faq-item.active {
+      background: #b1eafe;
+      box-shadow: 0 7px 30px rgba(8,149,188,0.09);
+      border-radius: 34px 34px 18px 18px;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-question-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 2.7rem 0.8rem 2.3rem;
+      min-height: 54px;
+      cursor: pointer;
+      font-size: 1.02rem;
+      outline: none;
+      background: none;
+      border: none;
+      user-select: none;
+    }
+    .faq-question-text {
+      font-weight: 500;
+      color: #191b1f;
+    }
+    .faq-question-toggle {
+      background: #91eaff;
+      border-radius: 100%;
+      width: 54px; height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #373e41;
+      transition: background 0.14s, box-shadow 0.14s;
+      box-shadow: 0 2px 22px rgba(10,85,124,0.04);
+      border:none; outline: none;
+      cursor:pointer;
+      z-index: 2;
+      margin-left: 1.2em;
+      position: relative;
+    }
+    .faq-item.active .faq-question-toggle {
+      background: #2ed6ff;
+      color: #fff;
+    }
+    .faq-answer-wrap {
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        max-height 0.53s cubic-bezier(.82,0,.59,1.17),
+        opacity 0.33s cubic-bezier(.82,0,.59,1.17),
+        padding 0.34s cubic-bezier(.82,0,.59,1.17),
+        background 0.23s cubic-bezier(.82,0,.59,1.17),
+        border-radius 0.22s cubic-bezier(.82,0,.59,1.17);
+      overflow: hidden;
+      padding: 0 2rem 0 2rem;
+      font-size: 1.06rem;
+      background: transparent;
+      border-radius: 0 0 0 0;
+      margin-top: 0;
+      z-index: 1;
+    }
+    .faq-item.active .faq-answer-wrap {
+      max-height: 300px;
+      opacity: 1;
+      background: #daf7ff;
+      padding: 1.2rem 2rem 1.2rem 2rem;
+      border-radius: 0 0 18px 18px;
+      margin-top: -0.6rem;
+      animation: fadeInDown 0.4s;
+      pointer-events: all;
+    }
+    @keyframes fadeInDown {
+      from { opacity:0; transform:translateY(-12px);}
+      to { opacity:1; transform:translateY(0);}
+    }
+    @media (max-width: 900px) {
+      .faq-group-container {flex-direction: column; gap: 0.6rem; padding: 1.4rem 0.8rem;}
+      .faq-group-title {font-size: 1.35rem;}
+      .faq-questions-wrap {gap: 1rem;}
+    }
+    @media (max-width: 600px) {
+      .faq-title { font-size: 1.37rem;}
+      .faq-group-title { font-size:1.11rem;}
+      .faq-group-icon {width:40px; height:40px; font-size:1.1rem; min-width:40px;}
+      .faq-group-container {border-radius: 12px; padding:0.7rem 0.1rem;}
+      .faq-question-row,
+      .faq-item.active .faq-answer-wrap { border-radius:14px; padding:0.6rem 1.1rem 0.6rem 1.0rem;}
+      .faq-answer-wrap {font-size:0.97rem;}
+    }
+  </style>
+</head>
+<body>
+  <section class="faq-section">
+    <div class="faq-badge"><span style="font-size:1.26em;">&#8226;</span> FAQs</div>
+    <h2 class="faq-title">Frequently Asked<br/>Questions</h2>
+
+    <!-- General group -->
+    <div class="faq-group-container">
+      <div style="display: flex;align-items: center;min-width:140px;">
+        <span class="faq-group-icon"><i class="fa fa-user-astronaut"></i></span>
+        <span class="faq-group-title">General</span>
+      </div>
+      <div class="faq-questions-wrap">
+        <div class="faq-item">
+          <div class="faq-question-row" tabindex="0">
+            <span class="faq-question-text">What is Apex Gum?</span>
+            <span class="faq-question-toggle"><i class="fa fa-plus"></i></span>
+          </div>
+          <div class="faq-answer-wrap">
+            Apex Gum is a caffeinated chewing gum designed to deliver a fast, clean energy boost wherever you are.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question-row" tabindex="0">
+            <span class="faq-question-text">How much caffeine is in one piece of Apex Gum?</span>
+            <span class="faq-question-toggle"><i class="fa fa-plus"></i></span>
+          </div>
+          <div class="faq-answer-wrap">
+            Each piece contains approximately 40mg of natural caffeine derived from green coffee beans.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question-row" tabindex="0">
+            <span class="faq-question-text">When should I use Apex Gum?</span>
+            <span class="faq-question-toggle"><i class="fa fa-plus"></i></span>
+          </div>
+          <div class="faq-answer-wrap">
+            Use Apex Gum whenever you need quick, portable energy and focus—such as before workouts, exams, or long drives.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Science group -->
+    <div class="faq-group-container">
+      <div style="display: flex;align-items: center;min-width:140px;">
+        <span class="faq-group-icon"><i class="fa fa-flask"></i></span>
+        <span class="faq-group-title">Science</span>
+      </div>
+      <div class="faq-questions-wrap">
+        <div class="faq-item">
+          <div class="faq-question-row" tabindex="0">
+            <span class="faq-question-text">How does caffeinated gum work faster than coffee?</span>
+            <span class="faq-question-toggle"><i class="fa fa-plus"></i></span>
+          </div>
+          <div class="faq-answer-wrap">
+            Absorption through the mouth’s lining delivers caffeine faster to your bloodstream than digestion, so effects start within minutes.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question-row" tabindex="0">
+            <span class="faq-question-text">Is it safe to use Apex Gum daily?</span>
+            <span class="faq-question-toggle"><i class="fa fa-plus"></i></span>
+          </div>
+          <div class="faq-answer-wrap">
+            Yes, enjoy Apex Gum daily—just monitor your overall caffeine intake for best results.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    document.querySelectorAll('.faq-question-row').forEach(q => {
+      q.addEventListener('click', function() {
+        // Only one open at a time:
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if(item.contains(q)) {
+            item.classList.toggle('active');
+            // icon animate
+            let icon = q.querySelector('.faq-question-toggle i');
+            icon.classList.toggle('fa-plus');
+            icon.classList.toggle('fa-minus');
+          } else {
+            item.classList.remove('active');
+            let otherIcon = item.querySelector('.faq-question-toggle i');
+            if(otherIcon) {
+              otherIcon.classList.add('fa-plus');
+              otherIcon.classList.remove('fa-minus');
+            }
+          }
+        });
+      });
+      q.addEventListener('keypress', function(e) {
+        if(e.key==="Enter" || e.key===" ") q.click();
+      });
+    });
+  </script>
+</body>
+</html>

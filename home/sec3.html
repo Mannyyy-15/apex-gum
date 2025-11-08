@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Product Grid</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0b0b0b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .product-section {
+      display: flex;
+      gap: 30px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    /* Left Card */
+    .left-card {
+      flex: 1;
+      background: url('/assests/sportImage.png') center/cover no-repeat;
+      border-radius: 16px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px;
+      min-height: 480px;
+      overflow: hidden;
+    }
+
+    .left-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+    }
+
+    .left-content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+
+    .left-content p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .left-content h1 {
+      font-size: 42px;
+      line-height: 1.1;
+    }
+
+    /* Animated highlight for "Lock In" */
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      padding: 0 8px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #00b4ff, #0090d4, #00b4ff);
+      background-size: 200% 100%;
+      animation: moveHighlight 3s linear infinite;
+    }
+
+    @keyframes moveHighlight {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* Right Card */
+    .right-card {
+      flex: 1;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #00b4ff, #0090d4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .right-card h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+
+    .price del {
+      opacity: 0.7;
+      margin-right: 8px;
+    }
+
+    /* Product image floating animation */
+    .product-img {
+      width: 50%;
+      transform: scale(2);
+      margin-bottom: 40px;
+      animation: floatUpDown 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: scale(2) translateY(0);
+      }
+      50% {
+        transform: scale(2) translateY(-15px);
+      }
+    }
+
+    /* Button */
+    .buy-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 40px;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .product-section {
+        flex-direction: column;
+      }
+      .left-card, .right-card {
+        width: 100%;
+      }
+      .product-img {
+        transform: scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="product-section">
+    <!-- Left Card -->
+    <div class="left-card">
+      <div class="left-content">
+        <p>Pricing</p>
+        <h1>Its Time To<br><span class="highlight">Lock In.</span></h1>
+      </div>
+    </div>
+
+    <!-- Right Card -->
+    <div class="right-card">
+      <h2>Picnic Package</h2>
+      <p class="price"><del>$16.9</del> $12.8</p>
+      <img src="/assests/apexProduct1.png" alt="Apex Boxes" class="product-img"> 
+      <button class="buy-btn">Buy Now</button>
+    </div>
+  </section>
+
+</body>
+</html>
