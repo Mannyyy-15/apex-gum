@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Why Choose Us - Comparison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {font-family:'Montserrat',Arial,sans-serif;margin:0;color:#181b23;background:#fff;}
+    .comparison-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1rem 2.5rem 1rem;
+      position:relative;
+    }
+    .c-header {
+      display:flex; flex-direction: column; align-items:flex-start; margin-bottom:1.7rem; gap:1.2rem;
+    }
+    .c-label {
+      color:#19ccff; font-size:1rem; font-weight:600; margin-bottom:.3rem; letter-spacing:0.08em;
+      display:flex;align-items:center;gap:.39rem;
+    }
+    .c-title {
+      font-weight:900; font-size:2.3rem; margin-bottom:0.3rem; letter-spacing:-1px;
+    }
+    .c-products {
+      display:flex;justify-content:center; gap:4.7vw; margin-bottom:1.1rem;
+    }
+    .c-prod-col {
+      display:flex; flex-direction:column;align-items:center;gap:.19rem;
+    }
+    .c-prod-icon {
+      font-size:2.3rem; color:#19ccff;
+      margin-bottom:.05rem;
+    }
+    .c-prod-title {font-weight:700; font-size:1.18rem;}
+    .c-prod-desc {font-size:.89rem;color:#7b8492;margin-top:.07rem;}
+    .comp-table-wrap {
+      position:relative; z-index:2;
+    }
+    .comp-table {
+      background: linear-gradient(122deg,#19ccff 45%,#1e9fe1 100%);
+      border-radius:16px; box-shadow:0 3px 32px rgba(25,204,255,0.14);
+      padding:2.3rem 0 2.3rem 0;
+      margin-right:310px; /* room for main card float */
+      position:relative;
+      z-index:2;
+    }
+    .comp-table-grid {
+      display:grid;
+      grid-template-columns:220px 1fr 1fr; 
+      align-items:center;
+      min-width:790px; /* allow horizontal scrolling on small screens */
+      width:100%;
+    }
+    .comp-left-label {
+      font-size:1.11rem;
+      font-weight:700;
+      color:#fff;
+      padding:1.15rem 0 1.1rem 37px;
+      border-bottom:1.5px solid rgba(255,255,255,0.16);
+    }
+    .comp-table-row:last-child .comp-left-label {border-bottom:none;}
+    .comp-cell { padding:1.15rem 0 1.1rem 0; text-align:center; border-bottom:1.5px solid rgba(255,255,255,0.10);}
+    .comp-table-row:last-child .comp-cell {border-bottom:none;}
+    .comp-check {
+      color:#19ccff; font-size:1.19rem; border-radius:100px; border:1.5px solid #d7f3fe; background:#fff; width:2rem; height:2rem; display:inline-flex; align-items:center; justify-content:center;
+      box-shadow: 0 2px 12px rgba(25,204,255,0.09); }
+    .comp-empty { 
+      color:#bbb; font-size:1.09rem; border-radius:100px; border:1.5px solid #e3eaf1; background:#fff; width:2rem; height:2rem; display:inline-flex; align-items:center; justify-content:center; }
+    .main-card {
+      position:absolute; 
+      top:45px; right:0; width:300px; height:455px;
+      background: linear-gradient(122deg,#19ccff 0%,#085bba 97%);
+      border-radius:16px; box-shadow:0 30px 48px rgba(25,204,255,0.23);
+      z-index:3;
+      display:flex;flex-direction:column;align-items:center;gap:.82rem;
+      padding:2.45rem 2rem;
+    }
+    .main-card-top {
+      display:flex;align-items:center;justify-content:start;gap:.7rem;width:100%;margin-bottom:1.4rem;
+    }
+    .main-card-prod {
+      display:flex;flex-direction:column;align-items:flex-start;gap:.07rem;
+    }
+    .main-card-icon {font-size:2rem; color:#fff;}
+    .main-card-title {font-weight:700;color:#fff;font-size:1.15rem;line-height:1;margin-top:.01rem;}
+    .main-card-ingredients {font-size:.93rem;color:#ecfafe;margin-top:-.15rem;}
+    .main-card-brand {margin-left:auto;font-size:2.1rem;color:#fff;font-weight:700;letter-spacing:.18em;}
+    .main-card-list {margin-top:.42rem;width:100%;display:flex;flex-direction:column;gap:1.2rem;}
+    .main-card-row {display:flex;align-items:center;justify-content:flex-end;}
+    .main-card-row .main-card-circle {
+      width:2rem; height:2rem; border-radius:100px; display:flex;align-items:center;justify-content:center; background:#fff;
+    }
+    .main-card-row .main-card-check {
+      color:#19ccff; font-size:1.18rem; background:#fff; border-radius:100px; border:1.5px solid #e3f7ff; display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+      box-shadow:0 0 12px 1px rgba(25,204,255,0.09);
+    }
+    .main-card-row .main-card-empty {
+      color:#bbb; font-size:1rem; background:#fff; border-radius:100px; border:1.5px solid #e3eaf1; display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+    }
+    @media (max-width:1200px){
+      .comparison-section{padding:3rem .1rem 2.5rem .1rem;}
+      .comp-table{margin-right:0;}
+      .main-card{position:static;width:100%;max-width:340px;margin:2.4rem auto 0 auto;}
+    }
+    @media (max-width:900px) {
+      .comp-table-grid{min-width:600px;}
+      .main-card{max-width:330px;}
+      .c-title{font-size:1.8rem;}
+      .c-prod-title{font-size:.97rem;}
+    }
+    @media (max-width:650px){
+      .comparison-section{padding:1.3rem .01rem;}
+      .c-header{margin-bottom:1.2rem;}
+      .c-title{font-size:1.2rem;}
+      .main-card{font-size:.97rem;}
+      .main-card-brand{font-size:.91rem;}
+      .main-card{max-width:99vw;padding:1.25rem .7rem;}
+      .comp-table{padding:.9rem 0 .9rem 0;}
+      .comp-table-grid{font-size:.89rem;}
+      .comp-left-label{padding-left:13px;}
+    }
+    @media (max-width:500px){
+      .main-card{padding:1rem .3rem;}
+    }
+  </style>
+</head>
+<body>
+<section class="comparison-section">
+  <div class="c-header">
+    <div class="c-label"><i class="fa-solid fa-arrows-rotate"></i> Comparison</div>
+    <div class="c-title">Why Choose Us</div>
+  </div>
+  <div class="c-products">
+    <div class="c-prod-col"><i class="fa-solid fa-bottle-water c-prod-icon"></i>
+      <div class="c-prod-title">Energy Drinks</div>
+      <div class="c-prod-desc">Ingredients</div>
+    </div>
+    <div class="c-prod-col"><i class="fa-solid fa-mug-saucer c-prod-icon"></i>
+      <div class="c-prod-title">Coffee Drinks</div>
+      <div class="c-prod-desc">Ingredients</div>
+    </div>
+  </div>
+  <div class="comp-table-wrap">
+    <!-- main table -->
+    <div class="comp-table">
+      <div class="comp-table-grid">
+        <!-- Labels, energy, coffee columns -->
+        <div></div>
+        <div style="text-align:center;font-weight:700;color:#1a2433;padding-bottom:.6rem;">Energy Drinks</div>
+        <div style="text-align:center;font-weight:700;color:#1a2433;padding-bottom:.6rem;">Coffee Drinks</div>
+        <!-- ROWS -->
+        <div class="comp-table-row comp-left-label">Caffeine & L- theanine</div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-left-label">Sugar</div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
+        <div class="comp-table-row comp-left-label">Aspartame</div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-left-label">Dairy Free</div>
+        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-left-label">Gluten Free</div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="comp-table-row comp-left-label">B Vitamins</div>
+        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
+        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
+      </div>
+    </div>
+    <!-- floating apex product card -->
+    <div class="main-card" style="box-shadow: 0 30px 48px 0px rgba(25,204,255,0.20);">
+      <div class="main-card-top">
+        <div class="main-card-prod">
+          <i class="fa-solid fa-mug-saucer main-card-icon"></i>
+          <div class="main-card-title">Coffee Drinks</div>
+          <div class="main-card-ingredients">Ingredients</div>
+        </div>
+        <div class="main-card-brand">APEX</div>
+      </div>
+      <div class="main-card-list">
+        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="main-card-row"><span class="main-card-empty"><i class="fa-regular fa-circle"></i></span></div>
+        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="main-card-row"><span class="main-card-empty"><i class="fa-regular fa-circle"></i></span></div>
+        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
+        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

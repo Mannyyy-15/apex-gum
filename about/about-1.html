@@ -2,276 +2,294 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hero Section 1 Recreation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900;400;500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual Infinite Carousels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
-    body {
-      background: #fff;
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Montserrat', Arial, sans-serif;
-      box-sizing: border-box;
-    }
-    .hero-main-wrap {
-      width: 100vw;
-      min-height: 100vh;
-      overflow-x: hidden;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; background: #fff; overflow-x: hidden; }
+    
+    .carousel-section { max-width: 100%; margin: 0 auto; padding: 3rem 1.5rem; }
+    
+    .carousel-header { text-align: center; margin-bottom: 3rem; }
+    .carousel-header .label { color: #19ccff; font-weight: 600; font-size: 1.05rem; margin-bottom: 0.8rem; }
+    .carousel-header h2 { font-size: 2.8rem; font-weight: 900; color: #111; line-height: 1.15; margin-bottom: 1rem; }
+    .carousel-header p { color: #6b7380; font-size: 1.08rem; max-width: 580px; margin: 0 auto; line-height: 1.65; }
+    
+    /* Carousel Container */
+    .carousel-container {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      z-index: 0;
-    }
-    .hero-center-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 3.4vw;
-    }
-    .hero-badge {
-      display: flex;
-      align-items: center;
-      color: #1bbefc;
-      gap: 0.5em;
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 1.38em;
-    }
-    .hero-heading {
-      font-size: 3.1rem;
-      font-weight: 900;
-      color: #14171b;
-      text-align: center;
-      margin-bottom: 0.9rem;
-      letter-spacing: -0.6px;
-      line-height: 1.13;
-    }
-    .hero-desc {
-      font-size: 1.15rem;
-      color: #717582;
-      margin-bottom: 2.6rem;
-      text-align: center;
-      font-weight: 500;
-      max-width: 550px;
-    }
-    .hero-cta-btns {
-      display: flex;
-      gap: 1.1em;
-      margin-bottom: 2rem;
-    }
-    .hero-cta-btn {
-      padding: 0.86em 2.1em;
-      border-radius: 8px;
-      font-weight: 700;
-      font-family: inherit;
-      font-size: 1.08em;
-      background: linear-gradient(90deg,#009dda,#36caff);
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 4px 24px #009dda14;
-      transition: background 0.2s;
-    }
-    .hero-cta-btn.secondary {
-      background: #fff;
-      color: #252b2d;
-      border: 1.7px solid #b7dafc;
-      box-shadow: none;
-    }
+      overflow: hidden;
+      border-radius: 12px;
 
-    /* Floating Cards */
-    .hero-cards-abs {
-      width: 100vw;
-      height: 0; /* trick for stacking floating absolute cards */
-      position: relative;
-      z-index: 3;
-      pointer-events: none;
     }
-    .hero-card {
+    
+    .carousel-track {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.2rem;
+      will-change: transform;
+    }
+    
+    .carousel-track.scroll-left {
+      animation: infiniteScrollLeft 55s linear infinite;
+    }
+    
+    .carousel-track.scroll-right {
+      animation: infiniteScrollRight 55s linear infinite;
+    }
+    
+    @keyframes infiniteScrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    @keyframes infiniteScrollRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
+    }
+    
+    /* Carousel Item */
+    .carousel-item {
+      flex: 0 0 auto;
+      min-width: 240px;
+      height: 220px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ddd;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .carousel-item:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(25,204,255,0.15); }
+    
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    
+    .carousel-item:hover img { transform: scale(1.05); }
+    
+    /* Item Overlay */
+    .item-overlay {
       position: absolute;
-      border-radius: 16px;
-      box-shadow: 0 8px 40px rgba(17,122,222,0.12);
-      background: #fff;
-      pointer-events:auto;
-      z-index:6;
-    }
-    /* Left top: stat box */
-    .hero-card.stat1 {
-      left: 8vw; top: 12vw;
-      width: 290px; height: 150px;
-      background: radial-gradient(100% 180% at 0% 90%,#02348a 0%,#1970c8 60%,#034078 100%);
-      color: #fff;
-      padding: 2.2em 2.1em 1.4em 2.1em;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
       display: flex;
-      flex-direction: column;
-      gap: 1em;
-      font-size:1.1em;
-    }
-    .stat1-icon {font-size:2em;}
-    .stat1-title {font-size: 2em;font-weight:900;}
-    .stat1-desc {font-size:1em; opacity:0.89;}
-    /* Right: product card */
-    .hero-card.product {
-      right: 12vw; top: 8vw;
-      width: 230px; padding: 1.1em 1.1em 1.23em 1.1em; text-align:left;
-    }
-    .hero-card.product-img {
-      display:block;width:96%;margin:0 auto 1em auto;background:#36cfff;border-radius:10px;
-      box-shadow:0 4px 8px #47e4ff18;
-    }
-    .product-title {font-size: 1em; font-weight:600; margin:0.5em 0 0.2em 0;}
-    .product-old {color:#bdbfc4; text-decoration:line-through; font-size:.96em;}
-    .product-new {color:#191919; font-weight:800; font-size:1.21em;}
-    /* Left mini card */
-    .hero-card.share {
-      left: 19vw; top: 32vw;
-      width: 260px; min-height:82px;display:flex;align-items:center;box-shadow:0 8px 30px #19d2e70e;
-      padding:1.18em 1.25em;gap:1em;
-    }
-    .share-avatar {
-      width:54px;height:54px;border-radius:50%;object-fit:cover;flex:0 0 54px;
-    }
-    .share-txt {font-size:.99em;font-weight:600;line-height:1.24;margin-bottom:0.3em;}
-    .share-link {
-      background: #19d2e7;
-      padding: .6em 2em; border: none;color: #fff;
-      border-radius: 6px;font-size:.91em;font-weight: 700;cursor:pointer;box-shadow:0 2px 8px #12cbea44;
-      margin-top:0.25em;
-    }
-    /* Bottom right: stat2 box */
-    .hero-card.stat2 {
-      right: 12vw; top: 31vw;
-      width: 220px; height: 120px; display: flex; flex-direction:column;justify-content:center;align-items:flex-start;
-      background:radial-gradient(90% 180% at 100% 0%,#04B3ED 16%,#2570e3 100%);
-      color:#fff;padding:1.9em 1.5em 1.35em 1.5em;font-size:1.05em;
-      box-shadow: 0 6px 26px #0ebfff15;
-    }
-    .stat2-icon {font-size:1.7em;}
-    .stat2-title {font-size: 2em;font-weight:900;}
-    .stat2-desc {font-size:1em; opacity:.88;}
-    /* Center: phone */
-    .hero-phone-block {
-      position: relative;
-      margin: 4vw auto 0 auto;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      z-index: 10;
-      width: 330px;
-      height: 430px;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    .hero-phone-bg {
+    
+    .carousel-item:hover .item-overlay { opacity: 1; }
+    
+    .play-btn {
+      width: 54px;
+      height: 54px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #222;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+    
+    .carousel-item:hover .play-btn {
+      background: #19ccff;
+      transform: scale(1.1);
+    }
+    
+    /* Badge Overlays */
+    .live-badge {
       position: absolute;
-      left: 50%;
-      bottom:-8vw;
-      transform: translate(-50%,0);
-      width: 580px;
-      height: 420px;
-      z-index: -1;
-      pointer-events: none;
-    }
-    .hero-phone-mock {
-      width: 330px;
-      height: 430px;
-      border-radius: 38px;
-      background:#fff;
-      box-shadow:0 8px 60px #0db0eb21;display: flex;align-items: center;justify-content: center;overflow: hidden;position: relative;
+      top: 1rem;
+      right: 1rem;
+      background: #ff2f2f;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
       z-index: 2;
+      box-shadow: 0 2px 12px rgba(255,48,48,0.22);
     }
-    .hero-phone-img {width: 100%;height: 102%;object-fit:cover;display: block;}
-    /* Phone on screen UI lines */
-    .phone-controls {
-      position:absolute;
-      top:90px;left:220px;width:240px;z-index:10;display:flex;flex-direction:column;gap:.7em;
+    
+    .stat-badge {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      background: rgba(0,0,0,0.68);
+      color: #fff;
+      padding: 0.9rem;
+      border-radius: 10px;
+      z-index: 2;
+      backdrop-filter: blur(8px);
     }
-    .phone-control-row {
-      display:flex;align-items:center;gap:.7em;
-      background:rgba(80,80,80,0.12);padding:.37em 1.6em;border-radius:7px;width:160px;
+    
+    .stat-badge .stat-number {
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
     }
-    .phone-control-dot {
-      display:inline-block;width:1.5em;height:1.5em;background:gold;border-radius:50%;color:#fff;
-      text-align:center;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.96em;
+    
+    .stat-badge .stat-label {
+      font-size: 0.78rem;
+      opacity: 0.9;
+      margin-top: 0.2rem;
     }
-    @media (max-width:900px) {
-      .hero-main-wrap{padding:0;}
-      .hero-phone-block,.hero-phone-mock{width:92vw;max-width:370px;height:390px;}
-      .hero-cards-abs .hero-card{font-size: .97em;}
-      .hero-phone-bg{width:99vw;max-width:480px;}
+    
+    .btn-bottom {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      padding: 0.6rem 1.3rem;
+      background: linear-gradient(135deg, #13b6fa, #36e2fa);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 4px 16px rgba(58,199,250,0.18);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
     }
-    @media (max-width:600px){
-      .hero-heading{font-size:1.32rem;}
-      .hero-phone-block,.hero-phone-mock{width:99vw;max-width:360px;height:260px;}
-      .hero-cards-abs .hero-card{font-size:.89em;}
-      .hero-phone-bg{width:105vw;}
-      .phone-controls{left:44vw;width:30vw;}
-      .hero-card{min-width:120px;}
+    
+    .btn-bottom:hover { background: linear-gradient(135deg, #0b84c7, #1aacda); transform: translateY(-2px); }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .carousel-item { min-width: 200px; height: 180px; }
+    }
+    
+    @media (max-width: 768px) {
+      .carousel-section { padding: 2rem 1rem; }
+      .carousel-header h2 { font-size: 1.8rem; }
+      .carousel-item { min-width: 160px; height: 150px; }
+      .play-btn { width: 44px; height: 44px; font-size: 1rem; }
+      .live-badge { font-size: 0.75rem; padding: 0.3rem 0.8rem; }
+      .stat-badge { padding: 0.7rem; }
+      .btn-bottom { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .carousel-section { padding: 1.5rem 0.8rem; }
+      .carousel-header h2 { font-size: 1.4rem; }
+      .carousel-item { min-width: 130px; height: 130px; }
+      .stat-badge { padding: 0.6rem; }
+      .stat-badge .stat-number { font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
-<div class="hero-main-wrap">
-  <div class="hero-center-block">
-    <div class="hero-badge"><img src="https://img.icons8.com/?size=24&id=60383&format=png" alt="" style="width:20px;"> Media House</div>
-    <div class="hero-heading">Where Energy Meets<br>Limitless Imagination.</div>
-    <div class="hero-desc">
-      From electrifying events to cinematic storytelling, we create<br/>
-      moments that live beyond the screen.
-    </div>
-    <div class="hero-cta-btns">
-      <button class="hero-cta-btn">Buy Now</button>
-      <button class="hero-cta-btn secondary">Learn more</button>
-    </div>
+
+<section class="carousel-section">
+  <div class="carousel-header">
+    <div class="label">About Us</div>
+    <h2>Most Powerful Way<br>To Energize Every Grind</h2>
+    <p>Two independent infinite carousels - one scrolls left, one scrolls right with different content.</p>
   </div>
-  <div class="hero-cards-abs">
-    <div class="hero-card stat1">
-      <span class="stat1-icon">&#128337;</span>
-      <div class="stat1-title">34.5 Min</div>
-      <div class="stat1-desc">Average event watch time</div>
-    </div>
-    <div class="hero-card product">
-      <img class="hero-card product-img" src="https://assets-global.website-files.com/63a5a69f2791608c5e26fb13/63b3acf439f92f1d8f01db58_apex-product-p.png" alt="Apex Gum">
-      <div class="product-title">Apex Gum Full Package</div>
-      <div>
-        <span class="product-old">$169</span>
-        <span class="product-new">$20.8</span>
-      </div>
-    </div>
-    <div class="hero-card share">
-      <img class="share-avatar" src="https://randomuser.me/api/portraits/women/22.jpg" alt="User">
-      <div>
-        <div class="share-txt">Where Energy Meets Boundless Imagination.</div>
-        <button class="share-link">Get to link</button>
-      </div>
-    </div>
-    <div class="hero-card stat2">
-      <span class="stat2-icon">&#127760;</span>
-      <div class="stat2-title">100+</div>
-      <div class="stat2-desc">Clients across the globe</div>
+
+  <!-- First Carousel (Scrolls Left) -->
+  <div class="carousel-container">
+    <div class="carousel-track scroll-left" id="carousel1">
+      <!-- Items will be populated by JS -->
     </div>
   </div>
 
-  <div class="hero-phone-block">
-    <svg class="hero-phone-bg" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="heroCirc" cx="50%" cy="65%" r="83%" fx="47%" fy="87%">
-          <stop offset="0%" stop-color="#12dafc" stop-opacity="0.52"/>
-          <stop offset="100%" stop-color="#38b2ff" stop-opacity="0.11"/>
-        </radialGradient>
-      </defs>
-      <path d="M600,360 Q300,40 0,360" fill="none" stroke="#c7ebfa" stroke-width="2"/>
-      <path d="M0,360 A300,300 0 0,1 600,360 Z" fill="url(#heroCirc)" />
-    </svg>
-    <div class="hero-phone-mock">
-      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=640&h=1200" alt="athlete" class="hero-phone-img">
-      <div class="phone-controls">
-        <div class="phone-control-row"><span class="phone-control-dot">&#128712;</span><div style="flex:1;height:0.4em;background:#e1e4e7;border-radius:4px;"></div></div>
-        <div class="phone-control-row"><span class="phone-control-dot">&#128712;</span><div style="flex:1;height:0.4em;background:#e1e4e7;border-radius:4px;"></div></div>
-        <div class="phone-control-row"><span class="phone-control-dot">&#128712;</span><div style="flex:1;height:0.4em;background:#e1e4e7;border-radius:4px;"></div></div>
-      </div>
+  <!-- Second Carousel (Scrolls Right) -->
+  <div class="carousel-container">
+    <div class="carousel-track scroll-right" id="carousel2">
+      <!-- Items will be populated by JS -->
     </div>
   </div>
-</div>
+</section>
+
+<script>
+  // Carousel 1 Images
+  const carousel1Images = [
+    { url: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Workout', badge: null },
+    { url: 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Running', badge: 'btn', btnText: 'View Product' },
+    { url: 'https://images.pexels.com/photos/1367173/pexels-photo-1367173.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Tennis', badge: 'live' },
+    { url: 'https://images.pexels.com/photos/2220294/pexels-photo-2220294.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Profile', badge: null },
+  ];
+
+  // Carousel 2 Images (Different set)
+  const carousel2Images = [
+    { url: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Golf', badge: null },
+    { url: 'https://images.pexels.com/photos/3621929/pexels-photo-3621929.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Football', badge: 'stat', stat: '100+', statLabel: 'Happy customers' },
+    { url: 'https://images.pexels.com/photos/3657097/pexels-photo-3657097.jpeg?auto=compress&cs=tinysrgb&w=600', alt: 'Athletes', badge: null },
+    { url: 'https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=400', alt: 'Team', badge: 'btn', btnText: 'Learn more' },
+  ];
+
+  // Create carousel item HTML
+  function createItem(img) {
+    const div = document.createElement('div');
+    div.className = 'carousel-item';
+    
+    let badgeHTML = '';
+    if (img.badge === 'live') {
+      badgeHTML = '<div class="live-badge">Live</div>';
+    } else if (img.badge === 'stat') {
+      badgeHTML = `<div class="stat-badge">
+        <div class="stat-number">${img.stat}</div>
+        <div class="stat-label">${img.statLabel}</div>
+      </div>`;
+    } else if (img.badge === 'btn') {
+      badgeHTML = `<button class="btn-bottom">${img.btnText}</button>`;
+    }
+    
+    div.innerHTML = `
+      <img src="${img.url}" alt="${img.alt}" loading="lazy">
+      <div class="item-overlay">
+        <div class="play-btn">&#9654;</div>
+      </div>
+      ${badgeHTML}
+    `;
+    return div;
+  }
+
+  // Initialize carousels with TRIPLED items (3x) for true infinite looping
+  function initCarousel(trackId, images) {
+    const track = document.getElementById(trackId);
+    
+    // Add items 3 times for seamless infinite scrolling
+    images.forEach(img => track.appendChild(createItem(img)));
+    images.forEach(img => track.appendChild(createItem(img)));
+    images.forEach(img => track.appendChild(createItem(img)));
+  }
+
+  // Initialize both carousels independently
+  initCarousel('carousel1', carousel1Images);
+  initCarousel('carousel2', carousel2Images);
+
+  // Pause animation on hover for BOTH carousels
+  document.querySelectorAll('.carousel-track').forEach(track => {
+    const container = track.parentElement;
+    
+    container.addEventListener('mouseenter', () => {
+      track.style.animationPlayState = 'paused';
+    });
+    
+    container.addEventListener('mouseleave', () => {
+      track.style.animationPlayState = 'running';
+    });
+  });
+</script>
+
 </body>
 </html>
-    

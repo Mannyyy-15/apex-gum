@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apex Gum Picnic Package</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #181b23;
+      margin: 0;
+    }
+
+    .product-section {
+      max-width: 90vw;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      display: grid;
+      gap: 2.2rem;
+      grid-template-columns: 55% 45%;
+    }
+
+    /* ======= Gallery ======= */
+    .product-gallery {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 400px 250px;
+      border-radius: 15px;
+      height: fit-content;
+      position: sticky;
+      top: 10px;
+      align-self: start;
+    }
+
+    .product-gallery .main-img {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      opacity: 0;
+      animation: fadeUp 1.05s .11s both cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 3px 24px rgba(25,204,255,.11);
+      opacity: 0;
+      animation: fadeUp 1.09s .21s both cubic-bezier(.34,1.56,.64,1);
+    }
+
+    /* ======= Product Details ======= */
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.35rem;
+      opacity: 0;
+      animation: fadeUp 1.13s .18s both cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .product-title-group {
+      margin-bottom: -.65rem;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #0a0e27;
+      margin-bottom: 0.45rem;
+      letter-spacing: -1px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: .96rem;
+      font-weight: 500;
+      color: #19ccff;
+      margin-bottom: 0.47rem;
+    }
+
+    .star {
+      color: #19ccff;
+      font-size: 1.18rem;
+    }
+
+    .reviews {
+      color: #8ca2be;
+      font-size: .97rem;
+    }
+
+    .product-price-row {
+      display: flex;
+      gap: 1.2rem;
+      align-items: baseline;
+      margin-bottom: .5rem;
+    }
+
+    .product-price {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #101012;
+      letter-spacing: -.7px;
+    }
+
+    .product-old-price {
+      font-size: 1.2rem;
+      color: #d5dbe6;
+      text-decoration: line-through;
+      font-weight: 700;
+    }
+
+    .options-label,
+    .tablets-label,
+    .ingredient-label,
+    .quantity-label {
+      font-size: .92rem;
+      color: #9198a9;
+      margin-bottom: .12rem;
+      display: block;
+    }
+
+    .options-group,
+    .tablets-group,
+    .ingredients-row,
+    .quantity-row {
+      display: flex;
+      gap: 1.1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .option-btn,
+    .tablet-btn {
+      background: #fff;
+      border: 1.5px solid #222;
+      border-radius: 9px;
+      padding: .6rem 1.15rem;
+      font-size: 1rem;
+      font-family: 'Montserrat';
+      font-weight: 600;
+      cursor: pointer;
+      transition: border .21s, background .18s;
+    }
+
+    .option-btn.selected,
+    .option-btn:hover,
+    .tablet-btn.selected,
+    .tablet-btn:hover {
+      border: 1.5px solid #19ccff;
+      background: #e3f7ff;
+      color: #0a0e27;
+    }
+
+    .ingredient {
+      display: flex;
+      align-items: center;
+      font-size: 1.07rem;
+      font-weight: 700;
+      margin-right: 1rem;
+      color: #101012;
+      gap: .38rem;
+    }
+
+    .ingredient .fa-solid {
+      font-size: .97rem;
+      margin-right: .25rem;
+      color: #19ccff;
+    }
+
+    .quantity-row {
+      gap: .6rem;
+    }
+
+    .qty-btn {
+      width: 2.35rem;
+      height: 2.35rem;
+      border: 1px solid #ddd;
+      background: #fff;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #181b23;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background .17s, color .17s;
+    }
+
+    .qty-btn:hover {
+      background: #19ccff;
+      color: #fff;
+    }
+
+    .qty-value {
+      width: 5rem;
+      height: 2.30rem;
+      text-align: center;
+      font-size: 1.18rem;
+      font-weight: 600;
+      border: solid 1px #ddd;
+      border-radius: 9px;
+      margin-right: .22rem;
+      color: #181b23;
+      outline: none;
+    }
+
+    .add-cart-row {
+      margin: 1.1rem 0 .9rem 0;
+      display: flex;
+      gap: .9rem;
+    }
+
+    .add-cart-btn {
+      flex: 1;
+      background: linear-gradient(95deg, #19ccff, #0d3a81 95%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      padding: 1.1rem 0;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(25, 204, 255, .08);
+      letter-spacing: .04em;
+      transition: background .3s, box-shadow .3s, transform .22s cubic-bezier(.34,1.56,.64,1);
+      opacity: 0;
+      animation: fadeUp 1.07s .41s both cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .add-cart-btn:hover {
+      background: linear-gradient(95deg, #3bbcfa 90%, #0d3a81);
+      transform: scale(1.03);
+    }
+
+    .add-cart-icon-btn {
+      padding: 0 1rem;
+      border-radius: 12px;
+      border: 1px solid #e3eaf1;
+      background: #fff;
+      color: #0d3a81;
+      font-size: 1.28rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: border .2s;
+    }
+
+    .add-cart-icon-btn:hover {
+      border-color: #19ccff;
+      color: #19ccff;
+    }
+
+    /* ======= Accordion ======= */
+    .accordion-section {
+      padding: 0 0 0.7rem 0;
+      margin-bottom: .7rem;
+    }
+
+    .accordion-title {
+      font-weight: 700;
+      color: #101012;
+      font-size: 1.09rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: .13rem;
+      border-bottom: 2.5px solid #eee;
+      padding: .33rem 0;
+      background: none;
+      position: relative;
+      transition: border-color .28s;
+    }
+
+    .accordion-title:after {
+      content: '\f078';
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 1.11rem;
+      margin-left: auto;
+      color: #19ccff;
+      transition: transform .16s;
+    }
+
+    .accordion-title.active {
+      border-bottom: 2.5px solid #ddd;
+    }
+
+    .accordion-title.active:after {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      font-size: 0.99rem;
+      color: #687185;
+      margin-top: .16rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .33s cubic-bezier(.73,.19,.62,1), opacity .22s;
+      opacity: 0;
+    }
+
+    .accordion-title.active + .accordion-content {
+      opacity: 1;
+      max-height: 300px;
+    }
+
+    .payment-icons {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      margin-top: .32rem;
+    }
+
+    .payment-icons img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: contrast(.86) brightness(.98);
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(28px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ======= Responsive ======= */
+    @media (max-width: 1050px) {
+      .product-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 1.5rem;
+      }
+      .product-gallery {
+        position: relative; /* Disable sticky */
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: .6rem;
+      }
+      .product-gallery .main-img {
+        grid-column: 1 / 4;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .thumbnail {
+        height: 90px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .product-section {
+        padding: 1.5rem 1rem;
+      }
+      .product-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: .4rem;
+      }
+      .product-gallery .main-img {
+        height: 180px;
+      }
+      .thumbnail {
+        height: 80px;
+      }
+      .product-title {
+        font-size: 1.25rem;
+      }
+      .add-cart-btn {
+        padding: .8rem 0;
+        font-size: 1.07rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<section class="product-section">
+  <div class="product-gallery">
+    <img class="main-img" src="/assests/Frame 2147225725.png" alt="Apex Gum Box">
+    <img class="thumbnail" src="/assests/Frame 2147225726.png" alt="Apex Gum Hand">
+    <img class="thumbnail" src="/assests/Frame 2147225727.png" alt="Apex Gum Track">
+  </div>
+
+  <div class="product-details">
+    <div class="product-title-group">
+      <div class="product-title">Apex Gum Picnic Package</div>
+      <div class="product-rating">
+        <span>Rating</span>
+        <span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="reviews">(45 reviews)</span>
+      </div>
+    </div>
+
+    <div class="product-price-row" style="border-bottom: solid 1px #ddd;">
+      <span class="product-price">$12.8</span>
+      <span class="product-old-price">$16.9</span>
+    </div>
+
+    <span class="options-label">Packages:</span>
+    <div class="options-group" id="packageOptions">
+      <button class="option-btn selected" onclick="selectPackage(this)">Picnic Package</button>
+      <button class="option-btn" onclick="selectPackage(this)">Full Package</button>
+    </div>
+
+    <span class="tablets-label">Tablets:</span>
+    <div class="tablets-group" id="tabletOptions">
+      <button class="tablet-btn selected" onclick="selectTablet(this)">9 Total</button>
+      <button class="tablet-btn" onclick="selectTablet(this)">54 Total</button>
+    </div>
+
+    <span class="ingredient-label">Ingredient:</span>
+    <div class="ingredients-row">
+      <div class="ingredient-group" style="display: flex;">
+        <span class="ingredient"><i class="fa-solid fa-flask"></i>Taurine</span>
+        <span class="ingredient"><i class="fa-solid fa-leaf"></i>Lemon Balm</span>
+        <span class="ingredient"><i class="fa-solid fa-bolt"></i>Caffeine</span>
+      </div>
+    </div>
+
+    <span class="quantity-label">Quantity:</span>
+    <div class="quantity-row">
+      <button class="qty-btn" onclick="changeQty(-1)">-</button>
+      <input class="qty-value" id="qty" value="1" readonly />
+      <button class="qty-btn" onclick="changeQty(1)">+</button>
+    </div>
+
+    <div class="add-cart-row">
+      <button class="add-cart-btn">Add to cart</button>
+      <button class="add-cart-icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Accordion -->
+    <div class="accordion-section">
+      <div class="accordion-title active" onclick="toggleAccordion(this)">
+         Product Highlights
+      </div>
+      <div class="accordion-content" style="max-height: 300px; opacity: 1;">
+        Science-backed peppermint gum with natural caffeine and Lemon Balm extract. Perfect for outdoor, sports, and social activities.
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-title" onclick="toggleAccordion(this)">Shipping Details</div>
+      <div class="accordion-content">
+        Free shipping on orders over $30. All orders are packed and shipped within 24 hours.
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-title" onclick="toggleAccordion(this)">How to Use</div>
+      <div class="accordion-content">
+        Enjoy 1-2 tablets before an activity for best results. Chew and smile!
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-title" onclick="toggleAccordion(this)">Payment Method</div>
+      <div class="accordion-content">
+        <div class="payment-icons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Visa.svg/1200px-Visa.svg.png" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/MC_Logo.png" alt="MasterCard">
+          <img src="https://companieslogo.com/img/orig/AWS_BIG.D-f539e6be.png?t=1647266787" alt="AWS">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Paypal_2014_logo.png" alt="PayPal">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function selectPackage(btn) {
+  document.querySelectorAll('#packageOptions .option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectTablet(btn) {
+  document.querySelectorAll('#tabletOptions .tablet-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function changeQty(amount) {
+  var input = document.getElementById('qty');
+  var val = parseInt(input.value);
+  val = Math.max(1, val + amount);
+  input.value = val;
+}
+
+function toggleAccordion(element) {
+  var all = document.querySelectorAll('.accordion-title');
+  var allContents = document.querySelectorAll('.accordion-content');
+  all.forEach(function(el, i) {
+    if (el !== element) {
+      el.classList.remove('active');
+      allContents[i].style.maxHeight = '0px';
+      allContents[i].style.opacity = 0;
+    }
+  });
+  element.classList.toggle('active');
+  let content = element.nextElementSibling;
+  if (element.classList.contains('active')) {
+    content.style.maxHeight = content.scrollHeight + "px";
+    content.style.opacity = 1;
+  } else {
+    content.style.maxHeight = "0px";
+    content.style.opacity = 0;
+  }
+}
+</script>
+</body>
+</html>

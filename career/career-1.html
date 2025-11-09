@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join The Movement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; background: #fff; }
+    
+    .movement-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .movement-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .movement-label {
+      color: #19ccff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    
+    .movement-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #0a0e27;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: slideDown 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+    }
+    
+    .movement-desc {
+      font-size: 1.05rem;
+      color: #6b7380;
+      max-width: 600px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 0.4s forwards;
+    }
+    
+    .movement-btn {
+      background: linear-gradient(135deg, #13b6fa, #36e2fa);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(58,199,250,0.18);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      animation: fadeIn 1s ease-out 0.6s forwards;
+    }
+    
+    .movement-btn:hover {
+      background: linear-gradient(135deg, #0b84c7, #1aacda);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(58,199,250,0.24);
+    }
+    
+    /* Desktop: Flex Layout */
+    .movement-gallery {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    
+    .gallery-item {
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ddd;
+      box-shadow: 0 8px 32px rgba(25,204,255,0.08);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 220px;
+      flex-shrink: 0;
+      transform-origin: center bottom;
+    }
+    
+    /* Outer Left - 220x360 */
+    .gallery-item.img-1 {
+      height: 360px;
+      opacity: 0;
+      animation: slideUpSmooth 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 2s forwards;
+    }
+    
+    /* Inner Left - 220x310 */
+    .gallery-item.img-2 {
+      height: 310px;
+      opacity: 0;
+      animation: slideUpSmooth 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.4s forwards;
+    }
+    
+    /* Middle - 220x270 */
+    .gallery-item.img-middle {
+      height: 270px;
+      opacity: 0;
+      animation: slideUpSmooth 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
+    }
+    
+    /* Inner Right - 220x310 */
+    .gallery-item.img-4 {
+      height: 310px;
+      opacity: 0;
+      animation: slideUpSmooth 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.4s forwards;
+    }
+    
+    /* Outer Right - 220x360 */
+    .gallery-item.img-5 {
+      height: 360px;
+      opacity: 0;
+      animation: slideUpSmooth 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 2s forwards;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 60px rgba(25,204,255,0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: block;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    /* Enhanced Animations - Smoother Easing */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideUpSmooth {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    /* Tablet: Flex with smaller sizes */
+    @media (max-width: 1024px) {
+      .movement-section { padding: 3rem 1.5rem; }
+      .gallery-item { width: 180px; }
+      .gallery-item.img-1 { height: 290px; }
+      .gallery-item.img-2 { height: 250px; }
+      .gallery-item.img-middle { height: 220px; }
+      .gallery-item.img-4 { height: 250px; }
+      .gallery-item.img-5 { height: 290px; }
+      .movement-title { font-size: 2.4rem; }
+    }
+    
+    @media (max-width: 768px) {
+      .movement-section { padding: 2.5rem 1.5rem; }
+      .gallery-item { width: 150px; }
+      .gallery-item.img-1 { height: 240px; }
+      .gallery-item.img-2 { height: 200px; }
+      .gallery-item.img-middle { height: 180px; }
+      .gallery-item.img-4 { height: 200px; }
+      .gallery-item.img-5 { height: 240px; }
+      .movement-title { font-size: 1.8rem; }
+      .movement-desc { font-size: 1rem; }
+    }
+
+    
+    
+    /* Mobile: Masonry Grid */
+    @media (max-width: 600px) {
+      .movement-section { padding: 2rem 1rem; }
+      
+      .movement-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        align-items: auto;
+        flex-wrap: wrap;
+        overflow-x: visible;
+      }
+      
+      .gallery-item {
+        width: 100%;
+        flex-shrink: 1;
+      }
+      
+      .gallery-item.img-1 {
+        height: 200px;
+        grid-column: 1;
+        grid-row: 1;
+      }
+      
+      .gallery-item.img-2 {
+        height: 180px;
+        grid-column: 2;
+        grid-row: 1;
+      }
+      
+      .gallery-item.img-middle {
+        height: 160px;
+        grid-column: 1 / 3;
+        grid-row: 2;
+      }
+      
+      .gallery-item.img-4 {
+        height: 180px;
+        grid-column: 1;
+        grid-row: 3;
+      }
+      
+      .gallery-item.img-5 {
+        height: 200px;
+        grid-column: 2;
+        grid-row: 3;
+      }
+      
+      .movement-title { font-size: 1.5rem; }
+      .movement-desc { font-size: 0.95rem; max-width: 100%; }
+      .movement-btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; }
+    }
+    
+    /* Small Mobile */
+    @media (max-width: 400px) {
+      .movement-section { padding: 1.5rem 1rem; }
+      .movement-title { font-size: 1.3rem; margin-bottom: 1rem; }
+      .movement-desc { font-size: 0.9rem; margin-bottom: 1.5rem; }
+      
+      .gallery-item.img-1 { height: 150px; }
+      .gallery-item.img-2 { height: 140px; }
+      .gallery-item.img-middle { height: 130px; }
+      .gallery-item.img-4 { height: 140px; }
+      .gallery-item.img-5 { height: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="movement-section">
+  <!-- Header -->
+  <div class="movement-header">
+    <div class="movement-label">
+      <i class="fas fa-video"></i> Media House
+    </div>
+    <h2 class="movement-title">Join The Movement<br>Create The Moment</h2>
+    <p class="movement-desc">
+      At Apex Media House, we're not just building campaigns, we're shaping culture.
+    </p>
+    <button class="movement-btn">Join the team</button>
+  </div>
+
+  <!-- Gallery - 5 Images -->
+  <div class="movement-gallery">
+    <!-- Outer Left -->
+    <div class="gallery-item img-1">
+      <img src="/assests/Rectangle 19.png" alt="Office">
+    </div>
+
+    <!-- Inner Left -->
+    <div class="gallery-item img-2">
+      <img src="/assests/Rectangle 13.png" alt="Designer">
+    </div>
+
+    <!-- Middle -->
+    <div class="gallery-item img-middle">
+      <img src="/assests/Rectangle 12.png" alt="Team">
+    </div>
+
+    <!-- Inner Right -->
+    <div class="gallery-item img-4">
+      <img src="/assests/Rectangle 10.png" alt="Creative">
+    </div>
+
+    <!-- Outer Right -->
+    <div class="gallery-item img-5">
+      <img src="/assests/Rectangle 13.png" alt="Studio">
+    </div>
+  </div>
+</section>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Scroll animation for header
+  gsap.from('.movement-header', {
+    scrollTrigger: {
+      trigger: '.movement-section',
+      start: 'top 70%',
+    },
+    opacity: 0,
+    y: 40,
+    duration: 1,
+    ease: 'power3.out'
+  });
+</script>
+
+</body>
+</html>

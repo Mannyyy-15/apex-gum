@@ -41,6 +41,9 @@
         justify-content: center;
         gap: 150px;
         position: relative;
+        flex-wrap: nowrap;
+        transform-origin: center center;
+        transition: transform 0.3s ease;
       }
 
       .left,
@@ -83,7 +86,6 @@
         z-index: 3;
       }
 
-      /* SVG positions for better alignment */
       .svg-lines {
         position: absolute;
         top: 50%;
@@ -137,24 +139,51 @@
         width: 150px;
       }
 
-      /* Ensure lines stay behind text */
-      .left .item,
-      .right .item {
-        z-index: 5;
+      /* Keep same layout but scale on smaller screens */
+      @media (max-width: 1400px) {
+        .content {
+          transform: scale(0.9);
+        }
       }
 
-      /* Responsive */
-      @media (max-width: 900px) {
+      @media (max-width: 1200px) {
         .content {
-          flex-direction: column;
-          gap: 60px;
+          transform: scale(0.8);
         }
+      }
 
-        .svg-lines {
-          display: none;
+      @media (max-width: 992px) {
+        .content {
+          transform: scale(0.7);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          transform: scale(0.6);
+        }
+        .heading {
+          font-size: 32px;
+          margin-bottom: 60px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .content {
+          transform: scale(0.5);
+        }
+        .heading {
+          font-size: 28px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .content {
+          transform: scale(0.45);
         }
       }
     </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   </head>
   <body>
@@ -171,7 +200,6 @@
 
         <div class="center">
           <img src="/assests/tablets.png" alt="Apex Gum" class="product-img" />
-          <!-- Multiple SVGs -->
           <div class="svg-lines">
             <img src="/assests/Vector 17.svg" alt="Line" />
             <img src="/assests/Vector 11.svg" alt="Line" />
@@ -193,7 +221,6 @@
     </section>
 
     <script>
-      // Animate SVG paths with GSAP
       document.addEventListener("DOMContentLoaded", () => {
         const svgs = document.querySelectorAll(".svg-lines img");
 
@@ -225,7 +252,6 @@
             });
         });
 
-        // Floating product
         gsap.to(".product-img", {
           y: -10,
           duration: 1.5,

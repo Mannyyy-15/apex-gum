@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partners Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; background: #fff; }
+    
+    .partners-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    
+    .partners-label {
+      color: #19ccff;
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    
+    .partners-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: #0a0e27;
+      margin-bottom: 3.5rem;
+      letter-spacing: -1px;
+      opacity: 0;
+      animation: slideDown 0.8s ease-out 0.2s forwards;
+    }
+    
+    /* Grid Layout - 4 columns */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    
+    /* Partner Card */
+    .partner-card {
+      background: #fff;
+      border: 1.5px solid #e8ecf1;
+      border-radius: 14px;
+      padding: 1rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .partner-card:nth-child(1) { animation-delay: 0.3s; }
+    .partner-card:nth-child(2) { animation-delay: 0.35s; }
+    .partner-card:nth-child(3) { animation-delay: 0.4s; }
+    .partner-card:nth-child(4) { animation-delay: 0.45s; }
+    .partner-card:nth-child(5) { animation-delay: 0.5s; }
+    .partner-card:nth-child(6) { animation-delay: 0.55s; }
+    .partner-card:nth-child(7) { animation-delay: 0.6s; }
+    .partner-card:nth-child(8) { animation-delay: 0.65s; }
+    
+    .partner-card:hover {
+      border-color: #19ccff;
+      box-shadow: 0 12px 40px rgba(25,204,255,0.15);
+      transform: translateY(-6px) scale(1.02);
+    }
+    
+    .partner-logo {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease;
+    }
+    
+    .partner-card:hover .partner-logo {
+      transform: scale(1.1);
+    }
+    
+    .partner-logo img {
+      max-width: 85%;
+      max-height: 80px;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+    
+    .partner-card:hover .partner-logo img {
+      filter: brightness(0.8) drop-shadow(0 2px 8px rgba(25,204,255,0.3));
+    }
+    
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .partners-grid { grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+      .partners-title { font-size: 2.6rem; }
+    }
+    
+    @media (max-width: 768px) {
+      .partners-section { padding: 3rem 1.5rem; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .partners-title { font-size: 2rem; margin-bottom: 2.5rem; }
+      .partner-card { padding: 2rem 1.5rem; min-height: 120px; }
+      .partner-logo img { max-height: 70px; }
+    }
+    
+    @media (max-width: 480px) {
+      .partners-section { padding: 2rem 1rem; }
+      .partners-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .partners-title { font-size: 1.6rem; margin-bottom: 1.5rem; }
+      .partner-card { padding: 1.5rem 1.2rem; min-height: 100px; }
+      .partner-logo img { max-height: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="partners-section">
+  <!-- Header -->
+  <div class="partners-label">
+    <i class="fas fa-handshake"></i> Partners
+  </div>
+  <h2 class="partners-title">Backed By Top Companies</h2>
+
+  <!-- Grid -->
+  <div class="partners-grid">
+    <!-- Card 1 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png" alt="Google">
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" alt="Amazon">
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1200px-Facebook_Logo_%282019%29.png" alt="Facebook">
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1200px-Microsoft_logo.svg.png" alt="Microsoft">
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/1200px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS">
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Logo_of_Twitter.svg/1200px-Logo_of_Twitter.svg.png" alt="Twitter">
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Alibaba_Group_logo.svg/1200px-Alibaba_Group_logo.svg.png" alt="Alibaba">
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="partner-card">
+      <div class="partner-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1200px-Netflix_2015_logo.svg.png" alt="Netflix">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Scroll animation for title
+  gsap.from('.partners-title', {
+    scrollTrigger: {
+      trigger: '.partners-section',
+      start: 'top 70%',
+    },
+    opacity: 0,
+    y: 30,
+    duration: 0.7,
+    ease: 'power3.out'
+  });
+  
+  // Staggered animation for cards on scroll
+  gsap.from('.partner-card', {
+    scrollTrigger: {
+      trigger: '.partners-grid',
+      start: 'top 75%',
+    },
+    opacity: 0,
+    y: 40,
+    stagger: 0.08,
+    duration: 0.6,
+    ease: 'power2.out'
+  });
+</script>
+
+</body>
+</html>

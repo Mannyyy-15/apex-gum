@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Similar Products</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family:'Montserrat',Arial,sans-serif;
+      margin: 0;
+      background: #fff;
+    }
+    .similar-sec {
+      max-width:1246px;
+      margin:0 auto;
+      padding:3rem 1rem;
+    }
+    .similar-header {
+      text-align:center; margin-bottom:2.7rem;
+    }
+    .similar-label {
+      color:#19ccff; font-weight:600; font-size:1rem; letter-spacing:0.06em;
+      display:flex;align-items:center;justify-content:center;gap:0.43rem;
+    }
+    .similar-title {
+      font-weight:900; font-size:2.8rem; letter-spacing:-2px;
+    }
+    .similar-grid {
+      display: grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.5rem;
+    }
+    .similar-card {
+      position:relative; border-radius:16px; overflow:hidden;
+      box-shadow:0 3px 40px rgba(25,204,255,0.13);
+      background:linear-gradient(128deg,#19ccff 40%,#24b9e2 100%);
+      min-height:540px;
+      display:flex;
+      align-items:flex-end;
+      justify-content: center;
+      animation:cardFadeIn 0.7s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .similar-card:nth-child(1){animation-delay:.13s;}
+    .similar-card:nth-child(2){animation-delay:.27s;}
+    .similar-img {
+      position: absolute;
+      top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;
+      border-radius:6px;
+    }
+    .similar-fav {
+      position:absolute;top:1.3rem;right:1.3rem;z-index:10;
+      background:rgba(255,255,255,0.71);border-radius:10px;padding:.43rem 1rem;
+      font-size:1.5rem; color:#0a0e27; box-shadow:0 2px 24px rgba(25,204,255,.13);
+      transition:background .19s;
+      border:none;
+    }
+    .similar-card:not(:hover) .similar-fav {background:rgba(255,255,255,0.71);}
+    .similar-fav.active {color:#19ccff;}
+    .similar-info-bar {
+      position:relative;
+      z-index:2;
+      width: 90%;
+      bottom: 2%;
+      border-radius:8px;
+      background:white;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.5rem;
+      min-height:90px;
+      gap:1.1rem;
+      opacity:0;
+      transform:translateY(60px);
+      animation:slideUpInfo 0.8s 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    .similar-card:nth-child(1) .similar-info-bar{animation-delay:.43s;}
+    .similar-card:nth-child(2) .similar-info-bar{animation-delay:.59s;}
+    .similar-info-details {
+      display:flex;flex-direction:column;align-items:flex-start;gap:.51rem;
+      min-width:0;
+    }
+    .similar-info-title {
+      font-weight:700;font-size:1.19rem;color:#181b23;margin-bottom:.11rem;letter-spacing:-.5px;
+      word-break:break-word;max-width:18rem;
+    }
+    .similar-info-prices {
+      display:flex;align-items:center;gap:.6rem;
+      font-size:1.19rem;font-weight:600;
+      flex-wrap:wrap;
+    }
+    .similar-info-oldprice {
+      color:#a5b0c3; text-decoration:line-through; font-size:.98rem; font-weight:500;
+    }
+    .similar-info-price {
+      font-size:1.31rem;font-weight:900;color:#181b23;letter-spacing:-.5px;
+    }
+    .add-cart-btn {
+      background:linear-gradient(94deg,#19ccff 85%,#0d3a81 100%);
+      color:#fff;font-weight:700;font-size:1.08rem;padding:.77rem 1.5rem;
+      border-radius:10px;border:none;display:flex;align-items:center;gap:.84rem;letter-spacing:.02em;
+      box-shadow:0 8px 32px rgba(25,204,255,0.12);cursor:pointer;
+      transition:background .2s,box-shadow .26s,transform .22s cubic-bezier(.34,1.56,.64,1);
+      min-width:120px;
+    }
+    .add-cart-btn .fa-shopping-cart {font-size:1.22rem;}
+    .add-cart-btn:hover {background:linear-gradient(94deg,#39d0fa 90%,#0d3a81);transform:scale(1.03);}
+    @keyframes slideUpInfo {
+      0% {opacity:0;transform:translateY(60px);}
+      100%{opacity:1;transform:translateY(0);}
+    }
+    @keyframes cardFadeIn {
+      0%{opacity:0;transform:scale(.97);}
+      100%{opacity:1;transform:scale(1);}
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:1200px){
+      .similar-title{font-size:2.1rem;}
+      .similar-info-bar{padding:.9rem .9rem;}
+      .similar-card{min-height:420px;}
+    }
+    @media (max-width:950px){
+      .similar-title{font-size:1.4rem;}
+      .similar-grid{grid-template-columns:1fr;gap:2rem;}
+      .similar-card{min-height:340px;}
+      .similar-info-bar{padding:.8rem .6rem;}
+      .similar-info-title{font-size:.97rem;}
+      .similar-info-prices{font-size:.99rem;}
+      .add-cart-btn{padding:.61rem 1rem;font-size:0.97rem;}
+    }
+    @media (max-width:650px){
+      .similar-header{margin-bottom:.91rem;}
+      .similar-sec{padding:1.5rem .4rem;}
+      .similar-card{min-height:230px;}
+      .similar-info-bar{
+        position: absolute;
+        left:4%;
+        bottom:4%;
+        width:92%;
+        flex-direction:column;
+        justify-content:flex-start;align-items:flex-start;
+        gap:.4rem;
+        padding:.7rem .53rem;
+        min-height:55px;
+      }
+      .similar-info-details{gap:.23rem;}
+      .add-cart-btn{margin-top:.4rem;width:100%;padding:.55rem .4rem;}
+      .similar-info-title{font-size:0.93rem;max-width:100%;}
+      .similar-info-prices{font-size:.91rem;}
+    }
+    @media (max-width:430px){
+      .similar-card{min-height:170px;}
+      .similar-title{font-size:1rem;}
+      .add-cart-btn{font-size:0.86rem;}
+      .similar-info-title{font-size:.77rem;}
+      .similar-header{margin-bottom:.53rem;}
+      .similar-info-bar{padding:.43rem .2rem;}
+    }
+  </style>
+</head>
+<body>
+<section class="similar-sec">
+  <div class="similar-header">
+    <div class="similar-label"><i class="fa-solid fa-location-dot"></i> Suggestions</div>
+    <div class="similar-title">Similar Products</div>
+  </div>
+  <div class="similar-grid">
+    <!-- Card 1 -->
+    <div class="similar-card">
+      <img class="similar-img" src="/assests/apexProduct.png" alt="Apex Gum Picnic Package">
+      <button class="similar-fav active"><i class="fa-solid fa-heart"></i></button>
+      <div class="similar-info-bar">
+        <div class="similar-info-details">
+          <div class="similar-info-title">Apex Gum Picnic Package</div>
+          <div class="similar-info-prices">
+            <span class="similar-info-oldprice">$16.9</span>
+            <span class="similar-info-price">$12.8</span>
+          </div>
+        </div>
+        <button class="add-cart-btn"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="similar-card">
+      <img class="similar-img" src="/assests/apexProduct1.png" alt="Apex Gum Full Package">
+      <button class="similar-fav"><i class="fa-regular fa-heart"></i></button>
+      <div class="similar-info-bar">
+        <div class="similar-info-details">
+          <div class="similar-info-title">Apex Gum Full Package</div>
+          <div class="similar-info-prices">
+            <span class="similar-info-oldprice">$16.9</span>
+            <span class="similar-info-price">$20.8</span>
+          </div>
+        </div>
+        <button class="add-cart-btn"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
