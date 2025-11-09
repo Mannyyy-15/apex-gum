@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>APEX — Features</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        /* Global reset & base */
+:root{
+  --max-width:1200px;
+  --page-pad: 28px;
+  --muted:#7a8288;
+  --dark:#071822;
+  --accent:#1e90ff;
+  --card-radius:12px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family: 'Poppins', system-ui, -apple-system; color:var(--dark);background:#fff}
+.container{max-width:var(--max-width);margin:48px auto;padding:0 var(--page-pad)}
+
+/* Intro */
+.intro{ 
+    text-align:center; 
+    margin-bottom:36px;
+}
+.kicker{
+    font-size:12px;
+    color:var(--muted); 
+    margin-bottom:12px;
+}
+.kicker img{ 
+    width:16px; 
+    height:16px; 
+    vertical-align:middle;
+    margin-right:6px; 
+}
+
+.headline{ 
+    font-weight:550; 
+    font-size:46px; 
+    line-height:0.95; 
+    margin:0; 
+    letter-spacing:-1px;
+}
+
+.sub{ 
+    color:var(--muted); 
+    margin-top:20px; 
+    font-size:14px; 
+    max-width:400px; 
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* GRID: 3 columns on desktop: two equal cards + big hero */
+.feature-grid{
+  display:flex;
+  gap:28px;
+  align-items:start;
+}
+
+.cards{
+  display:flex;
+  flex:1;
+  gap:28px;
+}
+
+/* feature cards */
+.feature-card{
+  display:flex;
+  flex-direction: column;
+  min-width: 10px;
+}
+
+.feature-card img{ 
+    width:100%; 
+    height:auto; 
+    object-fit:cover; 
+    overflow:hidden; 
+    object-position:center; 
+    display:block;
+    border-radius:var(--card-radius);
+}
+/* body under thumbnail */
+.feature-body{ 
+    padding:0 2px;
+}
+.feature-title{ 
+    font-size:18px; 
+    margin:0 0 6px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    font-weight:700;    
+}
+.chev{ 
+    color: black; 
+    font-size:35px; 
+    font-weight: 100;
+}
+.feature-desc{ 
+    color:var(--muted); 
+    font-size:13px; 
+    margin:0 0 10px;
+}
+
+/* avatars */
+.avatars{ 
+  display:flex;;  
+}
+.avatars img{ 
+    display:inline-grid; 
+    place-items:center; 
+    width:34px; 
+    height:34px; 
+    border: 3px solid #fff;
+    border-radius:50%; 
+}
+.a1{ z-index:3; margin-left:0 }
+.a2{ margin-left:-16px; z-index:2 }
+.a3{ margin-left:-16px; z-index:1 }
+
+.view-square{
+    width:100px; 
+    height:100px; 
+    border:1px solid var(--dark); 
+    border-radius:var(--card-radius); 
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:center; 
+    cursor:pointer;
+}
+
+
+/* HERO / CAROUSEL */
+.hero {
+  width: 45%;
+  aspect-ratio: 1 / 1;
+  background-image: url('/assests/viewProduct.jpg');
+  background-size: cover;
+  background-position: right;
+  border-radius: var(--card-radius);
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.hero-inner{
+    border-radius:14px; 
+    padding:22px; 
+    height: 100%;
+    color:white; 
+    position:relative; 
+    overflow:hidden;
+}
+
+.badges{ 
+    display:flex; 
+    gap:12px; 
+    position:absolute; 
+    top:18px; 
+    left:18px; 
+    z-index:4;
+}
+
+.badge{ 
+    background-color :transparent; 
+    padding:6px 10px; 
+    border-radius: 6px; 
+    border: 1px solid #fff;
+    font-size:12px; 
+    /* gap: 6px; */
+    color:#fff;
+}
+
+.cta.small{ 
+    position:absolute; 
+    left:18px; 
+    bottom:18px; 
+    z-index:4; 
+    border-radius:4px; 
+    cursor: pointer;
+    background:white; color:#0b2a33; padding:8px 12px; font-weight:700;
+}
+
+    /* diamonds bottom right */
+    .hero-pagination{ 
+      position:absolute; 
+      right:16px; 
+      bottom:25px; 
+      display:flex; 
+      gap:10px; 
+      z-index:1; 
+    }
+    .diamond{ 
+      width:10px;
+      height:10px; 
+      transform:rotate(45deg); 
+      background:rgba(255,255,255,0.28); 
+      border:none; 
+      border-radius:1.5px; 
+    }
+    .diamond.active{ 
+      background:#fff; 
+    }
+
+/* small-screen styling */
+@media (max-width:940px){
+  .feature-grid{ 
+    flex-direction:column; 
+    gap: 0;
+  }
+  .hero{ 
+    width:100%; 
+    height:300px; 
+    margin:20px 0px; 
+  }
+  .view-square{
+    width:80px; 
+    height:80px; 
+  }
+  .view-square img{ width:20px; height:20px; }
+  .vs-text{
+    font-size: 14px;
+  }
+  .hero-inner{ padding:20px }
+  .headline{ font-size:36px }
+}
+@media (max-width:450px){
+  .headline{ font-size:26px }
+  .sub{ font-size:13px }
+  .cta.small{ font-size:13px; padding:6px 10px }
+}
+
+
+
+
+
+
+
+
+
+/* HERO BACKGROUND */
+.get-yours-hero {
+    background-image: url("/assests/19abb6dbf3d761eed44af4b674fbce8f43677498.png");
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* GLASS CARD */
+.get-yours-hero-card {
+    max-width: 650px;
+    padding: 40px 48px;
+    border-radius: 15px;
+    backdrop-filter: blur(25px);
+    color: #fff;
+    text-align: center;
+    border: 1px solid #bcb8b8;
+}
+
+/* Label */
+.get-yours-hero-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 100;
+    opacity: 0.6;
+}
+
+.label-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Title */
+.get-yours-hero-title {
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+/* Sub Text */
+.get-yours-hero-sub {
+    font-size: 14px;
+    max-width: 480px;
+    margin: 0 auto 30px;
+    opacity: 0.6;
+    line-height: 1.6;
+}
+
+/* Logo Row */
+.logo-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    opacity: 0.6;
+    width: 350px;
+    height: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo-row img {
+    height: 100%;
+    width: 50px;
+    object-fit: contain;
+}
+
+/* Buttons */
+.cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.btn {
+    padding: 12px 26px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn.primary {
+  background: rgba(0, 41, 129, 1);
+  background: linear-gradient(145deg,rgb(7, 97, 200) 0%, rgba(24, 192, 236, 1) 50%, rgb(15, 77, 212) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn.primary:hover {
+    background: #1f90e7;
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.btn.secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #FFFFFF;
+}
+
+.btn.secondary:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* Responsive */
+@media (max-width: 780px) {
+    .hero-card {
+        padding: 32px 26px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+    }
+}
+
+
+
+</style>
+
+
+  <main class="container">
+    <!-- Header / Intro -->
+    <header class="intro">
+      <div class="kicker"><img src="/assests/game-icons_concentration-orb.png" alt="">Benefits</div>
+      <h1 class="headline">Power Meets<br/>Precision.</h1>
+      <p class="sub">Designed to sharpen focus, boost reaction time, and keep you locked in when it counts.</p>
+    </header>
+
+    <!--  style="flex-wrap:wrap;" -->
+    <section class="feature-grid" aria-label="Product features and hero">
+
+      <section class="cards">
+              <!-- Feature card 1 (col 1) -->
+      <article class="feature-card" >
+          <img src="/assests/reactionTime_Img.png" alt="">
+
+        <div class="feature-body">
+          <h3 class="feature-title">Reaction Time <span class="chev">›</span></h3>
+          <p class="feature-desc">Stay sharp when every second counts. Apex Gum helps boost alertness and quick thinking.</p>
+          <div class="avatars" aria-hidden="true">
+            <img src="/assests/img1.jpg" class="a1" alt="">
+            <img src="/assests/img3.jpg" class="a2" alt="">
+            <img src="/assests/img2.jpg" class="a3" alt="">
+
+          </div>
+        </div>
+      </article>
+
+      <!-- Column : centered view-all square (col 2) -->
+      <div class="col col-center">
+        <div class="view-square" role="button" aria-label="View all">  
+            <img src="/assests/teenyicons_arrow-solid.png" alt="">
+          <div class="vs-text">view all</div>
+        </div>
+      </div>
+
+      <!-- Feature card 2 (col 3) -->
+      <article class="feature-card">
+          <img src="/assests/concentration_Img.png" alt="">
+        <div class="feature-body">
+          <h3 class="feature-title">Concentration <span class="chev">›</span></h3>
+          <p class="feature-desc">Lock in and stay focused. Ingredients enhance mental clarity and reduce distractions.</p>
+        </div>
+      </article>
+      </section>
+
+      <!-- Hero / Carousel (second row: full width) -->
+      <aside class="hero">
+        <div class="hero-inner">
+          <div class="badges">
+            <span class="badge">Endurance</span>
+            <span class="badge">Speed</span>
+            <span class="badge">Vigilance</span>
+          </div>
+          <button class="cta small" data-action="view">View Product ↗</button>
+                    <div class="hero-pagination" role="tablist" aria-label="hero slides">
+            <button class="diamond active" data-slide="0" aria-label="slide 1"></button>
+            <button class="diamond" data-slide="1" aria-label="slide 2"></button>
+            <button class="diamond" data-slide="2" aria-label="slide 3"></button>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+
+
+
+
+  <!-- ====== HERO SECTION ====== -->
+<section class="get-yours-hero">
+    <div class="get-yours-hero-card">
+
+        <!-- Top label -->
+        <div class="get-yours-hero-label">
+            <img src="/assests/mdi_about.png" class="label-icon" alt="">
+            <span>Get Yours</span>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="get-yours-hero-title">
+            Boost Your Performance<br>
+            Grab Your Apex Gum.
+        </h1>
+
+        <!-- Sub text -->
+        <p class="get-yours-hero-sub">
+            Lorem ipsum dolor sit amet consectetur. Justo lacus tristique volutpat elit
+            ultrices ut purus. Ut metus nunc vitae risus.
+        </p>
+
+        <!-- Payment Logos -->
+        <div class="logo-row">
+            <img src="/assests/logos_visa.png" alt="">
+            <img src="/assests/logos_paypal.png" alt="">
+            <img src="/assests/devicon_amazonwebservices-wordmark.png" alt="">
+            <img src="/assests/logos_mastercard.png" alt="">
+        </div>
+
+        <!-- Buttons -->
+        <div class="cta-row">
+            <button class="btn primary">
+                <img src="/assests/white_mage_shop-fill.png" alt="" class="btn-icon">
+                Buy Now
+            </button>
+
+            <button class="btn secondary">Learn more</button>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

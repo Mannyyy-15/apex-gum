@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testimonials Section</title>
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+  <style>
+    :root {
+      --primary-cyan: #17a2b8;
+      --dark-blue: #0a4a6f;
+      --text-black: #000;
+      --text-gray: #666;
+      --light-gray: #999;
+      --bg-light: #f5f5f5;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-light);
+      padding: 0;
+      margin: 0;
+    }
+    .reviews-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 50px 20px 0 20px;
+    }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 43px;
+    }
+    .reviews-header-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      color: var(--text-gray);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+    }
+    .reviews-header-label::before {
+      content: '👥';
+    }
+    .reviews-main-title {
+      font-size: 54px;
+      font-weight: 700;
+      color: var(--text-black);
+      margin: 0;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    .reviews-slider-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      margin-top: 30px;
+      align-items: stretch;
+    }
+    .reviews-left-card {
+      background: linear-gradient(135deg, #17a2b8 0%, #0d5a92 100%);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.10);
+      padding: 48px 42px 40px 42px;
+      color: white;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .reviews-left-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .reviews-left-avatars {
+      display: flex;
+      align-items: center;
+      gap: -7px;
+    }
+    .reviews-left-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 100%;
+      border: 2px solid white;
+      object-fit: cover;
+      margin-left: -7px;
+      background: #eee;
+    }
+    .reviews-left-title {
+      font-size: 44px;
+      font-weight: 700;
+      margin-left: 12px;
+      margin-bottom: 0;
+      line-height: 1;
+    }
+    .reviews-left-stars {
+      margin-top: 5px;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: #6ae4ff;
+    }
+    .reviews-left-desc {
+      font-size: 17px;
+      margin: 20px 0 32px 0;
+      color: #f4fcff;
+      line-height: 1.6;
+      font-weight: 400;
+      max-width: 100%;
+    }
+    /* Add review box */
+    .add-review-box {
+      margin-top: auto;
+      border: 2px dashed rgba(255,255,255,.5);
+      border-radius: 12px;
+      padding: 18px 0px;
+      text-align: center;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: #e5fdff;
+      cursor: pointer;
+      transition: border .3s;
+    }
+    .add-review-box:hover {
+      border-color: white;
+      background: rgba(255,255,255,.04);
+    }
+    .add-review-box span {
+      font-size: 25px;
+      font-weight: 400;
+      color: #c6faff;
+      margin-right: 8px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    /* Right testimonials slider */
+    .reviews-slider-card {
+      background: #eafdff;
+      border-radius: 13px;
+      box-shadow: 0 2px 13px rgba(7,39,62,0.08);
+      padding: 38px 38px 26px 38px;
+      position: relative;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .reviews-slider-stars {
+      color: #FFD600;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .reviews-slider-text {
+      color: var(--text-gray);
+      font-size: 17px;
+      margin-bottom: 34px;
+      line-height: 1.6;
+    }
+    .reviews-slider-user {
+      display: flex;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+    .reviews-user-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 100%;
+      object-fit: cover;
+      margin-right: 14px;
+      background: #eee;
+    }
+    .reviews-user-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .reviews-user-name {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text-black);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .reviews-user-role {
+      font-size: 15px;
+      color: #6a8199;
+      font-weight: 500;
+    }
+    .reviews-slider-quotes {
+      position: absolute;
+      bottom: 26px;
+      right: 38px;
+      display: flex;
+      align-items: flex-end;
+      gap: 30px;
+      opacity: 0.16;
+      z-index: 0;
+    }
+    .reviews-slider-quotes svg {
+      width: 95px;
+      height: 80px;
+    }
+    .reviews-slider-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .reviews-slider-arrow {
+      border: 2px solid var(--border-gray);
+      background: white;
+      border-radius: 13px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: background 0.2s, border 0.2s;
+      box-shadow: 0 2px 10px rgba(7,39,62,0.04);
+    }
+    .reviews-slider-arrow:hover, .reviews-slider-arrow:focus {
+      background: #f3fdff;
+      border-color: var(--primary-cyan);
+    }
+
+    @media (max-width: 1100px) {
+      .reviews-main-title {
+        font-size: 40px;
+      }
+      .reviews-slider-wrapper {
+        grid-template-columns: 1fr 2fr;
+        gap: 18px;
+      }
+      .reviews-left-card {
+        padding: 32px 26px 28px 26px;
+      }
+      .reviews-slider-card {
+        padding: 24px 18px 14px 18px;
+      }
+    }
+    @media (max-width: 768px) {
+      .reviews-section {
+        padding: 30px 8px 0px 8px;
+      }
+      .reviews-header {
+        margin-bottom: 32px;
+      }
+      .reviews-slider-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .reviews-left-card {
+        border-radius: 15px;
+        padding: 25px 13px 18px 13px;
+        min-height: 200px;
+      }
+      .reviews-slider-card {
+        border-radius: 10px;
+        min-height: 230px;
+        padding: 18px 8px 14px 8px;
+      }
+      .reviews-slider-controls {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 19px;
+      }
+      .reviews-slider-arrow {
+        border-radius: 8px;
+        height: 54px;
+        font-size: 1.5rem;
+      }
+      .reviews-main-title {
+        font-size: 27px;
+      }
+      .reviews-left-title {
+        font-size: 26px;
+      }
+    }
+    @media (max-width: 500px) {
+      .reviews-main-title {
+        font-size: 19px;
+      }
+      .reviews-header-label {
+        font-size: 12px;
+      }
+      .reviews-section {
+        padding: 16px 3px 0px 3px;
+      }
+      .reviews-left-title {
+        font-size: 16px;
+      }
+      .reviews-left-desc {
+        font-size: 11px;
+        margin: 8px 0 12px 0;
+      }
+      .reviews-left-stars {
+        font-size: 14px;
+      }
+      .reviews-slider-card {
+        min-height: 120px;
+      }
+      .reviews-slider-text {
+        font-size: 11px;
+      }
+      .reviews-slider-user {
+        font-size: 12px;
+      }
+      .reviews-user-name {
+        font-size: 15px;
+      }
+      .reviews-user-role {
+        font-size: 10px;
+      }
+      .reviews-slider-quotes svg {
+        width: 38px;
+        height: 34px;
+      }
+      .add-review-box {
+        font-size: 12px;
+        padding: 8px 0;
+      }
+      .add-review-box span { font-size: 17px;}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <div class="reviews-header-label">Reviews</div>
+      <h1 class="reviews-main-title">What People Are Saying</h1>
+    </div>
+    <div class="reviews-slider-wrapper">
+      <!-- Left Review Card -->
+      <div class="reviews-left-card">
+        <div class="reviews-left-top">
+          <div class="reviews-left-avatars">
+            <img src="https://randomuser.me/api/portraits/men/35.jpg" class="reviews-left-avatar" alt="User"/>
+            <img src="https://randomuser.me/api/portraits/women/52.jpg" class="reviews-left-avatar" alt="User"/>
+          </div>
+          <span class="reviews-left-title">Reviews</span>
+        </div>
+        <div class="reviews-left-stars">★★★★★</div>
+        <div class="reviews-left-desc">
+          Lorem ipsum dolor sit amet consectetur. Blandit platea velit vitae ipsum ridiculus interdum libero elit. Amet arcu justo porta eu. Quis arcu arcu volutpat viverra donec in. Eu in turpis nunc sed suspendisse auctor sed. Egestas nisl dolor euismod porttitor cursus. Facilisi lectus dignissim etiam viverra quam vel lacus. Fermentum magna sagittis mi fermentum ultrices viverra. Nullam elit commodo ornare dictum quam congue et.
+        </div>
+        <div class="add-review-box"><span>+</span>Add your review</div>
+      </div>
+      <!-- Right Testimonial Slider -->
+      <div>
+        <div id="testimonial-slider" class="reviews-slider-card">
+          <div class="reviews-slider-stars" id="star-rating">★★★★★</div>
+          <div class="reviews-slider-text" id="testimonial-text">
+            Lorem ipsum dolor sit amet consectetur. Blandit platea velit vitae ipsum ridiculus interdum libero elit. Amet arcu justo porta eu. Quis arcu arcu volutpat viverra donec in. Eu in turpis nunc sed suspendisse auctor sed. Egestas nisl dolor euismod porttitor cursus. Facilisi lectus dignissim etiam viverra quam vel lacus. Fermentum magna sagittis mi fermentum ultrices viverra. Nullam elit commodo ornare dictum quam congue et.
+          </div>
+          <div class="reviews-slider-user">
+            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="reviews-user-avatar" id="testimonial-avatar" alt="Avatar"/>
+            <div class="reviews-user-info">
+              <div class="reviews-user-name" id="testimonial-name">Sofia Werner</div>
+              <div class="reviews-user-role" id="testimonial-role">Software Developer</div>
+            </div>
+          </div>
+          <div class="reviews-slider-quotes">
+            <svg viewBox="0 0 95 80" fill="none"><path d="M0 80V39Q0 25 11 14T35 3V22Q22 22 13.5 30T5 51H28V80H0ZM60 80V39Q60 25 71 14T95 3V22Q82 22 73.5 30T65 51H88V80H60Z" fill="#17a2b8"/></svg>
+            <svg viewBox="0 0 95 80" fill="none"><path d="M0 80V39Q0 25 11 14T35 3V22Q22 22 13.5 30T5 51H28V80H0ZM60 80V39Q60 25 71 14T95 3V22Q82 22 73.5 30T65 51H88V80H60Z" fill="#17a2b8"/></svg>
+          </div>
+        </div>
+        <div class="reviews-slider-controls">
+          <button class="reviews-slider-arrow" id="testimonial-prev" aria-label="Previous Review">
+            &#8592;
+          </button>
+          <button class="reviews-slider-arrow" id="testimonial-next" aria-label="Next Review">
+            &#8594;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const testimonials = [
+      {
+        stars: '★★★★★',
+        text: "Lorem ipsum dolor sit amet consectetur. Blandit platea velit vitae ipsum ridiculus interdum libero elit. Amet arcu justo porta eu. Quis arcu arcu volutpat viverra donec in. Eu in turpis nunc sed suspendisse auctor sed.",
+        avatar: 'https://randomuser.me/api/portraits/women/32.jpg',
+        name: 'Sofia Werner',
+        role: 'Software Developer'
+      },
+      {
+        stars: '★★★★★',
+        text: "The user experience is simply outstanding. My team loves how easy it is. We’ve switched our workflow thanks to the brilliant interface. Support is amazing and fast.",
+        avatar: 'https://randomuser.me/api/portraits/men/87.jpg',
+        name: 'James Carter',
+        role: 'Product Manager'
+      },
+      {
+        stars: '★★★★★',
+        text: "Great functionality, impressive speed and reliability. The design is modern and clean. Highly recommended to anyone who needs top-notch results.",
+        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+        name: 'Priya Singh',
+        role: 'UX Designer'
+      }
+    ];
+
+    let current = 0;
+    const tl = gsap.timeline();
+    function showTestimonial(index, animate=true) {
+      const testimonial = testimonials[index];
+      // Animate out
+      if (animate) {
+        tl.to("#testimonial-slider", {opacity: 0, y: 40, duration: 0.32, ease: "power1.in"});
+      }
+      setTimeout(() => {
+        document.getElementById("star-rating").textContent = testimonial.stars;
+        document.getElementById("testimonial-text").textContent = testimonial.text;
+        document.getElementById("testimonial-avatar").src = testimonial.avatar;
+        document.getElementById("testimonial-name").textContent = testimonial.name;
+        document.getElementById("testimonial-role").textContent = testimonial.role;
+        if (animate) {
+          // Animate in
+          tl.to("#testimonial-slider", {opacity: 1, y: 0, duration: 0.4, ease: "power2.out"});
+        } else {
+          gsap.set("#testimonial-slider", {opacity: 1, y:0});
+        }
+      }, animate ? 320 : 0);
+    }
+    document.getElementById("testimonial-prev").onclick = function () {
+      current = (current - 1 + testimonials.length) % testimonials.length;
+      showTestimonial(current);
+    };
+    document.getElementById("testimonial-next").onclick = function () {
+      current = (current + 1) % testimonials.length;
+      showTestimonial(current);
+    };
+    // Initial state
+    showTestimonial(0, false);
+    // Animate left card in on load
+    gsap.from(".reviews-left-card", {
+      opacity: 0,
+      y: 40,
+      duration: 0.7,
+      ease: "power2.out"
+    });
+    // Animate right slider in on load
+    gsap.from("#testimonial-slider", {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  </script>
+</body>
+</html>

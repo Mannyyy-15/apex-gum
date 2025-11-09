@@ -1,197 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Why Choose Us - Comparison</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
-    body {font-family:'Montserrat',Arial,sans-serif;margin:0;color:#181b23;background:#fff;}
-    .comparison-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 1rem 2.5rem 1rem;
-      position:relative;
-    }
-    .c-header {
-      display:flex; flex-direction: column; align-items:flex-start; margin-bottom:1.7rem; gap:1.2rem;
-    }
-    .c-label {
-      color:#19ccff; font-size:1rem; font-weight:600; margin-bottom:.3rem; letter-spacing:0.08em;
-      display:flex;align-items:center;gap:.39rem;
-    }
-    .c-title {
-      font-weight:900; font-size:2.3rem; margin-bottom:0.3rem; letter-spacing:-1px;
-    }
-    .c-products {
-      display:flex;justify-content:center; gap:4.7vw; margin-bottom:1.1rem;
-    }
-    .c-prod-col {
-      display:flex; flex-direction:column;align-items:center;gap:.19rem;
-    }
-    .c-prod-icon {
-      font-size:2.3rem; color:#19ccff;
-      margin-bottom:.05rem;
-    }
-    .c-prod-title {font-weight:700; font-size:1.18rem;}
-    .c-prod-desc {font-size:.89rem;color:#7b8492;margin-top:.07rem;}
-    .comp-table-wrap {
-      position:relative; z-index:2;
-    }
-    .comp-table {
-      background: linear-gradient(122deg,#19ccff 45%,#1e9fe1 100%);
-      border-radius:16px; box-shadow:0 3px 32px rgba(25,204,255,0.14);
-      padding:2.3rem 0 2.3rem 0;
-      margin-right:310px; /* room for main card float */
-      position:relative;
-      z-index:2;
-    }
-    .comp-table-grid {
-      display:grid;
-      grid-template-columns:220px 1fr 1fr; 
-      align-items:center;
-      min-width:790px; /* allow horizontal scrolling on small screens */
-      width:100%;
-    }
-    .comp-left-label {
-      font-size:1.11rem;
-      font-weight:700;
-      color:#fff;
-      padding:1.15rem 0 1.1rem 37px;
-      border-bottom:1.5px solid rgba(255,255,255,0.16);
-    }
-    .comp-table-row:last-child .comp-left-label {border-bottom:none;}
-    .comp-cell { padding:1.15rem 0 1.1rem 0; text-align:center; border-bottom:1.5px solid rgba(255,255,255,0.10);}
-    .comp-table-row:last-child .comp-cell {border-bottom:none;}
-    .comp-check {
-      color:#19ccff; font-size:1.19rem; border-radius:100px; border:1.5px solid #d7f3fe; background:#fff; width:2rem; height:2rem; display:inline-flex; align-items:center; justify-content:center;
-      box-shadow: 0 2px 12px rgba(25,204,255,0.09); }
-    .comp-empty { 
-      color:#bbb; font-size:1.09rem; border-radius:100px; border:1.5px solid #e3eaf1; background:#fff; width:2rem; height:2rem; display:inline-flex; align-items:center; justify-content:center; }
-    .main-card {
-      position:absolute; 
-      top:45px; right:0; width:300px; height:455px;
-      background: linear-gradient(122deg,#19ccff 0%,#085bba 97%);
-      border-radius:16px; box-shadow:0 30px 48px rgba(25,204,255,0.23);
-      z-index:3;
-      display:flex;flex-direction:column;align-items:center;gap:.82rem;
-      padding:2.45rem 2rem;
-    }
-    .main-card-top {
-      display:flex;align-items:center;justify-content:start;gap:.7rem;width:100%;margin-bottom:1.4rem;
-    }
-    .main-card-prod {
-      display:flex;flex-direction:column;align-items:flex-start;gap:.07rem;
-    }
-    .main-card-icon {font-size:2rem; color:#fff;}
-    .main-card-title {font-weight:700;color:#fff;font-size:1.15rem;line-height:1;margin-top:.01rem;}
-    .main-card-ingredients {font-size:.93rem;color:#ecfafe;margin-top:-.15rem;}
-    .main-card-brand {margin-left:auto;font-size:2.1rem;color:#fff;font-weight:700;letter-spacing:.18em;}
-    .main-card-list {margin-top:.42rem;width:100%;display:flex;flex-direction:column;gap:1.2rem;}
-    .main-card-row {display:flex;align-items:center;justify-content:flex-end;}
-    .main-card-row .main-card-circle {
-      width:2rem; height:2rem; border-radius:100px; display:flex;align-items:center;justify-content:center; background:#fff;
-    }
-    .main-card-row .main-card-check {
-      color:#19ccff; font-size:1.18rem; background:#fff; border-radius:100px; border:1.5px solid #e3f7ff; display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
-      box-shadow:0 0 12px 1px rgba(25,204,255,0.09);
-    }
-    .main-card-row .main-card-empty {
-      color:#bbb; font-size:1rem; background:#fff; border-radius:100px; border:1.5px solid #e3eaf1; display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
-    }
-    @media (max-width:1200px){
-      .comparison-section{padding:3rem .1rem 2.5rem .1rem;}
-      .comp-table{margin-right:0;}
-      .main-card{position:static;width:100%;max-width:340px;margin:2.4rem auto 0 auto;}
-    }
-    @media (max-width:900px) {
-      .comp-table-grid{min-width:600px;}
-      .main-card{max-width:330px;}
-      .c-title{font-size:1.8rem;}
-      .c-prod-title{font-size:.97rem;}
-    }
-    @media (max-width:650px){
-      .comparison-section{padding:1.3rem .01rem;}
-      .c-header{margin-bottom:1.2rem;}
-      .c-title{font-size:1.2rem;}
-      .main-card{font-size:.97rem;}
-      .main-card-brand{font-size:.91rem;}
-      .main-card{max-width:99vw;padding:1.25rem .7rem;}
-      .comp-table{padding:.9rem 0 .9rem 0;}
-      .comp-table-grid{font-size:.89rem;}
-      .comp-left-label{padding-left:13px;}
-    }
-    @media (max-width:500px){
-      .main-card{padding:1rem .3rem;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX - Product Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-cyan: #17a2b8;
+            --dark-blue: #0a4a6f;
+            --text-black: #000000;
+            --text-gray: #666666;
+            --light-gray: #999999;
+            --border-gray: #e8e8e8;
+            --bg-light: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-light);
+            padding: 60px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header-section {
+            margin-bottom: 50px;
+        }
+
+        .comparison-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .comparison-label::before {
+            content: '🔄';
+            font-size: 16px;
+        }
+
+        .main-heading {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-black);
+            letter-spacing: -0.5px;
+            margin-bottom: 0;
+        }
+
+        /* Main Comparison Wrapper */
+        .comparison-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1.2fr 1.2fr;
+            gap: 0;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        /* Features Column */
+        .features-column {
+            background: linear-gradient(135deg, #17a2b8 0%, #117a92 100%);
+            border-radius: 12px 0 0 12px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-item {
+            color: white;
+            font-size: 17px;
+            font-weight: 500;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.3;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Product Comparison Columns */
+        .product-column {
+            background-color: white;
+            border-right: 1px solid var(--border-gray);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-column:nth-child(4) {
+            border-right: none;
+        }
+
+        /* Product Headers */
+        .product-header {
+            padding: 30px 25px;
+            border-bottom: 1px solid var(--border-gray);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-black);
+        }
+
+        .product-subtitle {
+            font-size: 12px;
+            color: var(--light-gray);
+            font-weight: 400;
+        }
+
+        /* Checklist Container */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 0;
+        }
+
+        .check-row {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .check-row:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .check-icon.active {
+            background-color: var(--primary-cyan);
+            color: white;
+        }
+
+        .check-icon.inactive {
+            background-color: transparent;
+            border: 2px solid var(--border-gray);
+            color: var(--border-gray);
+            font-size: 16px;
+        }
+
+        /* APEX Column - Elevated Effect */
+        .apex-column {
+            background: linear-gradient(135deg, #17a2b8 0%, #0a4a6f 100%);
+            border-radius: 0 12px 12px 0;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+            top: -20px;
+            width: calc(25% - 7.5px);
+            height: calc(100% + 40px);
+            z-index: 3;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .apex-column::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .apex-header {
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .apex-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .apex-title {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .apex-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .apex-checklist {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .apex-check-row {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .apex-check-row:last-child {
+            border-bottom: none;
+        }
+
+        .apex-check-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-cyan);
+        }
+
+        .apex-check-icon.inactive {
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: transparent;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .comparison-wrapper {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                padding-right: 0;
+            }
+
+            .apex-column {
+                position: relative;
+                right: auto;
+                top: auto;
+                width: auto;
+                height: auto;
+                box-shadow: none;
+                border-radius: 0 12px 12px 0;
+            }
+
+            .features-column {
+                grid-column: 1;
+                border-radius: 12px 0 0 12px;
+            }
+
+            .main-heading {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .comparison-wrapper {
+                grid-template-columns: 1fr;
+                padding-right: 0;
+            }
+
+            .features-column {
+                grid-column: 1;
+                border-radius: 12px 12px 0 0;
+                order: 1;
+            }
+
+            .product-column {
+                grid-column: 1;
+                border-right: none;
+                border-bottom: 1px solid var(--border-gray);
+                order: 2;
+            }
+
+            .product-column:nth-child(2) {
+                order: 2;
+            }
+
+            .product-column:nth-child(3) {
+                order: 3;
+            }
+
+            .apex-column {
+                grid-column: 1;
+                border-radius: 0 0 12px 12px;
+                order: 4;
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                height: auto;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+                margin-top: 0;
+            }
+
+            .main-heading {
+                font-size: 32px;
+            }
+
+            .product-header {
+                padding: 25px 20px;
+            }
+
+            .check-row {
+                padding: 18px 20px;
+            }
+
+            .apex-header {
+                padding-bottom: 20px;
+            }
+
+            .apex-check-row {
+                padding: 18px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            body {
+                padding: 40px 0;
+            }
+
+            .header-section {
+                margin-bottom: 30px;
+                padding: 0 12px;
+            }
+
+            .main-heading {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+
+            .comparison-label {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+
+            .comparison-wrapper {
+                gap: 0;
+            }
+
+            .features-column {
+                border-radius: 12px 12px 0 0;
+                padding: 25px 15px;
+            }
+
+            .feature-item {
+                font-size: 14px;
+                padding: 15px 0;
+            }
+
+            .product-column {
+                border-radius: 0;
+            }
+
+            .product-header {
+                padding: 20px 15px;
+                gap: 8px;
+            }
+
+            .product-title {
+                font-size: 14px;
+            }
+
+            .product-subtitle {
+                font-size: 11px;
+            }
+
+            .product-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+            }
+
+            .check-row {
+                padding: 15px 15px;
+            }
+
+            .apex-column {
+                border-radius: 0 0 12px 12px;
+                padding: 25px 15px;
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                height: auto;
+            }
+
+            .apex-header {
+                padding-bottom: 18px;
+                gap: 8px;
+            }
+
+            .apex-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+            }
+
+            .apex-title {
+                font-size: 14px;
+            }
+
+            .apex-subtitle {
+                font-size: 11px;
+            }
+
+            .apex-check-row {
+                padding: 15px 0;
+            }
+
+            .check-icon,
+            .apex-check-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 11px;
+            }
+        }
+
+        /* Smooth Transitions */
+        .check-icon,
+        .apex-check-icon,
+        .product-icon,
+        .apex-icon {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-column:hover .check-icon.active {
+            transform: scale(1.1);
+        }
+
+        .apex-column:hover .apex-check-icon {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-<section class="comparison-section">
-  <div class="c-header">
-    <div class="c-label"><i class="fa-solid fa-arrows-rotate"></i> Comparison</div>
-    <div class="c-title">Why Choose Us</div>
-  </div>
-  <div class="c-products">
-    <div class="c-prod-col"><i class="fa-solid fa-bottle-water c-prod-icon"></i>
-      <div class="c-prod-title">Energy Drinks</div>
-      <div class="c-prod-desc">Ingredients</div>
-    </div>
-    <div class="c-prod-col"><i class="fa-solid fa-mug-saucer c-prod-icon"></i>
-      <div class="c-prod-title">Coffee Drinks</div>
-      <div class="c-prod-desc">Ingredients</div>
-    </div>
-  </div>
-  <div class="comp-table-wrap">
-    <!-- main table -->
-    <div class="comp-table">
-      <div class="comp-table-grid">
-        <!-- Labels, energy, coffee columns -->
-        <div></div>
-        <div style="text-align:center;font-weight:700;color:#1a2433;padding-bottom:.6rem;">Energy Drinks</div>
-        <div style="text-align:center;font-weight:700;color:#1a2433;padding-bottom:.6rem;">Coffee Drinks</div>
-        <!-- ROWS -->
-        <div class="comp-table-row comp-left-label">Caffeine & L- theanine</div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-left-label">Sugar</div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
-        <div class="comp-table-row comp-left-label">Aspartame</div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-left-label">Dairy Free</div>
-        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-left-label">Gluten Free</div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-cell"><span class="comp-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="comp-table-row comp-left-label">B Vitamins</div>
-        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
-        <div class="comp-table-row comp-cell"><span class="comp-empty"><i class="fa-regular fa-circle"></i></span></div>
-      </div>
-    </div>
-    <!-- floating apex product card -->
-    <div class="main-card" style="box-shadow: 0 30px 48px 0px rgba(25,204,255,0.20);">
-      <div class="main-card-top">
-        <div class="main-card-prod">
-          <i class="fa-solid fa-mug-saucer main-card-icon"></i>
-          <div class="main-card-title">Coffee Drinks</div>
-          <div class="main-card-ingredients">Ingredients</div>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="comparison-label">Comparison</div>
+            <h1 class="main-heading">Why Choose Us</h1>
         </div>
-        <div class="main-card-brand">APEX</div>
-      </div>
-      <div class="main-card-list">
-        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="main-card-row"><span class="main-card-empty"><i class="fa-regular fa-circle"></i></span></div>
-        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="main-card-row"><span class="main-card-empty"><i class="fa-regular fa-circle"></i></span></div>
-        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
-        <div class="main-card-row"><span class="main-card-check"><i class="fa-solid fa-check"></i></span></div>
-      </div>
+
+        <!-- Main Comparison Grid -->
+        <div class="comparison-wrapper">
+            <!-- Features Column -->
+            <div class="features-column">
+                <div class="feature-item">Caffeine & L-theanine</div>
+                <div class="feature-item">Sugar</div>
+                <div class="feature-item">Aspartame</div>
+                <div class="feature-item">Dairy free</div>
+                <div class="feature-item">Gluten free</div>
+                <div class="feature-item">B Vitamins</div>
+            </div>
+
+            <!-- Energy Drinks Column -->
+            <div class="product-column">
+                <div class="product-header">
+                    <div class="product-icon">⚡</div>
+                    <div class="product-title">Energy Drinks</div>
+                    <div class="product-subtitle">Ingredients</div>
+                </div>
+                <div class="checklist">
+                    <div class="check-row"><div class="check-icon active">✓</div></div>
+                    <div class="check-row"><div class="check-icon active">✓</div></div>
+                    <div class="check-row"><div class="check-icon active">✓</div></div>
+                    <div class="check-row"><div class="check-icon inactive">○</div></div>
+                    <div class="check-row"><div class="check-icon inactive">○</div></div>
+                    <div class="check-row"><div class="check-icon inactive">○</div></div>
+                </div>
+            </div>
+
+            <!-- Coffee Drinks Column -->
+            <div class="product-column">
+                <div class="product-header">
+                    <div class="product-icon">☕</div>
+                    <div class="product-title">Coffee Drinks</div>
+                    <div class="product-subtitle">Ingredients</div>
+                </div>
+                <div class="checklist">
+                    <div class="check-row"><div class="check-icon active">✓</div></div>
+                    <div class="check-row"><div class="check-icon active">✓</div></div>
+                    <div class="check-row"><div class="check-icon active">✓</div></div>
+                    <div class="check-row"><div class="check-icon inactive">○</div></div>
+                    <div class="check-row"><div class="check-icon inactive">○</div></div>
+                    <div class="check-row"><div class="check-icon inactive">○</div></div>
+                </div>
+            </div>
+
+            <!-- APEX Column (Elevated/Floating) -->
+            <div class="apex-column">
+                <div class="apex-header">
+                    <div class="apex-icon">☕</div>
+                    <div class="apex-title">APEX</div>
+                    <div class="apex-subtitle">Coffee Drinks</div>
+                </div>
+                <div class="apex-checklist">
+                    <div class="apex-check-row"><div class="apex-check-icon">✓</div></div>
+                    <div class="apex-check-row"><div class="apex-check-icon inactive">○</div></div>
+                    <div class="apex-check-row"><div class="apex-check-icon inactive">○</div></div>
+                    <div class="apex-check-row"><div class="apex-check-icon">✓</div></div>
+                    <div class="apex-check-row"><div class="apex-check-icon">✓</div></div>
+                    <div class="apex-check-row"><div class="apex-check-icon">✓</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
 </body>
 </html>
