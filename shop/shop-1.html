@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Product Grid</title>
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .product-section {
+      display: flex;
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    /* Left Card */
+    .left-card {
+      flex: 1;
+      background: url('/assests/sportImage.png') center/cover no-repeat;
+      border-radius: 16px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px;
+      min-height: 480px;
+      overflow: hidden;
+    }
+
+    .left-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.18) 60%, rgba(0,0,0,0) 100%);
+      border-radius: 16px;
+    }
+
+    .left-content {
+      position: absolute;
+      z-index: 2;
+      color: #fff;
+      top:5%;
+    }
+
+    .left-content p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .left-content h1 {
+      font-size: 42px;
+      line-height: 1.1;
+    }
+
+    /* Animated highlight for "Lock In" */
+    .highlight {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      padding: 0 8px;
+      border-radius: 4px;
+      /* background: linear-gradient(90deg, #00b4ff, #0090d4, #00b4ff); */
+      background-size: 200% 100%;
+      animation: moveHighlight 3s linear infinite;
+    }
+
+  .highlight::before {
+    content: '';    
+    position: absolute;
+    /* top: 15%; */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #38b6ff, #00e4ff);
+    /* border-radius: 8px; */
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: slide-bg 1s cubic-bezier(.6,1.7,.69,.77) forwards;
+    animation-delay: .8s;
+}
+
+@keyframes slide-bg {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+    /* Right Card */
+    .right-card {
+      flex: 1;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #00b4ff, #0090d4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .right-card h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+
+    .price del {
+      opacity: 0.7;
+      margin-right: 8px;
+    }
+
+    /* Product image floating animation */
+    .product-img {
+      width: 50%;
+      transform: scale(2);
+      margin-bottom: 40px;
+      animation: floatUpDown 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: scale(2) translateY(0);
+      }
+      50% {
+        transform: scale(2) translateY(-15px);
+      }
+    }
+
+    /* Button */
+  .buy-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center; /* <-- Add this line */
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+    .buy-btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .product-section {
+        flex-direction: column;
+      }
+      .left-card, .right-card {
+        width: 100%;
+      }
+      .product-img {
+        transform: scale(1.5);
+      }
+    }
+    .fadeIn {
+  opacity: 0;
+  animation: fadeIn 0.7s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* Optional: add staggered delay classes for sequencing/fine control */
+.delay-1 { animation-delay: 0.13s; }
+.delay-2 { animation-delay: 0.34s; }
+.delay-3 { animation-delay: 0.48s; }
+.delay-4 { animation-delay: 0.66s; }
+
+  </style>
+</head>
+<body>
+
+  <section class="product-section">
+    <!-- Left Card -->
+    <div class="right-card">
+      <h2 class="fadeIn delay-2">Full Package</h2>
+      <p class="price fadeIn delay-3"><del>$16.9</del> $20.8</p>
+      <img src="/assests/apexProduct1.png" alt="Apex Boxes" class="product-img "> 
+      <button class="buy-btn fadeIn delay-3"> <i class="fa fa-shopping-basket"></i>Buy Now</button>
+    </div>
+
+    <!-- Right Card -->
+    <div class="right-card">
+      <h2 class="fadeIn delay-2">Picnic Package</h2>
+      <p class="price fadeIn delay-3"><del>$16.9</del> $12.8</p>
+      <img src="/assests/apexProduct1.png" alt="Apex Boxes" class="product-img "> 
+      <button class="buy-btn fadeIn delay-3"><i class="fa fa-shopping-basket"></i> Buy Now</button>
+    </div>
+  </section>
+
+</body>
+</html>

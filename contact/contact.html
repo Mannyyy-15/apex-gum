@@ -7,6 +7,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<!-- FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
 
   <style>
     /* =========================
@@ -110,7 +113,7 @@
     /* Hero /
      Main */
     main {
-      margin-top:86px; /* header spacing */
+      /* margin-top:86px; header spacing */
       flex:1;
       padding: 40px 20px 80px;
       max-width:var(--container-max);
@@ -123,7 +126,24 @@
       position:relative;
       overflow:visible;
       grid-template-columns: 1fr minmax(300px, 520px);
+  background-image: url('/assests/fluent_ink-stroke-24-filled.png');
+  background-repeat: no-repeat;
+
     }
+
+@media (max-width: 900px) {
+  main {
+    background-size: 90vw auto;
+    background-position: center 100px;
+  }
+}
+@media (max-width: 600px) {
+  main {
+    background-size: 140vw auto;
+    background-position: 70% 180px;
+  }
+}
+
 
     /* left column hero */
     .hero{
@@ -170,11 +190,11 @@
     .form-card{
       position:relative;
       z-index:3;
-      background: linear-gradient(180deg, rgba(255,255,255,var(--glass-opacity)), rgba(240,255,255,0.34));
+      /* background: linear-gradient(180deg, rgba(255,255,255,var(--glass-opacity)), rgba(240,255,255,0.34)); */
       border-radius:var(--card-radius);
       box-shadow:var(--shadow);
       padding:26px 28px;
-      border: 1px solid rgba(10,20,30,0.06);
+      /* border: 1px solid rgba(10,20,30,0.06); */
       backdrop-filter: blur(var(--glass-blur));
       -webkit-backdrop-filter: blur(var(--glass-blur));
       min-height:560px;
@@ -286,13 +306,14 @@
     }
     .blue-variant{
       background: rgba(0, 41, 129, 1);
-      background: linear-gradient(145deg,rgba(0, 60, 129, 1) 0%, rgba(24, 192, 236, 1) 50%, rgba(0, 41, 129, 1) 100%);
+      background: linear-gradient(145deg,#18C0EC 0%, rgba(24, 192, 236, 1) 50%,#002981 100%);
       color:white;
       font-weight:700;
       width: 124px;
       cursor:pointer;
-      display:inline-flex;
+      display:flex;
       gap:10px;
+     border-radius: 8px;
       align-items:center;
     }
     .muted {
@@ -318,29 +339,7 @@
 <body>
   <div class="page">
     <!-- Header -->
-    <header role="banner">
-      <div class="nav-inner">
-        <div class="logo" aria-hidden="true">
-          <img src="images/logo.png" alt="">
-        </div>
 
-        <nav role="navigation" aria-label="Main navigation">
-          <div class="menu" role="menubar">
-            <a href="#" role="menuitem">Home</a>
-            <a href="#" role="menuitem">Shop</a>
-            <a href="#" role="menuitem">Product</a>
-            <a href="#" role="menuitem">About</a>
-            <a href="#" role="menuitem">Contact</a>
-          </div>
-        </nav>
-
-        <div class="nav-actions">
-          <button class="icon-btn btn-ghost" aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="#0b2a33" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="#0b2a33" stroke-width="1.6" /></svg></button>
-          <button class="icon-btn btn-ghost" aria-label="Cart"><img src="images/mage_shop-fill.png" alt=""></button>
-          <button class="cta"><img src="images/white_mage_shop-fill (1).png" alt=""> Buy Now</button>
-        </div>
-      </div>
-    </header>
 
     <!-- Main -->
     <main>
@@ -352,8 +351,8 @@
         <p class="lead">Lorem ipsum dolor sit amet consectetur. Consectetur sed euismod maecenas.</p>
 
         <div class="hero-actions">
-          <button class="btn blue-variant"><img src="images/white_mage_shop-fill (1).png"alt=""> Buy Now</button>
-          <button class="btn-ghost"><img src="images/mage_shop-fill.png" alt=""></button>
+          <button class="btn blue-variant"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+          <button class="btn-ghost"><i class="fas fa-shopping-cart"></i></button>
         </div>
       </section>
 
@@ -395,8 +394,8 @@
         <div class="form-footer">
 
           <div class="submit-wrap">
-            <button class="btn blue-variant" id="send"><img src="images/white_mage_shop-fill (1).png"alt=""> Buy Now</button>
-            <button class="btn-ghost-compact" id="mini"><img src="images/mage_shop-fill.png" alt=""></button>
+            <button class="btn blue-variant" id="send"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            <button class="btn-ghost-compact" id="mini"><i class="fas fa-shopping-cart"></i></button>
           </div>
         </div>
       </aside>
@@ -484,8 +483,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; } */
   /* gradient similar to screenshot */
   background: linear-gradient(180deg,#0731a8 0%, #0b66d4 28%, #08a6e8 72%, #00d1ff 100%);
   color: #fff;
-  
 }
+
 .blue-inner {
   margin:0 auto;
   display:grid;
@@ -727,69 +726,64 @@ button { font: inherit; cursor: pointer; border: none; background: none; } */
             Lorem ipsum dolor sit amet consectetur. Lectus eget in orci feugiat viverra habitant. Lacinia eu vitae et sit bibendum at dolor. Nunc et aliquam senectus felis maecenas diam eget ultrices condimentum.
           </p>
 
-          <div class="social-row" aria-hidden="false">
-            <!-- inline SVG placeholders for icons -->
-            <button class="social-icon-btn" aria-label="facebook">
-              <img src="images/fb.png" alt="">
-            </button>
-            <button class="social-icon-btn" aria-label="instagram">
-              <img src="images/insta.png" alt="">
-            </button>
-            <button class="social-icon-btn" aria-label="youtube">
-              <img src="images/youtube.png" alt="">
-            </button>
-            <button class="social-icon-btn" aria-label="dribbble">
-              <img src="images/Group.png" alt="">
-            </button>
-          </div>
+      <div class="social-row" aria-hidden="false">
+  <button class="social-icon-btn" aria-label="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </button>
+  <button class="social-icon-btn" aria-label="instagram">
+    <i class="fab fa-instagram"></i>
+  </button>
+  <button class="social-icon-btn" aria-label="youtube">
+    <i class="fab fa-youtube"></i>
+  </button>
+  <button class="social-icon-btn" aria-label="dribbble">
+    <i class="fab fa-dribbble"></i>
+  </button>
+</div>
+
         </div>
       </div>
     </section>
 
     <!-- LARGE BLUE SIGNUP / GRID SECTION -->
-    <section class="blue-section" id="blue-section">
-      <div class="blue-inner">
 
-        <!-- left column -->
-        <div class="left-col">
-          <div class="signup-copy">
-            <h3>Sign up to get our apex gum, or to stay up to date on information about our products.</h3>
-          </div>
-
-          <form class="signup-form" id="signup-form" novalidate>
-            <div class="inputs">
-              <input type="text" placeholder="First name" aria-label="First name" />
-              <input type="text" placeholder="Last name" aria-label="Last name" />
-              <input type="email" placeholder="Email" aria-label="Email" />
-              <button class="btn-submit" aria-label="Submit">Submit</button>
-            </div>
-          </form>
-
-          <!-- giant headline overlapping -->
-           <div>
-          <h1 class="giant-hero">It's Time To Lock In.</h1>
-          </div>
-        </div>
-
-        <!-- right column vertical link boxes -->
-        <aside class="right-col" aria-label="links">
-          <nav class="link-grid" aria-label="secondary links">
-            <a href="#" class="link-box">Shop</a>
-            <a href="#" class="link-box">About</a>
-            <a href="#" class="link-box">Instagram</a>
-            <a href="#" class="link-box">Privacy Policy</a>
-
-            <div class="small-row">
-              <a href="#" class="small-box">EN</a>
-              <a href="#" class="small-box">Cookies</a>
-            </div>
-          </nav>
-        </aside>
-
-      </div>
-    </section>
 
      
   </div>
 </body>
+<script>
+window.addEventListener('DOMContentLoaded', function(){
+  // HERO CONTACT CARD section
+  gsap.from(".contact-card", {opacity:0, y:-32, duration:.95, ease:"power4.out"});
+  gsap.from(".callout", {opacity:0, y:28, duration:.7, delay:.18, ease:"power2.out"});
+  gsap.from(".contact-right", {opacity:0, x:40, duration:1.1, delay:.24, ease:"power3.out"});
+  gsap.from(".social-row button", {opacity:0, y:18, scale:.85, stagger:0.11, duration:.35, delay:.36, ease:"back.out(2)"});
+  
+  // MAIN HERO TEXT and actions
+  gsap.from(".hero .kicker", {opacity:0, y:10, duration:.56, delay:.34, ease:"power2.out"});
+  gsap.from(".title", {opacity:0, y:25, duration:.7, delay:.47, ease:"power4.out"});
+  gsap.from(".lead", {opacity:0, y:12, duration:.5, delay:.84, ease:"power2.out"});
+  gsap.from(".hero-actions button", {opacity:0, y:20, scale:.88, duration:.39, stagger:0.14, delay:.95, ease:"back.out(1.3)"});
+  
+  // FORM CARD and fields
+  gsap.from(".form-card", {opacity:0, y:44, duration:.66, delay:1.04, ease:"power3.out"});
+  gsap.from(".form-top input", {opacity:0, y:6, duration:.32, stagger:0.11, delay:1.20, ease:"power2.out"});
+  gsap.from(".form-fields", {opacity:0, y:14, duration:.37, delay:1.35, ease:"power3.out"});
+  gsap.from(".radios .radio-row", {opacity:0, x:16, duration:.25, stagger:0.09, delay:1.45, ease:"power1.out"});
+  gsap.from("textarea.input", {opacity:0, y:17, duration:.41, delay:1.60, ease:"power2.out"});
+  gsap.from(".form-footer", {opacity:0, y:20, duration:.41, delay:1.80, ease:"power2.out"});
+  gsap.from(".form-footer button", {opacity:0, scale:.88, x:14, duration:.27, stagger:0.12, delay:1.94, ease:"back.out(2)"});
+
+  // BLUE SECTION
+  gsap.from(".blue-section", {opacity:0, y:40, duration:.8, delay:2.0, ease:"power2.out"});
+  gsap.from(".blue-inner", {opacity:0, y:30, duration:.7, delay:2.15, ease:"power2.out"});
+  gsap.from(".signup-copy h3", {opacity:0, x:35, duration:.74, delay:2.25, ease:"power3.out"});
+  gsap.from(".signup-form input", {opacity:0, y:14, duration:.29, stagger:0.12, delay:2.36, ease:"power1.out"});
+  gsap.from(".btn-submit", {opacity:0, scale:.84, x:-12, duration:.29, delay:2.56, ease:"back.out(2)"});
+  gsap.from(".giant-hero", {opacity:0, y:30, duration:.7, delay:2.6, ease:"power4.out"});
+  gsap.from(".right-col .link-box", {opacity:0, y:18, duration:.44, stagger:0.16, delay:2.8, ease:"power3.out"});
+  gsap.from(".small-row .small-box", {opacity:0, scale:0.8, y:7, duration:.32, stagger:.15, delay:3.0, ease:"back.out(2)"});
+});
+</script>
+
 </html>
