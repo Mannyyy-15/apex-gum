@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Why Choose Us — Exact Replica</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #f3f8fb;
+            --deep: #0b1220;
+            --accent-a: #2ec3f3;
+            --accent-b: #0b63b4;
+            --apex-start: #2ec3f3;
+            --apex-end: #0b2f86;
+            --check-color: #2ec3f3;
+            --cross-color: rgba(11, 18, 32, 0.28);
+            --max-w: 1200px;
+            --row-height: 68px; /* Slightly reduced row height for better fit */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", system-ui, sans-serif;
+            background: linear-gradient(180deg,#ffffff 0%, #f3f8fb 100%);
+            color: var(--deep);
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-w);
+            margin: auto;
+            position: relative;
+        }
+
+        /* --- Header --- */
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .kicker {
+            font-size: 13px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600; /* Added weight for kicker text */
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 5px 0 0;
+        }
+
+        /* --- Comparison Grid --- */
+        .compare {
+            /* Adjusted width of left panel for visual alignment */
+            grid-template-columns: 320px 1fr; 
+            display: grid;
+            gap: 0;
+            position: relative;
+            min-height: 480px;
+            box-shadow: 0 50px 110px rgba(9,30,66,0.08); /* Global shadow for the component block */
+            border-radius: 14px;
+        }
+
+        /* LEFT PANEL (Feature List) */
+        .left-panel {
+            background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+            color: #fff;
+            border-radius: 14px 0 0 14px; /* Only round the left corners */
+            padding: 28px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* Styling for all rows in the left panel */
+        .feature-item {
+            font-size: 17px;
+            font-weight: 400;
+            /* Adjust padding to match the row height exactly */
+            padding: calc(var(--row-height) / 2 - 10px) 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            height: var(--row-height);
+            display: flex;
+            align-items: center;
+            white-space: nowrap; /* Prevent wrap */
+        }
+
+        .feature-item:last-of-type {
+            border-bottom: 0;
+        }
+        
+        /* Specific BOLD style for the first item as seen in the screenshot */
+        .feature-item-bold {
+            font-weight: 700;
+        }
+
+
+        /* CENTER BOARD (Matrix) */
+        .center-board {
+            background: #fff;
+            /* Remove border radius and shadows from individual components as they are now on the wrapper */
+            border-radius: 0 14px 14px 0; 
+            overflow: hidden;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .board-head {
+            display: grid;
+            grid-template-columns: 1fr; 
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(11, 18, 32, 0.04);
+        }
+        .board-head .col-label {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--deep);
+        }
+
+        /* Matrix Rows */
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 1fr; /* Only one column for data */
+            height: var(--row-height);
+            padding: 0 24px;
+            border-bottom: 1px solid rgba(11, 18, 32, 0.06);
+            align-items: center;
+        }
+
+        .matrix-row:last-child {
+            border-bottom: none;
+        }
+
+        .cell {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .cell .fa-check {
+            color: var(--check-color);
+        }
+
+        .cell .fa-circle-xmark {
+            color: var(--cross-color);
+        }
+        
+        /* RIGHT CARD (APEX) - OVERLAP */
+        .right-card {
+            position: absolute;
+            right: -48px; /* Adjusted overlap based on visual look */
+            top: 28px;
+            width: 250px; /* Width adjusted */
+            height: 480px; /* Height adjusted */
+            border-radius: 14px;
+            background: linear-gradient(180deg, var(--apex-start), var(--apex-end));
+            color: #fff;
+            padding: 20px 0 20px 20px;
+            box-shadow: 0 50px 110px rgba(9, 30, 66, 0.14);
+            z-index: 6;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .apex-header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.95;
+            padding-right: 20px;
+        }
+        .apex-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .apex-header .apex-brand {
+            font-weight: 800;
+            margin-left: auto;
+        }
+
+        /* APEX Icon and Name */
+        .apex-visuals {
+            text-align: center; 
+            margin: 20px 0 30px;
+        }
+        .apex-visuals .fa-capsules {
+            font-size: 100px; 
+            opacity: 0.15; /* Increased opacity for clearer ghost image */
+            line-height: 1;
+            transform: rotate(-10deg);
+        }
+        .apex-visuals h3 {
+             font-weight: 800; 
+             font-size: 30px; 
+             margin: 0; 
+             line-height: 1;
+        }
+
+        /* APEX Feature List */
+        .apex-list {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        .apex-item {
+            list-style: none;
+            height: var(--row-height);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align all content to the right edge */
+            padding-right: 20px; 
+        }
+        
+        .apex-icon i {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        /* Price Row at the bottom */
+        .price-row {
+            margin-top: auto; 
+            display: flex; 
+            gap: 8px; /* Reduced gap */
+            font-weight: 800; 
+            font-size: 16px;
+            padding: 10px 20px 0 0;
+            justify-content: flex-end;
+            align-items: baseline;
+        }
+        .price-row .old {
+            text-decoration: line-through; 
+            opacity: 0.5; 
+            font-weight: 600; 
+            font-size: 14px;
+        }
+        .price-row .now {
+            font-size: 20px;
+        }
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 840px) {
+            .compare {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                box-shadow: none; /* Remove global shadow on mobile */
+            }
+            .left-panel { order: 1; width: 100%; border-radius: 10px; padding: 20px; }
+            .center-board { order: 2; width: 100%; border-radius: 10px; }
+            .right-card { 
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                height: auto;
+                order: 3;
+                padding: 20px; /* Uniform padding on mobile */
+            }
+            .apex-item { height: 60px; justify-content: flex-start; padding-right: 0; }
+            .apex-icon { justify-content: flex-start; }
+            .price-row { justify-content: flex-start; padding: 10px 0 0 0; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="kicker"><i class="fa-solid fa-code-compare" style="color:var(--accent-b);"></i>Comparison</div>
+            <h2 class="title">Why Choose Us</h2>
+        </div>
+
+        <div class="compare">
+
+            <div class="left-panel">
+                <div class="feature-item feature-item-bold">Caffeine &amp; L- theanine</div>
+                
+                <div class="feature-item">Sugar</div>
+                <div class="feature-item">Aspartame</div>
+                <div class="feature-item">Dairy Free</div>
+                <div class="feature-item">Gluten Free</div>
+                <div class="feature-item">B Vitamins</div>
+            </div>
+
+            <div class="center-board">
+                <div class="board-head">
+                    <div class="col-label">Energy Drinks</div>
+                </div>
+
+                <div class="matrix-row">
+                    <div class="cell"><i class="fa-regular fa-circle-xmark"></i></div>
+                </div>
+
+                <div class="matrix-row">
+                    <div class="cell"><i class="fa-solid fa-circle-check"></i></div>
+                </div>
+
+                <div class="matrix-row">
+                    <div class="cell"><i class="fa-solid fa-circle-check"></i></div>
+                </div>
+
+                <div class="matrix-row">
+                    <div class="cell"><i class="fa-regular fa-circle-xmark"></i></div>
+                </div>
+
+                <div class="matrix-row">
+                    <div class="cell"><i class="fa-regular fa-circle-xmark"></i></div>
+                </div>
+
+                <div class="matrix-row">
+                    <div class="cell"><i class="fa-solid fa-circle-check"></i></div>
+                </div>
+            </div>
+
+            <aside class="right-card">
+                <div class="apex-header">
+                    <div class="logo"><i class="fa-solid fa-mug-saucer"></i> Coffee Drinks</div>
+                    <div class="apex-brand">APEX</div>
+                </div>
+
+                <div class="apex-visuals">
+                    <i class="fa-solid fa-capsules"></i>
+                    <h3>APEX</h3>
+                </div>
+
+                <ul class="apex-list">
+                    <li class="apex-item">
+                        <div class="apex-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    </li>
+
+                    <li class="apex-item">
+                        <div class="apex-icon"><i class="fa-regular fa-circle-xmark"></i></div>
+                    </li>
+
+                    <li class="apex-item">
+                        <div class="apex-icon"><i class="fa-regular fa-circle-xmark"></i></div>
+                    </li>
+                    
+                    <li class="apex-item">
+                        <div class="apex-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    </li>
+
+                    <li class="apex-item">
+                        <div class="apex-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    </li>
+
+                    <li class="apex-item">
+                        <div class="apex-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    </li>
+                </ul>
+                
+                <div class="price-row">
+                    <div class="old">$36.5</div>
+                    <div class="now">$20.8</div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
