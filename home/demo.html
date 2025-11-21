@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX - Its Time To Lock In</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: radial-gradient(ellipse at center, #1ec5e6 0%, #0860b8 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+            z-index: 10;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 60px;
+        }
+
+        /* Center Top Section */
+        .center-top {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .benefits {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .benefits::before {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .main-title {
+            font-size: 56px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        /* Circular Background with Ticks */
+        .circle-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 450px;
+            z-index: 1;
+        }
+
+        /* Outer Large Circle with Ticks */
+        .outer-circle-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1200px;
+            height: 1200px;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        /* Outer Circle Responsive */
+        @media (max-width: 1200px) {
+            .outer-circle-container {
+                width: 1000px;
+                height: 1000px;
+            }
+
+            .outer-tick {
+                transform-origin: 50% 500px;
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .outer-circle-container {
+                width: 900px;
+                height: 900px;
+            }
+
+            .outer-tick {
+                transform-origin: 50% 450px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .outer-circle-container {
+                width: 700px;
+                height: 700px;
+            }
+
+            .outer-tick {
+                transform-origin: 50% 350px;
+                height: 20px;
+                width: 2px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .outer-circle-container {
+                width: 600px;
+                height: 600px;
+            }
+
+            .outer-tick {
+                transform-origin: 50% 300px;
+                height: 15px;
+                width: 2px;
+            }
+        }
+
+        .outer-circle-ticks {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: outerCircleRotate 10s ease-in-out infinite;
+        }
+
+        @keyframes outerCircleRotate {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        .outer-tick {
+            position: absolute;
+            width: 2px;
+            height: 35px;
+            background: rgb(255, 255, 255);
+            top: 0;
+            left: 50%;
+            transform-origin: 50% 600px;
+        }
+
+        .circle-ticks {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tick {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: rgb(255, 255, 255);
+            top: 0;
+            left: 50%;
+            transform-origin: 50% 225px;
+            animation: tickRotate 3s ease-in-out infinite;
+        }
+
+        @keyframes tickRotate {
+            0%, 100% {
+                opacity: 0.25;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .circle-ticks {
+            animation: circleRotate 8s ease-in-out infinite;
+        }
+
+        @keyframes circleRotate {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(15deg);
+            }
+        }
+
+        .tick-line-left,
+        .tick-line-right {
+            position: absolute;
+            top: 50%;
+            width: 120px;
+            height: 2px;
+            background: rgb(255, 255, 255);
+        }
+
+        .tick-line-left {
+            left: -150px;
+        }
+
+        .tick-line-right {
+            right: -150px;
+        }
+
+        /* Side Lines - Left */
+        .side-lines-left {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            z-index: 5;
+        }
+
+        .line-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .line {
+            width: 70px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.836);
+        }
+
+        /* Side Lines - Right */
+        .side-lines-right {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            z-index: 5;
+        }
+
+        /* Product Container */
+        .product-container {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 60px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .product-box {
+            width: 700px;
+            max-width: 90vw;
+            height: auto;
+            position: relative;
+            z-index: 3;
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3));
+        }
+
+        .product-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .circle-container {
+                width: 400px;
+                height: 400px;
+            }
+
+            .tick {
+                transform-origin: 50% 200px;
+            }
+
+            @keyframes circleRotate {
+                0%, 100% {
+                    transform: rotate(0deg);
+                }
+                50% {
+                    transform: rotate(12deg);
+                }
+            }
+
+            .product-box {
+                width: 600px;
+                max-width: 85vw;
+            }
+
+            .main-title {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .circle-container {
+                width: 360px;
+                height: 360px;
+            }
+
+            .tick {
+                transform-origin: 50% 180px;
+                height: 15px;
+            }
+
+            @keyframes circleRotate {
+                0%, 100% {
+                    transform: rotate(0deg);
+                }
+                50% {
+                    transform: rotate(10deg);
+                }
+            }
+
+            .product-box {
+                width: 500px;
+                max-width: 80vw;
+            }
+
+            .main-title {
+                font-size: 40px;
+            }
+
+            .top-nav {
+                padding: 0 30px;
+            }
+
+            .nav-left {
+                gap: 30px;
+            }
+
+            .side-lines-left,
+            .side-lines-right {
+                display: none;
+            }
+
+            .product-container {
+                margin-top: 50px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .circle-container {
+                width: 320px;
+                height: 320px;
+            }
+
+            .tick {
+                transform-origin: 50% 160px;
+                height: 12px;
+            }
+
+            @keyframes circleRotate {
+                0%, 100% {
+                    transform: rotate(0deg);
+                }
+                50% {
+                    transform: rotate(8deg);
+                }
+            }
+
+            .product-box {
+                width: 400px;
+                max-width: 75vw;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .top-nav {
+                top: 20px;
+                padding: 0 20px;
+            }
+
+            .center-top {
+                top: 20px;
+            }
+
+            .nav-item {
+                font-size: 13px;
+            }
+
+            .nav-left {
+                gap: 20px;
+            }
+
+            .benefits {
+                font-size: 12px;
+            }
+
+            .product-container {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .circle-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .tick {
+                transform-origin: 50% 140px;
+                height: 10px;
+            }
+
+            @keyframes circleRotate {
+                0%, 100% {
+                    transform: rotate(0deg);
+                }
+                50% {
+                    transform: rotate(6deg);
+                }
+            }
+
+            .product-box {
+                width: 300px;
+                max-width: 70vw;
+            }
+
+            .main-title {
+                font-size: 22px;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .nav-left {
+                gap: 15px;
+            }
+
+            .product-container {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="nav-left">
+                <div class="nav-item">Performance</div>
+                <div class="nav-item">Caffeine</div>
+            </div>
+            <div class="nav-item">Precision</div>
+        </div>
+
+        <!-- Center Top Section -->
+        <div class="center-top">
+            <div class="benefits">Benefits</div>
+            <h1 class="main-title">Its Time To Lock In</h1>
+        </div>
+
+        <!-- Outer Large Circle with Ticks (overflow hidden) -->
+        <div class="outer-circle-container">
+            <div class="outer-circle-ticks" id="outerCircleTicks"></div>
+        </div>
+
+        <!-- Circular Background with Ticks -->
+        <div class="circle-container">
+            <div class="circle-ticks" id="circleTicks"></div>
+        </div>
+
+        <!-- Product Container -->
+        <div class="product-container">
+            <div class="product-box">
+                <img src="/assests/tablets.png" alt="APEX Performance Energy Gum - Peppermint">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate circular ticks (inner circle)
+        const circleTicks = document.getElementById('circleTicks');
+        const tickCount = 72; // Number of ticks around the circle
+
+        for (let i = 0; i < tickCount; i++) {
+            const tick = document.createElement('div');
+            tick.className = 'tick';
+            const angle = (360 / tickCount) * i;
+            tick.style.transform = `rotate(${angle}deg)`;
+            circleTicks.appendChild(tick);
+        }
+
+        // Generate outer circle ticks (larger circle with overflow hidden)
+        const outerCircleTicks = document.getElementById('outerCircleTicks');
+        const outerTickCount = 120; // More ticks for larger circle
+
+        for (let i = 0; i < outerTickCount; i++) {
+            const tick = document.createElement('div');
+            tick.className = 'outer-tick';
+            const angle = (360 / outerTickCount) * i;
+            tick.style.transform = `rotate(${angle}deg)`;
+            outerCircleTicks.appendChild(tick);
+        }
+    </script>
+</body>
+</html>

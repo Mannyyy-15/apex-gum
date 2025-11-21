@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>APEX Feature Section Refined</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background: radial-gradient(circle at 50% 45%, #21a3e8 70%, #0d4f8b 100%);
+            overflow: hidden;
+        }
+        .feature-section {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        /* SVG background ring */
+        #svg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        /* Headline centered above product */
+        .feature-title {
+            position: absolute;
+            top: 11%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.1rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 3px 30px #236ea966;
+            z-index: 10;
+            letter-spacing: 0.01em;
+        }
+        /* Product images stacked, centered */
+        .feature-visuals {
+            position: absolute;
+            left: 50%;
+            top: 45%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+        .feature-pills {
+            width: 180px;
+            margin-bottom: -52px;
+            filter: drop-shadow(0 10px 40px #17426648);
+        }
+        .feature-packaging {
+            width: 240px;
+            filter: drop-shadow(0 10px 40px #17559944);
+        }
+        /* Meta item positions in corners */
+        .feature-meta {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            top: 0; left: 0;
+            z-index: 15;
+        }
+        .meta-item {
+            position: absolute;
+            font-family: 'Montserrat', sans-serif;
+            color: #eaeffb;
+            font-size: 1.15rem;
+            opacity: 0.82;
+            letter-spacing: 0.09em;
+        }
+        .meta-performance { top: 45px; left: 45px; }
+        .meta-caffeine    { top: 45px; left: 154px; }
+        .meta-benefits    { top: 45px; left: 50%; transform: translateX(-50%);}
+        .meta-precision   { top: 45px; right: 52px; }
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .feature-title { font-size: 2.1rem; top: 10%; }
+            .feature-pills { width: 110px; }
+            .feature-packaging { width: 150px; }
+            .meta-item { font-size: 0.87rem; }
+            .meta-performance { left: 14px; }
+            .meta-caffeine    { left: 98px; }
+            .meta-benefits    { left: 50%; }
+            .meta-precision   { right: 16px; }
+        }
+        /* SVG ticks styling */
+        .tick {
+            stroke: #ffffff;
+            stroke-width: .85;
+            stroke-linecap: round;
+            opacity: 0.29;
+        }
+        .guide {
+            fill: none;
+            /* stroke: rgba(255,255,255,0.08); */
+            stroke-width: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="feature-section">
+        <svg id="svg" width="100vw" height="100vh" viewBox="0 0 600 600" aria-hidden="true">
+            <circle cx="300" cy="300" r="240" class="guide" />
+            <g id="ticks" transform="translate(300,300)"></g>
+        </svg>
+        <div class="feature-title">Its Time To Lock In</div>
+        <div class="feature-visuals">
+            <!-- Replace with your asset locations -->
+            <img src="pills.png" alt="APEX Pills" class="feature-pills" />
+            <img src="packaging.png" alt="APEX Packaging" class="feature-packaging" />
+        </div>
+        <div class="feature-meta">
+            <span class="meta-item meta-performance">Performance</span>
+            <span class="meta-item meta-caffeine">Caffeine</span>
+            <span class="meta-item meta-benefits">Benefits</span>
+            <span class="meta-item meta-precision">Precision</span>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const g = document.getElementById('ticks');
+            const radius = 240; // matches circle
+            const length = 14;
+            const count = 72;
+            for (let i = 0; i < count; i++) {
+                const angle = (360 / count) * i;
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', radius);
+                line.setAttribute('y1', 0);
+                line.setAttribute('x2', radius - length);
+                line.setAttribute('y2', 0);
+                line.setAttribute('class', 'tick');
+                line.setAttribute('transform', 'rotate(' + angle + ')');
+                g.appendChild(line);
+            }
+            let start = null;
+            const duration = 4000;
+            const maxRotation = 30;
+            function animate(timestamp) {
+                if (!start) start = timestamp;
+                const elapsed = (timestamp - start) % duration;
+                const progress = elapsed / duration;
+                const angle = maxRotation * Math.sin(progress * 2 * Math.PI);
+                g.setAttribute('transform', `translate(300,300) rotate(${angle})`);
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+        })();
+    </script>
+</body>
+</html>
