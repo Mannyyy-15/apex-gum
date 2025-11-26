@@ -24,7 +24,7 @@
     .section-wrapper{
       max-width:1240px;
       margin:0 auto;
-      padding:40px 16px 40px;
+      padding:60px 40px;
     }
     .section-label{
       display:inline-flex;
@@ -62,7 +62,7 @@
       justify-content:center;
       gap:14px;
       flex-wrap:wrap;
-      margin-bottom:34px;
+      margin-bottom:44px;
     }
     .btn{
       border-radius:999px;
@@ -91,12 +91,12 @@
       transform:translateY(-1.5px) scale(1.03);
     }
 
-    /* BENTO GRID */
+    /* ===== BENTO GRID ===== */
     .bento-grid{
       display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      grid-auto-rows:210px;
-      gap:22px;
+      grid-template-columns:repeat(5, 1fr);
+      grid-auto-rows:250px;
+      gap:20px;
     }
 
     .card{
@@ -116,61 +116,66 @@
       box-shadow:0 8px 30px rgba(8,34,84,.18);
     }
 
-    /* Column spans tuned to your width ratios */
-    .card-1{grid-column:span 1;} /* ≈265 */
-    .card-2{grid-column:span 2;} /* ≈500 */
-    .card-3{grid-column:span 1;} /* ≈300 */
-    .card-4{grid-column:span 1;} /* ≈350 */
-    .card-5{grid-column:span 1;} /* ≈425, visually close */
-    .card-6{grid-column:span 1;} /* ≈265 */
-    .card-7{
-      grid-column:span 2;        /* ≈630 */
-      grid-auto-rows:190px;
-    }
+    /* ROW 1: 1 | 2(BIGGER) | 1 | 1 = 5 cols */
+    .card-1 { grid-column: span 1; }
+    .card-2 { grid-column: span 2; }
+    .card-3 { grid-column: span 1; }
+    .card-4 { grid-column: span 1; }
+
+    /* ROW 2: 2 | 1 | 2(BIGGER) = 5 cols */
+    .card-5 { grid-column: span 2; }
+    .card-6 { grid-column: span 1; }
+    .card-7 { grid-column: span 2; }
 
     /* Overlays */
     .play-btn{
       position:absolute;
       inset:50%;
       transform:translate(-50%,-50%);
-      width:46px;height:46px;
+      width:50px;height:50px;
       border-radius:999px;
-      background:rgba(0,0,0,.45);
+      background:rgba(0,0,0,.5);
       display:grid;place-items:center;
       color:#fff;font-size:1.3rem;
       box-shadow:0 4px 16px rgba(0,0,0,.25);
       pointer-events:none;
-    }
-    .card-5 .play-btn, .card-7 .play-btn{
-      width:40px;height:40px;font-size:1.1rem;
+      z-index:1;
     }
     .card-menu{
       position:absolute;
-      top:13px;left:13px;
-      width:26px;height:26px;border-radius:7px;
-      background:rgba(0,0,0,.45);
+      top:14px;right:14px;
+      width:32px;height:32px;border-radius:8px;
+      background:rgba(0,0,0,.5);
       display:grid;place-items:center;
-      color:#fff;font-size:.85rem;
+      color:#fff;font-size:.95rem;
+      cursor:pointer;
+      z-index:2;
     }
     .live-badge{
       position:absolute;
       right:14px;top:14px;
-      border-radius:8px;
-      padding:3px 11px;
-      font-size:.8rem;font-weight:600;
+      border-radius:6px;
+      padding:4px 12px;
+      font-size:.8rem;font-weight:700;
       background:#ff2036;color:#fff;
+      z-index:2;
     }
     .view-cta{
       position:absolute;
-      bottom:16px;left:18px;
+      bottom:16px;left:16px;
       border-radius:999px;
       background:linear-gradient(90deg,var(--accent),var(--accent-dark));
       color:#fff;font-size:.9rem;font-weight:600;
-      padding:.55rem 1.4rem;
+      padding:.65rem 1.5rem;
       display:inline-flex;align-items:center;gap:6px;
       border:none;
       box-shadow:0 3px 14px rgba(11,138,250,.4);
+      cursor:pointer;
       z-index:2;
+      transition:transform .2s;
+    }
+    .view-cta:hover{
+      transform:scale(1.05);
     }
     .card-7 .view-cta{
       background:#fff;color:#111;
@@ -179,36 +184,202 @@
     .info-block{
       position:absolute;
       inset:auto 0 0 0;
-      padding:16px 18px 14px;
-      background:linear-gradient(0deg,rgba(0,0,0,.65) 0%,transparent 72%);
+      padding:18px 18px 16px;
+      background:linear-gradient(0deg,rgba(0,0,0,.7) 0%,transparent 75%);
       color:#fff;
+      z-index:1;
     }
-    .info-main{font-size:1.6rem;font-weight:800;}
-    .info-sub{font-size:.9rem;font-weight:500;margin-top:3px;}
+    .info-main{font-size:1.8rem;font-weight:800;line-height:1;}
+    .info-sub{font-size:.95rem;font-weight:500;margin-top:4px;opacity:.9;}
 
-    /* RESPONSIVE GRID BREAKPOINTS */
+    /* ===== RESPONSIVE (MAINTAIN BENTO GRID) ===== */
+    
+    /* LARGE TABLET (1200px and down) */
+    @media(max-width:1200px){
+      .section-wrapper{
+        padding:50px 30px;
+      }
+      .bento-grid{
+        grid-template-columns:repeat(5, 1fr);
+        grid-auto-rows:220px;
+        gap:18px;
+      }
+      .card-1 { grid-column: span 1; }
+      .card-2 { grid-column: span 2; }
+      .card-3 { grid-column: span 1; }
+      .card-4 { grid-column: span 1; }
+      .card-5 { grid-column: span 2; }
+      .card-6 { grid-column: span 1; }
+      .card-7 { grid-column: span 2; }
+    }
+
+    /* TABLET (1024px and down) */
     @media(max-width:1024px){
+      .section-wrapper{
+        padding:45px 25px;
+      }
+      h1.section-title{
+        font-size:clamp(2rem,4.5vw,2.8rem);
+      }
       .bento-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
+        grid-template-columns:repeat(5, 1fr);
+        grid-auto-rows:200px;
+        gap:16px;
       }
-      .card-1,.card-2,.card-3,.card-4,
-      .card-5,.card-6,.card-7{
-        grid-column:span 1;
+      .card-1 { grid-column: span 1; }
+      .card-2 { grid-column: span 2; }
+      .card-3 { grid-column: span 1; }
+      .card-4 { grid-column: span 1; }
+      .card-5 { grid-column: span 2; }
+      .card-6 { grid-column: span 1; }
+      .card-7 { grid-column: span 2; }
+      .play-btn{
+        width:45px;height:45px;
+        font-size:1.2rem;
       }
-      .card-7{grid-column:span 3;}
     }
 
+    /* SMALL TABLET/LANDSCAPE (768px and down) */
     @media(max-width:768px){
-      .section-wrapper{padding-inline:14px;}
-      .hero-actions{flex-direction:column;}
-      .btn{width:100%;justify-content:center;}
-      .bento-grid{
-        grid-template-columns:1fr;
-        grid-auto-rows:180px;
+      .section-wrapper{
+        padding:40px 20px;
       }
-      .card-1,.card-2,.card-3,.card-4,
-      .card-5,.card-6,.card-7{
-        grid-column:1;
+      h1.section-title{
+        font-size:clamp(1.8rem,4vw,2.4rem);
+      }
+      .hero-actions{
+        flex-direction:column;
+        gap:12px;
+        margin-bottom:36px;
+      }
+      .btn{
+        width:100%;
+        justify-content:center;
+        padding:.8rem 1.8rem;
+        font-size:.95rem;
+      }
+      /* MAINTAIN BENTO GRID - 4 columns */
+      .bento-grid{
+        grid-template-columns:repeat(4, 1fr);
+        grid-auto-rows:180px;
+        gap:14px;
+      }
+      .card-1 { grid-column: span 1; }
+      .card-2 { grid-column: span 2; }
+      .card-3 { grid-column: span 1; }
+      .card-4 { grid-column: span 1; display:none; }
+      .card-5 { grid-column: span 2; }
+      .card-6 { grid-column: span 1; }
+      .card-7 { grid-column: span 1; }
+      .play-btn{
+        width:42px;height:42px;
+        font-size:1.1rem;
+      }
+    }
+
+    /* MOBILE LANDSCAPE (640px and down) */
+    @media(max-width:640px){
+      .section-wrapper{
+        padding:35px 16px;
+      }
+      h1.section-title{
+        font-size:clamp(1.6rem,3.8vw,2.2rem);
+      }
+      /* MAINTAIN BENTO GRID - 3 columns */
+      .bento-grid{
+        grid-template-columns:repeat(3, 1fr);
+        grid-auto-rows:160px;
+        gap:12px;
+      }
+      .card-1 { grid-column: span 1; }
+      .card-2 { grid-column: span 1; }
+      .card-3 { grid-column: span 1; }
+      .card-4 { grid-column: span 1; display:none; }
+      .card-5 { grid-column: span 1; }
+      .card-6 { grid-column: span 1; }
+      .card-7 { grid-column: span 1; }
+      .play-btn{
+        width:38px;height:38px;
+        font-size:1rem;
+      }
+      .view-cta{
+        padding:.5rem 1rem;
+        font-size:.8rem;
+        bottom:12px;left:12px;
+      }
+    }
+
+    /* MOBILE PORTRAIT (480px and down) */
+    @media(max-width:480px){
+      .section-wrapper{
+        padding:30px 16px;
+      }
+      h1.section-title{
+        font-size:clamp(1.5rem,3.5vw,2rem);
+      }
+      .section-subtitle{
+        font-size:.95rem;
+        margin-bottom:20px;
+      }
+      .hero-actions{
+        margin-bottom:28px;
+      }
+      .btn{
+        padding:.75rem 1.6rem;
+        font-size:.9rem;
+      }
+      /* MAINTAIN BENTO GRID - 2 columns */
+      .bento-grid{
+        grid-template-columns:repeat(2, 1fr);
+        grid-auto-rows:140px;
+        gap:12px;
+      }
+      .card-1 { grid-column: span 1; }
+      .card-2 { grid-column: span 1; }
+      .card-3 { grid-column: span 1; }
+      .card-4 { grid-column: span 1; display:none; }
+      .card-5 { grid-column: span 1; }
+      .card-6 { grid-column: span 1; }
+      .card-7 { grid-column: span 1; }
+      .card-menu{
+        width:28px;height:28px;
+        font-size:.85rem;
+      }
+      .live-badge{
+        padding:3px 10px;
+        font-size:.75rem;
+      }
+      .view-cta{
+        padding:.55rem 1.2rem;
+        font-size:.85rem;
+        bottom:12px;left:12px;
+      }
+      .info-main{
+        font-size:1.4rem;
+      }
+      .info-sub{
+        font-size:.85rem;
+      }
+    }
+
+    /* VERY SMALL (360px and down) */
+    @media(max-width:360px){
+      .section-wrapper{
+        padding:25px 12px;
+      }
+      h1.section-title{
+        font-size:1.4rem;
+      }
+      .btn{
+        padding:.7rem 1.4rem;
+        font-size:.85rem;
+      }
+      .bento-grid{
+        grid-auto-rows:120px;
+      }
+      .play-btn{
+        width:34px;height:34px;
+        font-size:.9rem;
       }
     }
   </style>
@@ -231,13 +402,13 @@
     </div>
 
     <div class="bento-grid">
-      <!-- Row 1: 4 cards -->
+      <!-- ROW 1 -->
       <div class="card card-1">
-        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" alt="Gym">
       </div>
 
       <div class="card card-2">
-        <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=900&q=80" alt="Runner">
         <div class="card-menu"><i class="fa-solid fa-ellipsis"></i></div>
         <button class="view-cta">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> View Product
@@ -245,23 +416,23 @@
       </div>
 
       <div class="card card-3">
-        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=900&q=80" alt="Tennis">
         <div class="live-badge">Live</div>
         <div class="play-btn"><i class="fa-solid fa-play"></i></div>
       </div>
 
       <div class="card card-4">
-        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80" alt="Athlete">
       </div>
 
-      <!-- Row 2: 3 cards -->
+      <!-- ROW 2 -->
       <div class="card card-5">
-        <img src="https://images.unsplash.com/photo-1448814100339-234df1d4005d?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1448814100339-234df1d4005d?auto=format&fit=crop&w=900&q=80" alt="Golf">
         <div class="play-btn"><i class="fa-solid fa-play"></i></div>
       </div>
 
       <div class="card card-6">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Football">
         <div class="info-block">
           <div class="info-main">100+</div>
           <div class="info-sub">Happy customers</div>
@@ -269,7 +440,7 @@
       </div>
 
       <div class="card card-7">
-        <img src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=900&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=900&q=80" alt="Runner sprint">
         <button class="view-cta">
           View Product <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </button>
