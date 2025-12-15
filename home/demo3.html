@@ -1,0 +1,876 @@
+<style>
+  /* ===== APEX LOCK-IN SECTION - SCOPED ===== */
+  
+  .apex-lockin-wrapper-v2 {
+    --dash-length: 46px;
+    --dash-thickness: 3px !important;
+    --dash-gap: 18px;
+    --dash-color: rgb(255, 255, 255);
+    --color-bg-main: radial-gradient(ellipse at center, #1ec5e6 0%, #0860b8 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+  }
+
+  .apex-lockin-wrapper-v2 * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* ===== ANIMATION WRAPPER ===== */
+  .apex-lockin-wrapper-v2 .animation-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400vh;
+    background: var(--color-bg-main);
+  }
+
+  .apex-lockin-wrapper-v2 .container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 10px;
+    overflow: hidden;
+  }
+
+  .apex-lockin-wrapper-v2 .center-top {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+
+  .apex-lockin-wrapper-v2 .benefits {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* margin-bottom: 10px; */
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Icon for Benefits - Desktop */
+  .apex-lockin-wrapper-v2 .benefits .benefits-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: inline-block;
+  }
+
+  .apex-lockin-wrapper-v2 .benefits::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    display: none; /* Hide default square when icon is present */
+  }
+
+  /* Show default square only if no icon */
+  .apex-lockin-wrapper-v2 .benefits:not(:has(.benefits-icon))::before {
+    display: inline-block;
+  }
+
+ .apex-lockin-wrapper-v2 .main-title {
+  /* 56px at large desktop, smaller on tablets/phones */
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: white;
+  letter-spacing: clamp(-0.03rem, -0.05vw, -0.05rem);
+  line-height: 1.1;
+}
+
+
+  .apex-lockin-wrapper-v2 .circle-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 450px;
+    z-index: 1;
+  }
+
+  .apex-lockin-wrapper-v2 .circle-ticks {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .apex-lockin-wrapper-v2 .tick {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: rgb(255, 255, 255);
+    top: 0;
+    left: 50%;
+    transform-origin: 50% 225px;
+    opacity: 0.5;
+  }
+
+  .apex-lockin-wrapper-v2 .ticks-wrap {
+    position: absolute;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .apex-lockin-wrapper-v2 .ticks-wrap.left-side {
+    left: -500px;
+  }
+
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side {
+    right: -450px;
+  }
+
+  .apex-lockin-wrapper-v2 .ticks-header {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .apex-lockin-wrapper-v2 .ticks {
+    position: relative;
+    width: var(--dash-length);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--dash-gap);
+    /* padding-top: calc(var(--dash-gap) / 2); */
+  }
+
+  .apex-lockin-wrapper-v2 .dash-tick {
+    width: var(--dash-length);
+    height: 3px;
+    background: var(--dash-color);
+    border-radius: 2px;
+    position: relative;
+    transform-origin: left center;
+    opacity: 0.5;
+  }
+
+  .apex-lockin-wrapper-v2 .product-container {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .apex-lockin-wrapper-v2 .product-images {
+    position: relative;
+    width: 300px;
+    max-width: 90vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .apex-lockin-wrapper-v2 .product-box {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 3;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .apex-lockin-wrapper-v2 .product-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(.7, .3, 0, 1), opacity 0.5s;
+  }
+
+  .apex-lockin-wrapper-v2 .background-img {
+    position: absolute;
+    left: 35%;
+    top: 50%;
+    width: 220px;
+    height: 220px;
+    z-index: 1;
+    transform: translate(0%, -46%) scale(0.9) rotate(15deg);
+    opacity: 0;
+    filter: blur(0.5px) contrast(110%);
+    pointer-events: none;
+    transition: opacity 0.55s cubic-bezier(.7, .3, 0, 1), transform 0.6s cubic-bezier(.8, .4, .3, .94), filter 0.45s;
+  }
+
+  .apex-lockin-wrapper-v2 .background-img img {
+    width: 60%;
+  }
+
+  .apex-lockin-wrapper-v2 .benefit-label {
+    position: absolute;
+    z-index: 20;
+    padding: 7px 22px;
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 22px;
+    background: rgba(19, 154, 233, 0.13);
+    font-size: 18px;
+    opacity: 0;
+    pointer-events: none;
+    font-weight: 400;
+    transition: opacity 0.5s;
+  }
+
+  .apex-lockin-wrapper-v2 .label-speed { top: 23%; left: 25%; }
+  .apex-lockin-wrapper-v2 .label-endurance { top: 23%; right: 25%; }
+  .apex-lockin-wrapper-v2 .label-reaction { top: 46%; left: 19%; }
+  .apex-lockin-wrapper-v2 .label-emotion { top: 40%; right: 19%; }
+  .apex-lockin-wrapper-v2 .label-vigilance { top: 70%; left: 25%; }
+  .apex-lockin-wrapper-v2 .label-energy { top: 57%; right: 22%; }
+  .apex-lockin-wrapper-v2 .label-concentration { top: 73%; right: 25%; }
+
+  .apex-lockin-wrapper-v2 .side-counter {
+    position: absolute;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    opacity: 0;
+  }
+
+  .apex-lockin-wrapper-v2 .side-counter .counter-title {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+  }
+
+  .apex-lockin-wrapper-v2 .side-counter .counter-value {
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+
+  .apex-lockin-wrapper-v2 .left-counter {
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .apex-lockin-wrapper-v2 .right-counter {
+    right: 9%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .apex-lockin-wrapper-v2 .mobile-only-section {
+    display: none;
+  }
+
+  /* ===== MOBILE STYLES ===== */
+  @media (max-width: 768px) {
+    .apex-lockin-wrapper-v2 .animation-wrapper {
+      display: none !important;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-only-section {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 60vh;
+      width: 100%;
+      background: var(--color-bg-main);
+      padding: 40px 16px 60px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-center-top {
+      text-align: center;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-center-top .benefits {
+      justify-content: center;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    /* Mobile Icon Size */
+    .apex-lockin-wrapper-v2 .mobile-center-top .benefits .benefits-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-center-top .benefits::before {
+      width: 10px;
+      height: 10px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-center-top .main-title {
+      font-size: 24px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-circle-container {
+      position: relative;
+      width: min(80vw, 340px);
+      margin-bottom: 24px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-image-center {
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-image-center img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-counters {
+      display: flex;
+      gap: 32px;
+      margin-top: 16px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-counter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-counter .counter-title {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-bottom: 3px;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-counter .counter-value {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .apex-lockin-wrapper-v2 .mobile-counter .unit {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+
+  .apex-lockin-wrapper-v2 .ticks-headers {
+  display: flex;
+  flex-direction: row;
+  gap: clamp(1rem, 1.5vw, 1.5rem);  /* Gap between Performance & Caffeine */
+  align-items: center;
+  /* margin-bottom: clamp(1rem, 1.4vw, 20px); */
+  width: 100%;
+}
+
+.apex-lockin-wrapper-v2 .ticks-wrap.left-side .ticks-headers,
+.apex-lockin-wrapper-v2 .ticks-wrap.right-side .ticks-headers {
+  align-items: flex-start;  /* Align left for left-side, right for right-side */
+}
+
+.apex-lockin-wrapper-v2 .ticks-header {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(1rem, 1.25vw, 18px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: clamp(0.06rem, 0.07vw, 1px);
+  white-space: nowrap;
+}
+
+
+/* ===== COMPLETE DESKTOP/LAPTOP RESPONSIVE (1920px → 992px) ===== */
+/* ADD THESE to your existing CSS - Mobile unaffected */
+
+/* Ultra-wide Desktop (1920px+) - Your EXACT current design */
+@media (min-width: 1920px) {
+  .apex-lockin-wrapper-v2 .ticks-wrap.left-side { left: -500px; }
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side { right: -450px; }
+  .apex-lockin-wrapper-v2 .circle-container { width: 450px; height: 450px; }
+  .apex-lockin-wrapper-v2 .product-images { width: 300px; }
+  .apex-lockin-wrapper-v2 .background-img { width: 220px; height: 220px; }
+  .apex-lockin-wrapper-v2 .ticks-header { font-size: 18px; }
+  .apex-lockin-wrapper-v2 .side-counter .counter-title { font-size: 16px; }
+  .apex-lockin-wrapper-v2 .side-counter .counter-value { font-size: 26px; }
+}
+
+/* Large Desktop (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  /* .apex-lockin-wrapper-v2 .ticks-wrap.left-side { left: clamp(-28vw, -34vw, -480px); }
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side { right: clamp(-25vw, -31vw, -430px); } */
+  .apex-lockin-wrapper-v2 .circle-container { 
+    width: clamp(28vw, 31vw, 440px); 
+    height: clamp(28vw, 31vw, 440px); 
+  }
+  .apex-lockin-wrapper-v2 .product-images { width: clamp(18vw, 21vw, 310px); }
+  .apex-lockin-wrapper-v2 .background-img { 
+    width: clamp(14vw, 15.5vw, 210px); 
+    height: clamp(14vw, 15.5vw, 210px); 
+  }
+  .apex-lockin-wrapper-v2 .ticks-header { font-size: clamp(1rem, 1.25vw, 17px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-title { font-size: clamp(0.95rem, 1.1vw, 15px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-value { font-size: clamp(1.4rem, 1.8vw, 25px); }
+  .apex-lockin-wrapper-v2 .benefit-label { font-size: clamp(1rem, 1.25vw, 17px); }
+}
+
+/* Laptop Large (1366px - 1439px) */
+@media (min-width: 1366px) and (max-width: 1439px) {
+  .apex-lockin-wrapper-v2 .ticks-wrap.left-side { left: clamp(-32vw, -33vw, -450px); }
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side { right: clamp(-30vw, -30vw, -410px); }
+  .apex-lockin-wrapper-v2 .circle-container { 
+    width: clamp(27vw, 33vw, 430px); 
+    height: clamp(27vw, 33vw, 430px); 
+  }
+  .apex-lockin-wrapper-v2 .product-images { width: clamp(19vw, 22vw, 300px); }
+  .apex-lockin-wrapper-v2 .background-img { 
+    width: clamp(15vw, 16vw, 200px); 
+    height: clamp(15vw, 16vw, 200px); 
+  }
+  .apex-lockin-wrapper-v2 .ticks-header { font-size: clamp(0.95rem, 1.2vw, 16px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-title { font-size: clamp(0.9rem, 1.05vw, 15px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-value { font-size: clamp(1.35rem, 1.75vw, 24px); }
+}
+
+/* Laptop Medium (1200px - 1365px) */
+@media (min-width: 1200px) and (max-width: 1365px) {
+  .apex-lockin-wrapper-v2 .ticks-wrap.left-side { left: clamp(-24vw, -32vw, -420px); }
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side { right: clamp(-22vw, -29vw, -390px); }
+  .apex-lockin-wrapper-v2 .circle-container { 
+    width: clamp(26vw, 35vw, 410px); 
+    height: clamp(26vw, 35vw, 410px); 
+  }
+  .apex-lockin-wrapper-v2 .product-images { width: clamp(20vw, 24vw, 290px); }
+  .apex-lockin-wrapper-v2 .background-img { 
+    width: clamp(15.5vw, 16.5vw, 190px); 
+    height: clamp(15.5vw, 16.5vw, 190px); 
+  }
+  .apex-lockin-wrapper-v2 .ticks-header { font-size: clamp(0.9rem, 1.15vw, 15px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-title { font-size: clamp(0.875rem, 1vw, 14px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-value { font-size: clamp(1.3rem, 1.7vw, 23px); }
+}
+
+/* Laptop Small (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .apex-lockin-wrapper-v2 .ticks-wrap.left-side { left: clamp(-22vw, -31vw, -380px); }
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side { right: clamp(-20vw, -28vw, -360px); }
+  .apex-lockin-wrapper-v2 .circle-container { 
+    width: clamp(25vw, 37vw, 380px); 
+    height: clamp(25vw, 37vw, 380px); 
+  }
+  .apex-lockin-wrapper-v2 .product-images { width: clamp(22vw, 26vw, 280px); }
+  .apex-lockin-wrapper-v2 .background-img { 
+    width: clamp(16vw, 17.5vw, 180px); 
+    height: clamp(16vw, 17.5vw, 180px); 
+  }
+  .apex-lockin-wrapper-v2 .ticks-header { font-size: clamp(0.85rem, 1.1vw, 14px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-title { font-size: clamp(0.85rem, 0.95vw, 13px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-value { font-size: clamp(1.25rem, 1.65vw, 22px); }
+}
+
+/* Tablet Large (992px - 1023px) - Final desktop breakpoint */
+@media (min-width: 992px) and (max-width: 1023px) {
+  .apex-lockin-wrapper-v2 .ticks-wrap.left-side { left: -24vw; }
+  .apex-lockin-wrapper-v2 .ticks-wrap.right-side { right: -22vw; }
+  .apex-lockin-wrapper-v2 .circle-container { width: 40vw; height: 40vw; }
+  .apex-lockin-wrapper-v2 .product-images { width: 28vw; }
+  .apex-lockin-wrapper-v2 .background-img { width: 18vw; height: 18vw; }
+  .apex-lockin-wrapper-v2 .ticks-header { font-size: clamp(0.8rem, 1vw, 13px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-title { font-size: clamp(0.8rem, 0.9vw, 12px); }
+  .apex-lockin-wrapper-v2 .side-counter .counter-value { font-size: clamp(1.2rem, 1.6vw, 21px); }
+}
+
+
+</style>
+
+<div class="apex-lockin-wrapper-v2">
+  <!-- Desktop Animation Section -->
+  <div class="animation-wrapper" id="apexAnimationWrapper">
+    <div class="container">
+      <div class="center-top">
+        <div class="benefits">
+          <!-- 👇 YAHA APNA ICON URL PASTE KARNA -->
+          <img src="https://cdn.shopify.com/s/files/1/0792/8941/7948/files/pajamas_feature-flag_1.png?v=1764756474" alt="Benefits Icon" class="benefits-icon" />
+          Benefits
+        </div>
+        <h1 class="main-title">Its Time To Lock In</h1>
+      </div>
+
+      <div class="circle-container">
+        <div class="circle-ticks" id="circleTicks"></div>
+
+       <div class="ticks-wrap left-side"> 
+  <div class="ticks-headers">
+    <div class="ticks-header">Performance</div>
+    <div class="ticks-header">Caffeine</div>
+  </div>
+  <div class="ticks" id="rightTicks"></div>
+</div>
+
+
+        <div class="ticks-wrap right-side">
+          <div class="ticks-header">Precision</div>
+          <div class="ticks" id="leftTicks"></div>
+        </div>
+      </div>
+
+      <div class="product-container">
+        <div class="product-images">
+          <div class="background-img" id="backgroundPop">
+            <img src="https://cdn.shopify.com/s/files/1/0792/8941/7948/files/czx_2.png?v=1764561982" alt="Background" />
+          </div>
+          <div class="product-box">
+            <img id="productImg" src="https://cdn.shopify.com/s/files/1/0792/8941/7948/files/Apex_8_SLIM_rever_1_16c89846-a81b-4aad-8255-5ff9ae472b2a.png?v=1764562042" alt="Apex Product" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="side-counter left-counter">
+          <span class="counter-title">Energy</span>
+          <div class="counter-row" style="display:flex; align-items:baseline; gap:4px;">
+            <span class="counter-value" id="leftCounter">0</span>
+            <span class="unit">mg</span>
+          </div>
+        </div>
+
+        <div class="side-counter right-counter">
+          <span class="counter-title">Caffeine</span>
+          <div class="counter-row" style="display:flex; align-items:baseline; gap:4px;">
+            <span class="counter-value" id="rightCounter">0</span>
+            <span class="unit">mg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-label label-vigilance">Vigilance</div>
+      <div class="benefit-label label-reaction">Reaction Time</div>
+      <div class="benefit-label label-speed">Speed</div>
+      <div class="benefit-label label-endurance">Endurance</div>
+      <div class="benefit-label label-emotion">Emotional Status</div>
+      <div class="benefit-label label-energy">Energy</div>
+      <div class="benefit-label label-concentration">Concentration</div>
+    </div>
+  </div>
+
+  <!-- Mobile Section -->
+  <div class="mobile-only-section">
+    <div class="mobile-center-top">
+      <div class="benefits">
+        <!-- 👇 MOBILE KE LIYE BHI SAME ICON -->
+        <img src="https://cdn.shopify.com/s/files/1/0792/8941/7948/files/pajamas_feature-flag_1.png?v=1764756474" alt="Benefits Icon" class="benefits-icon" />
+        Benefits
+      </div>
+      <h1 class="main-title">Its Time To Lock In</h1>
+    </div>
+
+    <div class="mobile-circle-container">
+      <div class="mobile-image-center">
+        <img src="https://cdn.shopify.com/s/files/1/0792/8941/7948/files/czx_2.png?v=1764561982" alt="Product" />
+      </div>
+    </div>
+
+    <div class="mobile-counters" id="mobileCountersTrigger">
+      <div class="mobile-counter">
+        <span class="counter-title">Energy</span>
+        <span class="counter-value" id="mobileLeftCounter">0</span>
+        <span class="unit">mg</span>
+      </div>
+      <div class="mobile-counter">
+        <span class="counter-title">Caffeine</span>
+        <span class="counter-value" id="mobileRightCounter">0</span>
+        <span class="unit">mg</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+(function() {
+  'use strict';
+  
+  const root = document.querySelector('.apex-lockin-wrapper-v2');
+  if (!root || typeof gsap === 'undefined') return;
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Circle Ticks Generation
+  const circleTicks = root.querySelector('#circleTicks');
+  if (circleTicks) {
+    const tickCount = 72;
+    for (let i = 0; i < tickCount; i++) {
+      const tick = document.createElement('div');
+      tick.className = 'tick';
+      const angle = (360 / tickCount) * i;
+      tick.style.transform = `rotate(${angle}deg)`;
+      circleTicks.appendChild(tick);
+    }
+  }
+
+  if (isMobile) {
+    // ===== MOBILE SCROLL-TRIGGERED COUNTER ANIMATION =====
+    const mobileCountersTrigger = root.querySelector("#mobileCountersTrigger");
+    const mobileLeftCounter = root.querySelector("#mobileLeftCounter");
+    const mobileRightCounter = root.querySelector("#mobileRightCounter");
+    
+    let hasAnimated = false;
+
+    const mobileObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          
+          // Animate counters with GSAP
+          gsap.to(mobileLeftCounter, {
+            innerText: 100,
+            duration: 2.3,
+            snap: { innerText: 1 },
+            ease: "power1.out"
+          });
+          
+          gsap.to(mobileRightCounter, {
+            innerText: 199,
+            duration: 2.3,
+            snap: { innerText: 1 },
+            ease: "power1.out"
+          });
+          
+          // Unobserve after animation starts
+          mobileObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3, // Trigger when 30% of element is visible
+      rootMargin: "0px 0px -100px 0px" // Trigger slightly before reaching center
+    });
+
+    if (mobileCountersTrigger) {
+      mobileObserver.observe(mobileCountersTrigger);
+    }
+
+  } else {
+    // Desktop Animations
+    const wrapper = root.querySelector('.animation-wrapper');
+
+    // Populate Curved Ticks Function
+    function populateCurvedTicks(container, count, options = {}) {
+      const length = options.length ?? 46;
+      const thickness = options.thickness ?? 3;
+      const gap = options.gap ?? 18;
+      const curveStrength = options.curveStrength ?? 40;
+      const rotateAmount = options.rotate ?? 8;
+      const direction = options.direction ?? 1;
+
+      container.style.setProperty('--dash-length', length + 'px');
+      container.style.setProperty('--dash-thickness', thickness + 'px');
+      container.style.setProperty('--dash-gap', gap + 'px');
+      container.innerHTML = '';
+      
+      for (let i = 0; i < count; i++) {
+        const dash = document.createElement("div");
+        dash.className = "dash-tick";
+        const progress = i / (count - 1);
+        const curve = Math.sin(progress * Math.PI);
+        const xOffset = curve * curveStrength * direction;
+        dash.style.transform = `translateX(${xOffset}px) rotate(${curve * rotateAmount * direction}deg)`;
+        container.appendChild(dash);
+      }
+    }
+
+    populateCurvedTicks(root.querySelector("#leftTicks"), 20, {
+      length: 48, thickness: 2, gap: 25, curveStrength: 40, rotate: 8, direction: 1
+    });
+    populateCurvedTicks(root.querySelector("#rightTicks"), 20, {
+      length: 48, thickness: 2, gap: 25, curveStrength: 40, rotate: 8, direction: -1
+    });
+
+    // Hide ticks during benefits phase
+    // gsap.to(root.querySelectorAll(".ticks-wrap"), {
+    //   scrollTrigger: {
+    //     trigger: wrapper,
+    //     start: "top top",
+    //     end: "10% top",
+    //     scrub: true
+    //   },
+    //   opacity: 0
+    // });
+
+    // Bring ticks back before counter animation
+    gsap.to(root.querySelectorAll(".ticks-wrap"), {
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "50% top",
+        end: "60% top",
+        scrub: true
+      },
+      opacity: 1
+    });
+
+    // Product Image Scale Animation
+    gsap.to(root.querySelector("#productImg"), {
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top top",
+        end: "25% top",
+        scrub: true,
+      },
+      scale: 0.8,
+      opacity: 1,
+      ease: "power2.out",
+    });
+
+    // Background Pop Animation
+    gsap.fromTo(root.querySelector("#backgroundPop"),
+      { scale: 0.7, opacity: 1, filter: "blur(12px) contrast(100%)", borderRadius: "60%" },
+      {
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: "25% top",
+          scrub: true,
+        },
+        scale: 1.25,
+        opacity: 1,
+        filter: "blur(0px) contrast(140%)",
+        borderRadius: "16px",
+        ease: "power1.inOut",
+      }
+    );
+
+    // Benefit Labels Animation
+    const labelTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "10% top",
+        end: "50% top",
+        scrub: true
+      }
+    });
+    labelTl.to(root.querySelectorAll(".benefit-label"), {
+      opacity: 1,
+      duration: 1,
+      ease: "none"
+    });
+
+    // Hide Labels
+    gsap.to(root.querySelectorAll(".benefit-label"), {
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "60% top",
+        end: "80% top",
+        scrub: true
+      },
+      opacity: 0
+    });
+
+    // Product Image Fade Out
+    gsap.to(root.querySelector("#productImg"), {
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "60% top",
+        end: "80% top",
+        scrub: true
+      },
+      opacity: 0
+    });
+
+    // Background Image Transform
+    gsap.fromTo(root.querySelector(".background-img"),
+      { scale: 1.25, rotation: 15 },
+      {
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "60% top",
+          end: "80% top",
+          scrub: true
+        },
+        scale: 1.5,
+        rotation: 0
+      }
+    );
+
+    // Show Counters
+    gsap.to(root.querySelectorAll(".side-counter"), {
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "60% top",
+        end: "70% top",
+        scrub: true
+      },
+      opacity: 1
+    });
+
+    // Counter Animation Timeline
+    const tl = gsap.timeline({ paused: true });
+    tl.to(root.querySelector("#leftCounter"), {
+      innerText: 100,
+      duration: 2.3,
+      ease: "power1.out",
+      snap: { innerText: 1 }
+    }, 0);
+    tl.to(root.querySelector("#rightCounter"), {
+      innerText: 199,
+      duration: 2.3,
+      ease: "power1.out",
+      snap: { innerText: 1 }
+    }, 0);
+
+    // Dash Ticks Animation
+    const ticksArr = gsap.utils.toArray(root.querySelectorAll(".dash-tick"));
+    const fromBottom = ticksArr.slice().reverse();
+    tl.to(fromBottom, {
+      opacity: 1,
+      duration: 2.3,
+      ease: "none",
+      stagger: 2.3 / fromBottom.length
+    }, 0);
+
+    // Trigger Counter Animation
+    // Trigger Counter Animation
+    ScrollTrigger.create({
+      trigger: wrapper,
+      start: "60% top",
+      onEnter: () => tl.restart(),
+      onLeaveBack: () => tl.reverse()
+    });
+  }
+})();
+</script>
